@@ -1,0 +1,7 @@
+spring:
+    datasource:
+        hikari:
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            jdbc-url: jdbc:mysql://115.140.236.238:8806/dblog?serverTimezone=UTC
+            username: bloger
+            password: a123456789
