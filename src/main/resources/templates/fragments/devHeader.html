@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:fragment="devHeader" class="page-header content">
+    <div class="header-title">개발던전</div>
+    <nav>
+        <ul class="header-navigator">
+            <li class="header-menu"><a>개발일기</a></li>
+            <li class="header-divider">|</li>
+            <li class="header-menu"><a>프로그래밍 언어</a></li>
+            <li class="header-menu"><a>프레임워크 & 라이브러리</a></li>
+            <li class="header-menu"><a>알고리즘</a></li>
+            <li class="header-menu"><a>디자인 패턴</a></li>
+            <li class="header-divider">|</li>
+            <li class="header-menu"><a>일상</a></li>
+            <li class="header-divider">|</li>
+            <li class="header-menu"><a>NPC</a></li>
+        </ul>
+    </nav>
+    <div id="header-indicator"></div>
+    <script type="text/javascript">
+        window.addEventListener('load', () => {
+            const indicator = document.getElementById('header-indicator');
+
+            const menuItems = Array.from(document.getElementsByClassName('header-menu'));
+            menuItems.map(i => i.getElementsByTagName('a')[0]).forEach(a => {
+                a.addEventListener('mouseenter', () => {
+                    const width = a.offsetWidth;
+                    const left = a.getBoundingClientRect().left;
+                    indicator.style.width = `${width}px`;
+                    indicator.style.left = `${left}px`;
+                });
+            });
+        });
+    </script>
+</header>
+</html>
