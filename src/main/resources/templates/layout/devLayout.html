@@ -6,11 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="dev-dungeon.css">
+    <th:block layout:fragment="stylesheets"></th:block>
+    <th:block layout:fragment="headScripts"></th:block>
 </head>
 <body>
 <header th:replace="fragments/devHeader :: devHeader"></header>
 <th:block layout:fragment="content"></th:block>
 <footer th:replace="fragments/devFooter :: devFooter"></footer>
-<th:block layout:fragment="scripts"></th:block>
+<th:block layout:fragment="bodyScripts"></th:block>
 </body>
 </html>
