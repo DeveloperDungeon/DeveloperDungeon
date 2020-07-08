@@ -39,6 +39,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- Protocol Buffer Dependency -->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.12.2</version>
+        </dependency>
     </dependencies>
 
     <build>

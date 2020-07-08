@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_package = "com.dungeon.demo.proto";
+option java_outer_classname = "DevUser";
+
+message User {
+  string name = 1;
+  string password = 2;
+  string nickname = 3;
+  string email = 4;
+};
