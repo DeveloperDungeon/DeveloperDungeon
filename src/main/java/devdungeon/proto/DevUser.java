@@ -19,16 +19,16 @@ public final class DevUser {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string name = 1;</code>
-     * @return The name.
+     * <code>string id = 1;</code>
+     * @return The id.
      */
-    java.lang.String getName();
+    java.lang.String getId();
     /**
-     * <code>string name = 1;</code>
-     * @return The bytes for name.
+     * <code>string id = 1;</code>
+     * @return The bytes for id.
      */
     com.google.protobuf.ByteString
-        getNameBytes();
+        getIdBytes();
 
     /**
      * <code>string password = 2;</code>
@@ -79,7 +79,7 @@ public final class DevUser {
       super(builder);
     }
     private User() {
-      name_ = "";
+      id_ = "";
       password_ = "";
       nickname_ = "";
       email_ = "";
@@ -118,7 +118,7 @@ public final class DevUser {
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              name_ = s;
+              id_ = s;
               break;
             }
             case 18: {
@@ -171,38 +171,38 @@ public final class DevUser {
               devdungeon.proto.DevUser.User.class, devdungeon.proto.DevUser.User.Builder.class);
     }
 
-    public static final int NAME_FIELD_NUMBER = 1;
-    private volatile java.lang.Object name_;
+    public static final int ID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object id_;
     /**
-     * <code>string name = 1;</code>
-     * @return The name.
+     * <code>string id = 1;</code>
+     * @return The id.
      */
     @java.lang.Override
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        name_ = s;
+        id_ = s;
         return s;
       }
     }
     /**
-     * <code>string name = 1;</code>
-     * @return The bytes for name.
+     * <code>string id = 1;</code>
+     * @return The bytes for id.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
+        getIdBytes() {
+      java.lang.Object ref = id_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        name_ = b;
+        id_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -337,8 +337,8 @@ public final class DevUser {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+      if (!getIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
       }
       if (!getPasswordBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, password_);
@@ -358,8 +358,8 @@ public final class DevUser {
       if (size != -1) return size;
 
       size = 0;
-      if (!getNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+      if (!getIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
       }
       if (!getPasswordBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, password_);
@@ -385,8 +385,8 @@ public final class DevUser {
       }
       devdungeon.proto.DevUser.User other = (devdungeon.proto.DevUser.User) obj;
 
-      if (!getName()
-          .equals(other.getName())) return false;
+      if (!getId()
+          .equals(other.getId())) return false;
       if (!getPassword()
           .equals(other.getPassword())) return false;
       if (!getNickname()
@@ -404,8 +404,8 @@ public final class DevUser {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId().hashCode();
       hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
       hash = (53 * hash) + getPassword().hashCode();
       hash = (37 * hash) + NICKNAME_FIELD_NUMBER;
@@ -545,7 +545,7 @@ public final class DevUser {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        name_ = "";
+        id_ = "";
 
         password_ = "";
 
@@ -579,7 +579,7 @@ public final class DevUser {
       @java.lang.Override
       public devdungeon.proto.DevUser.User buildPartial() {
         devdungeon.proto.DevUser.User result = new devdungeon.proto.DevUser.User(this);
-        result.name_ = name_;
+        result.id_ = id_;
         result.password_ = password_;
         result.nickname_ = nickname_;
         result.email_ = email_;
@@ -631,8 +631,8 @@ public final class DevUser {
 
       public Builder mergeFrom(devdungeon.proto.DevUser.User other) {
         if (other == devdungeon.proto.DevUser.User.getDefaultInstance()) return this;
-        if (!other.getName().isEmpty()) {
-          name_ = other.name_;
+        if (!other.getId().isEmpty()) {
+          id_ = other.id_;
           onChanged();
         }
         if (!other.getPassword().isEmpty()) {
@@ -676,78 +676,78 @@ public final class DevUser {
         return this;
       }
 
-      private java.lang.Object name_ = "";
+      private java.lang.Object id_ = "";
       /**
-       * <code>string name = 1;</code>
-       * @return The name.
+       * <code>string id = 1;</code>
+       * @return The id.
        */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          name_ = s;
+          id_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string name = 1;</code>
-       * @return The bytes for name.
+       * <code>string id = 1;</code>
+       * @return The bytes for id.
        */
       public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
+          getIdBytes() {
+        java.lang.Object ref = id_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          name_ = b;
+          id_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string name = 1;</code>
-       * @param value The name to set.
+       * <code>string id = 1;</code>
+       * @param value The id to set.
        * @return This builder for chaining.
        */
-      public Builder setName(
+      public Builder setId(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        name_ = value;
+        id_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string name = 1;</code>
+       * <code>string id = 1;</code>
        * @return This builder for chaining.
        */
-      public Builder clearName() {
+      public Builder clearId() {
         
-        name_ = getDefaultInstance().getName();
+        id_ = getDefaultInstance().getId();
         onChanged();
         return this;
       }
       /**
-       * <code>string name = 1;</code>
-       * @param value The bytes for name to set.
+       * <code>string id = 1;</code>
+       * @param value The bytes for id to set.
        * @return This builder for chaining.
        */
-      public Builder setNameBytes(
+      public Builder setIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        name_ = value;
+        id_ = value;
         onChanged();
         return this;
       }
@@ -1046,10 +1046,10 @@ public final class DevUser {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016dev-user.proto\"G\n\004User\022\014\n\004name\030\001 \001(\t\022\020" +
-      "\n\010password\030\002 \001(\t\022\020\n\010nickname\030\003 \001(\t\022\r\n\005em" +
-      "ail\030\004 \001(\tB\033\n\020devdungeon.protoB\007DevUserb\006" +
-      "proto3"
+      "\n\016dev-user.proto\"E\n\004User\022\n\n\002id\030\001 \001(\t\022\020\n\010" +
+      "password\030\002 \001(\t\022\020\n\010nickname\030\003 \001(\t\022\r\n\005emai" +
+      "l\030\004 \001(\tB\033\n\020devdungeon.protoB\007DevUserb\006pr" +
+      "oto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1060,7 +1060,7 @@ public final class DevUser {
     internal_static_User_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_User_descriptor,
-        new java.lang.String[] { "Name", "Password", "Nickname", "Email", });
+        new java.lang.String[] { "Id", "Password", "Nickname", "Email", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
