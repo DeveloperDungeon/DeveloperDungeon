@@ -18,7 +18,7 @@ public class SignupAPI {
 
     @GetMapping("/signup")
     public String getSignup() {
-        return "signup";
+        return "signUp";
     }
 
     @PostMapping("/signup")
