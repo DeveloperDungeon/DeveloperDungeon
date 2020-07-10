@@ -110,4 +110,43 @@
         </div>
     </div>
 </th:block>
+
+<th:block layout:fragment="bodyScripts">
+    <script>
+        const button = document.getElementById('btnSignUp');
+        button.onclick = () => {
+            const request = new XMLHttpRequest();
+
+            const id = document.getElementById('inputId').value;
+            const pw = document.getElementById('inputPw').value;
+            const nick = document.getElementById('inputNickname').value;
+            const email = document.getElementById('inputEmail').value;
+
+            const body = {
+                id: id,
+                password: pw,
+                nickName: nick,
+                email: email
+            };
+
+            request.onload = () => {
+                switch (request.status) {
+                    case 200:
+                        console.log('성공');
+                        break;
+                    case 400:
+                        console.log('실패');
+                        break;
+                    default:
+                        console.log('예상치 못한 에러');
+                        break;
+                }
+            };
+
+            request.open('POST', 'http://localhost:8080/signup');
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.send(JSON.stringify(body));
+        };
+    </script>
+</th:block>
 </html>
