@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_package = "devdungeon.proto";
+option java_outer_classname = "Scenario";
+
+message Quest {
+  int32 id = 1;
+  string title = 2;
+  string content = 3;
+  User author = 4;
+  int64 regTime = 5;
+};
