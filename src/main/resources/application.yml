@@ -11,3 +11,7 @@ spring:
       jdbc-url: jdbc:mysql://115.140.236.238:8806/dblog?serverTimezone=UTC
       username: bloger
       password: a123456789
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
