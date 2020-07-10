@@ -10,6 +10,8 @@ public interface UserService {
     public UserVO getUser(String id);
 
     public boolean findUser(String id);
-
+    
     public int addUser(UserVO user);
+    
+    public String getUserPassword(String id);
 }

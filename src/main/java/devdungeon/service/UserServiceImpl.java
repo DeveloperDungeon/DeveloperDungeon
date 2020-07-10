@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserMapper userMapper;
+    private final UserMapper userMapper = null;
 
     @Override
     public List<UserVO> getAllUser() {

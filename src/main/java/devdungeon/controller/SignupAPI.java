@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RequiredArgsConstructor
 public class SignupAPI {
 
-    private final UserService userService;
+    private final UserService userService = null;
 
     @GetMapping("/signup")
     public String getSignup() {

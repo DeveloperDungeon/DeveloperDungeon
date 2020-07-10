@@ -3,14 +3,14 @@ package devdungeon.domain;
 import lombok.Data;
 
 @Data
-public class UserVO {
+public class LoginVO {
     String id;
     String password;
-    String nickName;
-    String email;
     public String getId() {
-		return this.id;
-    	
+    	return this.id;
+    }
+    public String getPassword() {
+    	return this.password;
     }
 }
 
