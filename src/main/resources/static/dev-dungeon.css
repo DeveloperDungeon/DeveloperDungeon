@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #999999;
+}
+
+.content {
+    max-width: 920px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.page-header {
+    height: 50px;
+    background: #555555;
+    color: white;
+}
+
+.header-title {
+    background: #333;
+    font-size: 25px;
+    width: 130px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+    float: left;
+    cursor: pointer;
+}
+
+nav {
+    margin-left: 150px;
+    margin-right: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.header-navigator {
+    padding: 0;
+    display: table-row;
+}
+
+.header-navigator > li {
+    display: table-cell;
+    height: 50px;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.header-menu {
+    padding: 0 5px;
+}
+
+.header-menu > a {
+    cursor: pointer;
+}
+
+.header-divider {
+    padding: 0 5px;
+}
+
+#header-indicator {
+    position: absolute;
+    width: 60px;
+    height: 10px;
+    left: 230px;
+    top: 45px;
+    background: #555555;
+    border-radius: 0 0 20px 20px;
+    transition: width 0.3s, left 0.3s;
+}
+
+section.main {
+    background-image: url("https://via.placeholder.com/920x420");
+    height: 420px;
+}
+
+article#operators {
+    position: relative;
+    width: 315px;
+    top: 80px;
+    left: 50px;
+    text-align: center;
+}
+
+.operators-title {
+    color: white;
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.operator-cards {
+    display: flex;
+    justify-content: space-between;
+}
+
+.operator-card {
+    width: 150px;
+    height: 230px;
+    background: white;
+    border: 1px solid gray;
+    border-radius: 10px;
+    display: inline-block;
+    /*box-shadow: 3px 3px 3px #777777;*/
+}
+
+.operator-img {
+    margin: 15px;
+    border-radius: 50%;
+}
+
+.operator-name {
+    letter-spacing: 3px;
+}
+
+.main-content {
+    padding: 15px;
+}
+
+.content-header {
+    font-size: 18px;
+}
+
+.section-icon {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+article.article-card {
+    box-shadow: 2px 2px 5px 1px #cccccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    margin: 32px 0;
+}
+
+.card-content {
+    display: inline-block;
+    width: 45%;
+    margin: auto 30px;
+}
+
+.tag {
+    display: inline-block;
+    color: white;
+    padding: 3px 8px;
+    font-size: 10px;
+    border-radius: 8px;
+}
+
+.new-tag {
+    background-color: #686FCC;
+}
+
+.chapter-tag {
+    background-color: #CC3E93;
+}
+
+.series-name-header {
+    display: inline-block;
+    font-size: 12px;
+}
+
+.card-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.card-preview {
+    font-size: 17px;
+}
+
+.card-image {
+    width: 55%;
+}
