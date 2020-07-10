@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 @RequiredArgsConstructor
-public class SignupAPI {
+public class SignupController {
 
     private final UserService userService;
 
@@ -26,6 +26,7 @@ public class SignupAPI {
 
         if(!userService.findUser(user.getId())) {
             userService.addUser(user);
+            //차후에 loginAPI Merge후  "redirect:/login으로 수정 예정
             return "login";
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"User Aleady exist");
