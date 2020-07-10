@@ -28,6 +28,6 @@ public class SignupAPI {
             userService.addUser(user);
             return "login";
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND,"User Aleady exist");
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"User Aleady exist");
     }
 }
