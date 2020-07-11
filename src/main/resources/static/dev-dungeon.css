@@ -7,9 +7,15 @@ body {
     background-color: #999999;
 }
 
+.content-width {
+    max-width: 920px;
+    margin: 0 auto;
+}
+
 .content {
     max-width: 920px;
     margin: 0 auto;
+    padding: 15px 0;
     background-color: white;
 }
 
@@ -178,4 +184,29 @@ article.article-card {
 
 .card-image {
     width: 55%;
+}
+
+/* Quest Card */
+
+.quest-card {
+    margin: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #555555;
+    background-color: transparent;
+
+    cursor: pointer !important;
+    user-select: none;
+
+    transition: background-color 200ms;
+}
+
+.quest-card:hover {
+    background-color: #999999;
+}
+
+.quest-card-author, .quest-card-time {
+    font-size: 15px;
+    font-weight: bold;
+    color: #555555;
 }

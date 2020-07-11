@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
+<div th:fragment="questCard(title, author, time, content)" class="quest-card">
+    <h3 th:text="${title}"></h3>
+    <div>
+        <span class="quest-card-author" th:text="${author}"></span>
+        <span class="quest-card-time" th:text="${time}"></span>
+    </div>
+    <p th:text="${content}"></p>
+</div>
+</html>
