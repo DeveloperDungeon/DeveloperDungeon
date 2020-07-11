@@ -115,8 +115,6 @@
     <script>
         const button = document.getElementById('btnSignUp');
         button.onclick = () => {
-            const request = new XMLHttpRequest();
-
             const id = document.getElementById('inputId').value;
             const pw = document.getElementById('inputPw').value;
             const nick = document.getElementById('inputNickname').value;
@@ -129,8 +127,12 @@
                 email: email
             };
 
-            request.onload = () => {
-                switch (request.status) {
+            request(`${ServerUrl}/signup`, {
+                // 디폴트 헤더인 Content-Type: application/json 을 사용하므로 헤더 명시 안해도 됨
+                method: RequestMethod.POST,
+                body: JSON.stringify(body)
+            }).then(xhr => {
+                switch (xhr.status) {
                     case 200:
                         console.log('성공');
                         break;
@@ -141,11 +143,7 @@
                         console.log('예상치 못한 에러');
                         break;
                 }
-            };
-
-            request.open('POST', 'http://localhost:8080/signup');
-            request.setRequestHeader('Content-Type', 'application/json');
-            request.send(JSON.stringify(body));
+            });
         };
     </script>
 </th:block>
