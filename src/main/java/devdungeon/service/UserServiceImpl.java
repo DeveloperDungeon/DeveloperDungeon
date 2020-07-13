@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserMapper userMapper = null;
+    private final UserMapper userMapper;
 
     @Override
     public List<UserVO> getAllUser() {
@@ -24,9 +24,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserVO getUser(String id, String password) {return userMapper.selectOne(id,password);}
+
+    @Override
     public boolean findUser(String id) {
         UserVO user = getUser(id);
         if( user == null) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean findUser(String id,String password){
+        UserVO user = getUser(id,password);
+        if(user == null){
             return false;
         }
         return true;

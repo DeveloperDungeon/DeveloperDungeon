@@ -8,9 +8,6 @@ public class UserVO {
     String password;
     String nickName;
     String email;
-    public String getId() {
-		return this.id;
-    	
-    }
+
 }
 

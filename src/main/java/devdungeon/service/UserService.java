@@ -9,9 +9,14 @@ public interface UserService {
 
     public UserVO getUser(String id);
 
+    public UserVO getUser(String id,String password);
+
     public boolean findUser(String id);
-    
+
+    public boolean findUser(String id,String password);
+
     public int addUser(UserVO user);
     
-    public String getUserPassword(String id);
+
+
 }
