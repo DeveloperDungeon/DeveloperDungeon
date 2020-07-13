@@ -32,6 +32,7 @@ public class QuestController {
 
     @PostMapping("/write")
     public String postQuestWrite(@RequestBody QuestVO questVO) {
+        questVO.setAuthor("asdf");
         questService.addQuest(questVO);
         return "redirect:/quest/list";
     }
