@@ -5,3 +5,120 @@
 <head>
     <title>개발 던전 로그인</title>
 </head>
+
+<th:block layout:fragment="stylesheets">
+    <style>
+        #content {
+            padding: 15px 0;
+        }
+
+        h1.title {
+            padding-left: 15px;
+        }
+        
+        table.login {
+            margin: 0 auto;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #999999;
+        }
+
+        label, input {
+            font-size: 18px;
+        }
+
+        label {
+            padding: 0 10px;
+        }
+
+        input {
+            width: 350px;
+        }
+
+        div.controls {
+            text-align: right;
+            width: 475px;
+            margin: 10px auto;
+        }
+
+        #btnLogIn {
+            color: #333333;
+            width: 80px;
+            height: 40px;
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 150ms;
+        }
+
+        #btnLogin:hover {
+            background-color: #999999;
+        }
+
+        #btnLogin:active {
+            background-color: #555555;
+        }
+    </style>
+</th:block>
+
+<th:block layout:fragment="content">
+    <div id="content" class="content">
+        <h1 class="title">로그인</h1>
+        <form>
+            <table class="login">
+                <tbody>
+                    <tr>
+                        <th><label for="inputId">아이디</label></th>
+                        <td><input id="inputId" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="inputPw">비밀번호</label></th>
+                        <td><input id="inputPw" type="password"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <div class="controls">
+            <button id="bntLogin">로그인</button>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="bodyScripts">
+    <script>
+        const button = document.getElementById('bntLogin');
+        button.onclick = () => {
+            const request = new XMLHttpRequest();
+            const id = document.getElementById('inputId').value;
+            const pw = document.getElementById('inputPw').value;
+
+            const body = {
+                id : id,
+                passward : pw
+            };
+
+            request.onload = () => {
+                switch(request.status) {
+                    case 200 :
+                        console.log('성공');
+                        break;
+                    
+                    case 400 :
+                        console.log('실패');
+                        break;
+
+                    default :
+                        console.log('예상치 못한 에러');
+                        break
+                }
+            };
+
+            request.open('POST', 'http://localhost:8080/login');
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.send(JSON.stringify(body));
+        }
+    </script>
+</th:block>
