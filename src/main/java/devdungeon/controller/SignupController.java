@@ -26,7 +26,7 @@ public class SignupController {
 
         if(!userService.findUser(user.getId())) {
             userService.addUser(user);
-            return "redirect:/";
+            return "redirect:/login";
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"User Aleady exist");
     }
