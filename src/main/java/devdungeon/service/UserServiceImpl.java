@@ -24,9 +24,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int getUser(String id, String password) {
+        return userMapper.loginCheck(id, password);
+    }
+
+    @Override
     public boolean findUser(String id) {
         UserVO user = getUser(id);
-        if( user == null) {
+        if (user == null) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean findUser(String id, String password) {
+        int userNum = getUser(id, password);
+        if (userNum == 0) {
             return false;
         }
         return true;
