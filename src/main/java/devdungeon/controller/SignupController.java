@@ -26,8 +26,7 @@ public class SignupController {
 
         if(!userService.findUser(user.getId())) {
             userService.addUser(user);
-            //차후에 loginAPI Merge후  "redirect:/login으로 수정 예정
-            return "login";
+            return "redirect:/";
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"User Aleady exist");
     }
