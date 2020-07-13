@@ -103,13 +103,11 @@
             request.onload = () => {
                 switch(request.status) {
                     case 200 :
-                        console.log('성공');
+                        redirect(request.responseURL);
                         break;
-                    
                     case 400 :
                         console.log('실패');
                         break;
-
                     default :
                         console.log('예상치 못한 에러');
                         break

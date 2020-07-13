@@ -30,5 +30,9 @@ function now() {
     return new Date().getMilliseconds();
 }
 
+function redirect(url) {
+    window.location.href = url;
+}
+
 String.prototype.zeroFill = function (len) { return "0".repeat(len - this.length) + this; };
 Number.prototype.zeroFill = function (len) { return this.toString().zeroFill(len); };
