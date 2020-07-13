@@ -15,3 +15,11 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+
+---
+spring:
+  profiles: hyuni
+
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://192.168.219.157:3306/dblog?serverTimezone=UTC
