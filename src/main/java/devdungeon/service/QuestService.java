@@ -10,4 +10,6 @@ public interface QuestService {
     QuestVO getOne(int id);
 
     List<QuestVO> getRecent(int amount);
+
+    int addQuest(QuestVO questVO);
 }
