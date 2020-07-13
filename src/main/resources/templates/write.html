@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/devLayout">
+<head>
+    <title>퀘스트 작성</title>
+</head>
+
+<th:block layout:fragment="stylesheets">
+    <style>
+        .content {
+            padding: 15px;
+        }
+
+        textarea {
+            height: 500px;
+        }
+
+        #controls {
+            text-align: right;
+        }
+    </style>
+</th:block>
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <h2>신규 퀘스트</h2>
+        <label class="w100" for="ta">신규 퀘스트 내용 작성</label>
+        <textarea class="w100" id="ta"></textarea>
+        <div id="controls">
+            <button class="btnNegative" id="btnCancel">취소</button>
+            <button class="btnPositive" id="btnConfirm">게시</button>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="bodyScripts">
+    <script>
+        document.getElementById('btnCancel').onclick = () => {
+            window.history.back();
+        };
+
+        const ta = document.getElementById('ta');
+        document.getElementById('btnConfirm').onclick = () => {
+            const content = ta.value;
+            console.log(content);
+        };
+    </script>
+</th:block>
