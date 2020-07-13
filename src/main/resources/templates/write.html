@@ -12,6 +12,15 @@
             padding: 15px;
         }
 
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        input {
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
         textarea {
             height: 500px;
         }
@@ -25,6 +34,8 @@
 <th:block layout:fragment="content">
     <div class="content">
         <h2>신규 퀘스트</h2>
+        <label class="w100" for="input">제목</label>
+        <input class="w100" id="input">
         <label class="w100" for="ta">신규 퀘스트 내용 작성</label>
         <textarea class="w100" id="ta"></textarea>
         <div id="controls">
@@ -41,9 +52,22 @@
         };
 
         const ta = document.getElementById('ta');
+        const tf = document.getElementById('input');
+
         document.getElementById('btnConfirm').onclick = () => {
+            const title = tf.value;
             const content = ta.value;
-            console.log(content);
+
+            const body = {
+                title: title,
+                content: content,
+                regTime: now()
+            };
+
+            request('/quest/write', {
+                method: 'POST',
+                body: JSON.stringify(body)
+            }).then(res => console.log(res));
         };
     </script>
 </th:block>
