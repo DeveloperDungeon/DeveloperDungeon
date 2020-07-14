@@ -35,6 +35,11 @@ public class QuestServiceImpl implements QuestService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public int addQuest(QuestVO questVO) {
+        return questMapper.insertQuest(questVO);
+    }
+
     private QuestVO setAuthorDetails(QuestVO questVO) {
         UserVO user = userService.getUser(questVO.getAuthor());
 

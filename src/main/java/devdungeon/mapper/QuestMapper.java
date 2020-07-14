@@ -1,6 +1,7 @@
 package devdungeon.mapper;
 
 import devdungeon.domain.QuestVO;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -17,4 +18,6 @@ public interface QuestMapper {
     @Select("SELECT * FROM quest ORDER BY reg_time DESC LIMIT #{amount}")
     List<QuestVO> selectRecent(int amount);
 
+    @Insert("INSERT INTO quest(title,content,author,reg_time) VALUES(#{title},#{content},#{author},#{regTime})")
+    int insertQuest(QuestVO questVO);
 }
