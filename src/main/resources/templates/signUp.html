@@ -87,7 +87,7 @@
                 email: email
             };
 
-            request(`${ServerUrl}/signup`, {
+            request(`/signup`, {
                 // 디폴트 헤더인 Content-Type: application/json 을 사용하므로 헤더 명시 안해도 됨
                 method: RequestMethod.POST,
                 body: JSON.stringify(body)
