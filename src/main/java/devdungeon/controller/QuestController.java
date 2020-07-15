@@ -29,7 +29,7 @@ public class QuestController {
     @GetMapping("/write")
     @CertifyAnnotation
     public String getQuestWrite() {
-        return "questWrite";
+        return "write";
     }
 
     @PostMapping("/write")
