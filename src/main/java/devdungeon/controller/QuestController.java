@@ -27,7 +27,7 @@ public class QuestController {
     @GetMapping("/write")
     @CertifyAnnotation
     public String getQuestWrite() {
-        return "write";
+        return "quest/write";
     }
 
     @PostMapping("/write")

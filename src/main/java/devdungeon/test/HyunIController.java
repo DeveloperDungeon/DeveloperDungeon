@@ -18,6 +18,6 @@ public class HyunIController {
     public String getList(Model model) {
         List<QuestVO> quests = questService.getAll();
         model.addAttribute("questList", quests);
-        return "list";
+        return "quest/list";
     }
 }
