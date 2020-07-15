@@ -28,7 +28,7 @@ public class LoginController {
     @PostMapping("/login")
     public String postLogin(@RequestBody UserVO user, HttpSession session) {
         if (userService.findUser(user.getId(), user.getPassword())) {
-            session.setAttribute("user", user);
+            session.setAttribute("user", user.getId());
 
             return "redirect:/";
         }

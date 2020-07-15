@@ -15,7 +15,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {
             HandlerMethod method = (HandlerMethod) handler;
-            UserVO user = (UserVO) request.getSession().getAttribute("user");
+            String user = (String) request.getSession().getAttribute("user");
             if (method.hasMethodAnnotation(CertifyAnnotation.class) && user == null) {
                 response.sendRedirect("/login");
                 return false;

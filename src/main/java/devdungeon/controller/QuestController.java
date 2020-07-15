@@ -33,8 +33,7 @@ public class QuestController {
     @PostMapping("/write")
     @CertifyAnnotation
     public String postQuestWrite(@RequestBody QuestVO questVO) {
-        UserVO userVO = (UserVO) session.getAttribute("user");
-        questVO.setAuthor(userVO.getId());
+        questVO.setAuthor((String) session.getAttribute("user"));
         questService.addQuest(questVO);
         return "redirect:/quest/list";
     }
