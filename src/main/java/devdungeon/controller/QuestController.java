@@ -42,13 +42,13 @@ public class QuestController {
     }
 
     @GetMapping("/edit")
-    @AuthAnnotation
+    @CertifyAnnotation
     public String getQuestEdit(){
         return "questEdit";
     }
 
     @PutMapping("/edit")
-    @AuthAnnotation
+    @CertifyAnnotation
     public String putQuestEdit(@RequestBody QuestVO questVO){
         questService.editQuest(questVO);
         return "questEdit";
