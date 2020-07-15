@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="kr">
 <header th:fragment="devHeader" class="page-header content-width">
-    <div class="header-title">개발던전</div>
+    <div id="main" class="header-title">개발던전</div>
     <nav>
         <ul class="header-navigator">
             <li class="header-menu"><a>개발일기</a></li>
@@ -19,6 +19,10 @@
     <div id="header-indicator"></div>
     <script type="text/javascript">
         window.addEventListener('load', () => {
+            document.querySelector('#main').onclick = () => {
+                redirect('/');
+            };
+
             const indicator = document.getElementById('header-indicator');
 
             const menuItems = Array.from(document.getElementsByClassName('header-menu'));
