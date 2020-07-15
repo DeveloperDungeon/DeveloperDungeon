@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/quest/*")
+@RequestMapping("/quest")
 public class QuestController {
 
     private final QuestService questService;
@@ -42,6 +42,8 @@ public class QuestController {
 
     @PutMapping("/edit")
     public String putQuestEdit(@RequestBody QuestVO questVO){
+        //login된 유저와 questVO author와 같은지 인증 절차 필요
+        questService.editQuest(questVO);
         return "questEdit";
     }
 }

@@ -47,4 +47,7 @@ public class QuestServiceImpl implements QuestService {
 
         return questVO;
     }
+
+    @Override
+    public int editQuest(QuestVO questVO){return questMapper.editQuest(questVO);}
 }

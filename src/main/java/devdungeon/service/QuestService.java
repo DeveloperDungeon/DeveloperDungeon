@@ -12,4 +12,6 @@ public interface QuestService {
     List<QuestVO> getRecent(int amount);
 
     int addQuest(QuestVO questVO);
+
+    int editQuest(QuestVO questVO);
 }
