@@ -1,5 +1,3 @@
-const ServerUrl = 'http://localhost:8080';
-
 const RequestMethod = {
     GET: 'GET',
     POST: 'POST',
