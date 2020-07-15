@@ -35,6 +35,11 @@ public class QuestServiceImpl implements QuestService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public int addQuest(QuestVO questVO) {
+        return questMapper.insertQuest(questVO);
+    }
+
     private QuestVO setAuthorDetails(QuestVO questVO) {
         UserVO user = userService.getUser(questVO.getAuthor());
 
@@ -42,4 +47,7 @@ public class QuestServiceImpl implements QuestService {
 
         return questVO;
     }
+
+    @Override
+    public int editQuest(QuestVO questVO){return questMapper.editQuest(questVO);}
 }
