@@ -27,7 +27,7 @@ function millisToTimeString(millis = now(), format = "yyyy년 MM월 dd일 a/p h�
  * @returns {number} current time millis
  */
 function now() {
-    return new Date().getMilliseconds();
+    return new Date().getTime();
 }
 
 function redirect(url) {
