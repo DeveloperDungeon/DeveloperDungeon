@@ -2,7 +2,6 @@ package devdungeon.controller;
 
 import devdungeon.annotation.CertifyAnnotation;
 import devdungeon.domain.QuestVO;
-import devdungeon.domain.UserVO;
 import devdungeon.service.QuestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
