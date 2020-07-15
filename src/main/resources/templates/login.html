@@ -41,6 +41,13 @@
             margin: 10px auto;
         }
 
+        #login_fail {
+            text-align: left;
+            width: 200px;
+            margin: 1px auto;
+            color : red;
+        }
+
         #bntLogin {
             color: #333333;
             width: 80px;
@@ -61,6 +68,8 @@
         #bntLogin:active {
             background-color: #555555;
         }
+
+
     </style>
 </th:block>
 
@@ -84,6 +93,7 @@
         <div class="controls">
             <button id="bntLogin">로그인</button>
         </div>
+
     </div>
 </th:block>
 
@@ -106,11 +116,11 @@
                         redirect(request.responseURL);
                         break;
                     case 400 :
-                        console.log('실패');
+                        alert('실패');
                         break;
                     default :
-                        console.log('예상치 못한 에러');
-                        break
+                        alert('실패');
+                        break;
                 }
             };
 
