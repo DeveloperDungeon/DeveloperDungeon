@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/devLayout">
+<head>
+    <title>퀘스트 목록</title>
+</head>
+
+<th:block layout:fragment="stylesheets">
+    <style>
+        h2 {
+            margin-left: 15px;
+        }
+    </style>
+</th:block>
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <h2>퀘스트 목록</h2>
+        <div th:each="quest : ${questList}">
+            <div th:replace="fragments/questCard :: questCard(title=${quest.title}, author=${quest.authorDetails.nickName}, time=${quest.regTime}, content=${quest.content})"></div>
+        </div>
+    </div>
+</th:block>
