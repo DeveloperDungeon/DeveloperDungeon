@@ -1,7 +1,6 @@
 package devdungeon.controller;
 
 import devdungeon.annotation.CertifyAnnotation;
-import devdungeon.domain.PageCriteria;
 import devdungeon.domain.PageDTO;
 import devdungeon.domain.QuestVO;
 import devdungeon.service.QuestService;
@@ -24,15 +23,10 @@ public class QuestController {
     public void getQuestList(Model model, @RequestParam(value = "page", required = false,
             defaultValue = "1") int page) {
 
-        PageDTO pageDTO = new PageDTO(new PageCriteria(page), questService.getTotalQuestNum());
-        model.addAttribute("currentPage", pageDTO.getPageCriteria().getCurrentPage());
-        model.addAttribute("minPage", pageDTO.getMinPage());
-        model.addAttribute("maxPage", pageDTO.getMaxPage());
-        model.addAttribute("prev", pageDTO.isPrev());
-        model.addAttribute("next", pageDTO.isNext());
-        model.addAttribute("questList", questService
-                .getQuestWithPage(pageDTO.getPageCriteria().getLimit(),
-                        pageDTO.getPageCriteria().getOffset()));
+        PageDTO pageDTO = new PageDTO(page, questService.getTotalQuestNum());
+        model.addAttribute("pageInfo",pageDTO);
+        model.addAttribute("questList",
+                questService.getQuestWithPage(pageDTO.getLimit(), pageDTO.getOffset()));
     }
 
     @GetMapping("/{id}")
