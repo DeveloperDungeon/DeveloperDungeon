@@ -14,4 +14,8 @@ public interface QuestService {
     int addQuest(QuestVO questVO);
 
     int editQuest(QuestVO questVO);
+
+    int getTotalQuestNum();
+
+    List<QuestVO> getQuestWithPage(int limit,int offset);
 }

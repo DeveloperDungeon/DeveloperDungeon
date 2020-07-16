@@ -49,5 +49,17 @@ public class QuestServiceImpl implements QuestService {
     }
 
     @Override
-    public int editQuest(QuestVO questVO){return questMapper.editQuest(questVO);}
+    public List<QuestVO> getQuestWithPage(int limit, int offset) {
+        return questMapper.selectWithPage(limit, offset);
+    }
+
+    @Override
+    public int editQuest(QuestVO questVO) {
+        return questMapper.editQuest(questVO);
+    }
+
+    @Override
+    public int getTotalQuestNum() {
+        return questMapper.getTotalQuestNum();
+    }
 }
