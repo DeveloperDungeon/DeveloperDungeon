@@ -11,7 +11,7 @@ public class PageDTO {
     private int total;
     private int minPage;
     private int maxPage;
-    private boolean prev, next;
+    private boolean hasPrev, hasNext;
 
     public PageDTO(int currentPage, int total) {
         this.currentPage = currentPage;
@@ -27,9 +27,7 @@ public class PageDTO {
 
         this.maxPage = maxPage < realEndPage ? this.maxPage : realEndPage;
 
-        this.prev = this.currentPage > 10;
-        this.next = this.maxPage != realEndPage;
+        this.hasPrev = this.currentPage > 10;
+        this.hasNext = this.maxPage != realEndPage;
     }
-
-
 }
