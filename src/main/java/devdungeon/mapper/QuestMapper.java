@@ -24,4 +24,11 @@ public interface QuestMapper {
 
     @Update("UPDATE quest SET title=#{title}, content=#{content} WHERE id=#{id}")
     int editQuest(QuestVO questVO);
+
+    @Select("SELECT COUNT(*) FROM quest WHERE id>0")
+    int getTotalQuestNum();
+
+    @Select("SELECT S1.* FROM ( SELECT * FROM quest ORDER BY reg_time DESC ) S1" +
+            " LIMIT #{limit, jdbcType=INTEGER} OFFSET #{offset, jdbcType=INTEGER}")
+    List<QuestVO> selectWithPage(int limit, int offset);
 }
