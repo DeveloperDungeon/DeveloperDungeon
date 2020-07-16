@@ -17,5 +17,8 @@ public interface UserService {
 
     public int addUser(UserVO user);
 
+    public boolean findUserByEmail(String email);
+
+    public boolean findUserByNick(String nickName);
 
 }

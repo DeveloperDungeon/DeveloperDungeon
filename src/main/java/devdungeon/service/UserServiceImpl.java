@@ -50,4 +50,18 @@ public class UserServiceImpl implements UserService {
     public int addUser(UserVO user) {
         return userMapper.insertUser(user);
     }
+
+    @Override
+    public boolean findUserByEmail(String email){
+        if(userMapper.selectByEmail(email)==null)
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean findUserByNick(String nickName){
+        if(userMapper.selectByNick(nickName)==null)
+            return true;
+        return false;
+    }
 }
