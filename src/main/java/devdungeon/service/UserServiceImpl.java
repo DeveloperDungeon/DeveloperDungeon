@@ -52,16 +52,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean findUserByEmail(String email){
-        if(userMapper.selectByEmail(email)==null)
-            return true;
-        return false;
+    public boolean findUserByEmail(String email) {
+        if (userMapper.selectByEmail(email) == null)
+            return false;
+        return true;
     }
 
     @Override
-    public boolean findUserByNick(String nickName){
-        if(userMapper.selectByNick(nickName)==null)
-            return true;
-        return false;
+    public boolean findUserByNick(String nickName) {
+        if (userMapper.selectByNick(nickName) == null)
+            return false;
+        return true;
     }
 }

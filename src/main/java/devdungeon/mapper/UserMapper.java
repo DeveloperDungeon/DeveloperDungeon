@@ -24,7 +24,7 @@ public interface UserMapper {
     @Select("SELECT * FROM user WHERE email=#{email}")
     UserVO selectByEmail(String email);
 
-    @Select("SELECT * FROM user WHERE nickName=#{nickName}")
+    @Select("SELECT * FROM user WHERE nick_name=#{nickName}")
     UserVO selectByNick(String nickName);
 
 }
