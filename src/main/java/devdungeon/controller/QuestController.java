@@ -45,7 +45,7 @@ public class QuestController {
     public String postQuestWrite(@RequestBody QuestVO questVO) {
         questVO.setAuthor((String) session.getAttribute("user"));
         questService.addQuest(questVO);
-        return "redirect:/quest/list";
+        return "redirect:/hyuni/list";
     }
 
     @GetMapping("/edit")
