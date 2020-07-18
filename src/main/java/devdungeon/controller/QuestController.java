@@ -1,8 +1,8 @@
 package devdungeon.controller;
 
 import devdungeon.annotation.CertifyAnnotation;
+import devdungeon.domain.PageDTO;
 import devdungeon.domain.QuestVO;
-import devdungeon.domain.UserVO;
 import devdungeon.service.QuestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,8 +20,18 @@ public class QuestController {
     private final HttpSession session;
 
     @GetMapping("/list")
-    public void getQuestList(Model model) {
-        model.addAttribute("list",questService.getAll());
+    public void getQuestList(Model model, @RequestParam(value = "page", required = false,
+            defaultValue = "1") int page) {
+
+        PageDTO pageDTO = new PageDTO(page, questService.getTotalQuestNum());
+        model.addAttribute("pageInfo",pageDTO);
+        model.addAttribute("questList",
+                questService.getQuestWithPage(pageDTO.getLimit(), pageDTO.getOffset()));
+    }
+
+    @GetMapping("/{id}")
+    public void getQuest(Model model, @PathVariable("id") Integer id) {
+        model.addAttribute("quest", questService.getOne(id));
     }
 
     @GetMapping("/write")
@@ -33,21 +43,20 @@ public class QuestController {
     @PostMapping("/write")
     @CertifyAnnotation
     public String postQuestWrite(@RequestBody QuestVO questVO) {
-        UserVO userVO = (UserVO) session.getAttribute("user");
-        questVO.setAuthor(userVO.getId());
+        questVO.setAuthor((String) session.getAttribute("user"));
         questService.addQuest(questVO);
         return "redirect:/quest/list";
     }
 
     @GetMapping("/edit")
     @CertifyAnnotation
-    public String getQuestEdit(){
+    public String getQuestEdit() {
         return "questEdit";
     }
 
     @PutMapping("/edit")
     @CertifyAnnotation
-    public String putQuestEdit(@RequestBody QuestVO questVO){
+    public String putQuestEdit(@RequestBody QuestVO questVO) {
         questService.editQuest(questVO);
         return "questEdit";
     }
