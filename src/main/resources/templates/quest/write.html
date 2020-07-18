@@ -5,9 +5,6 @@
 <head>
     <title th:if="${type}=='edit'" th:text="'퀘스트 수정 :: ' + ${quest.title}"></title>
     <title>퀘스트 작성</title>
-</head>
-
-<th:block layout:fragment="stylesheets">
     <style>
         .content {
             padding: 15px;
@@ -30,7 +27,7 @@
             text-align: right;
         }
     </style>
-</th:block>
+</head>
 
 <th:block layout:fragment="content">
     <div class="content">
