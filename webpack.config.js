@@ -1,21 +1,41 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const fs = require('fs');
+
+const clientPath = path.resolve(__dirname, 'src/main/front');
+
+function filesToEntry(filePath = clientPath, prefix = '') {
+    let entry = {};
+
+    const files = fs.readdirSync(filePath);
+    files.forEach(fileName => {
+        const fullPath = filePath + '/' + fileName;
+        const stat = fs.lstatSync(fullPath);
+        if (stat.isFile()) {
+            const split = fileName.split('.');
+            if (split[split.length - 1] !== 'js') return;
+            const name = split.slice(0, -1).join('.');
+            const entryName = prefix === '' ? name : prefix + '_' + name;
+            entry[entryName] = fullPath;
+        } else {
+            const recursivePath = filePath + '/' + fileName;
+            const recursivePrefix = prefix === '' ? fileName : prefix + '_' + fileName;
+            const recursiveEntry = filesToEntry(recursivePath, recursivePrefix);
+            entry = {...entry, ...recursiveEntry};
+        }
+    });
+
+    return entry;
+}
 
 module.exports = (env) => {
-    const clientPath = path.resolve(__dirname, 'src/main/front');
     const outputPath = path.resolve(__dirname, (env === 'production') ? 'src/main/resources/static' : 'out');
+
+    const entry = filesToEntry();
 
     return {
         mode: !env ? 'development' : env,
-        entry: {
-            index: clientPath + '/index.js',
-            login: clientPath + '/login.js',
-            signup: clientPath + '/signup.js',
-
-            quest_write: clientPath + '/quest/write.js',
-
-            fragment_devHeader: clientPath + '/fragment/devHeader.js'
-        },
+        entry: entry,
         output: {
             path: outputPath,
             filename: '[name].js'
