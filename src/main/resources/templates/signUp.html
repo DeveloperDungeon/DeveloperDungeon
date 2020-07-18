@@ -93,9 +93,7 @@
                 body: JSON.stringify(body)
             }).then(xhr => {
                 switch (xhr.status) {
-                    case 200:
-                        redirect(xhr.responseURL);
-                        break;
+                    case 200: /* Redirected */ break;
                     case 400:
                         console.log('실패');
                         alert('실패');
