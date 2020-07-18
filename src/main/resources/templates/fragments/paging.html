@@ -2,12 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="kr">
 <div th:fragment="paging(minPage, maxPage, currentPage, hasPrev, hasNext, baseUrl)" class="paging">
     <div>
-        <button th:disabled="${!hasPrev}" class="paging-button"
+        <button class="paging-button"
+                th:disabled="${!hasPrev}"
                 th:onclick="redirect([[${baseUrl}]], {page: [[${minPage-1}]]})">◀
         </button>
-        <button th:each="page : ${#numbers.sequence(minPage, maxPage)}"
+        <button class="paging-button"
+                th:each="page : ${#numbers.sequence(minPage, maxPage)}"
                 th:text="${page}"
-                class="paging-button"
                 th:classappend="${page == currentPage} ? paging-button-active"
                 th:onclick="redirect([[${baseUrl}]], {page: [[${page}]]})"></button>
         <button th:disabled="${!hasNext}"
@@ -15,5 +16,12 @@
                 th:onclick="redirect([[${baseUrl}]], {page: [[${maxPage+1}]]})">▶
         </button>
     </div>
+
+    <script>
+        // TODO Use redirect() function from src/main/front/common/utils.js with webpack
+        function redirect(baseUrl, params) {
+            window.location.href = baseUrl + '?page=' + params.page;
+        }
+    </script>
 </div>
 </html>

@@ -4,9 +4,6 @@
       layout:decorator="layout/devLayout">
 <head>
     <title>퀘스트 작성</title>
-</head>
-
-<th:block layout:fragment="stylesheets">
     <style>
         .content {
             padding: 15px;
@@ -29,7 +26,8 @@
             text-align: right;
         }
     </style>
-</th:block>
+    <script src="/quest_write.js"></script>
+</head>
 
 <th:block layout:fragment="content">
     <div class="content">
@@ -43,31 +41,4 @@
             <button class="btnPositive" id="btnConfirm">게시</button>
         </div>
     </div>
-</th:block>
-
-<th:block layout:fragment="bodyScripts">
-    <script>
-        document.getElementById('btnCancel').onclick = () => {
-            window.history.back();
-        };
-
-        const ta = document.getElementById('ta');
-        const tf = document.getElementById('input');
-
-        document.getElementById('btnConfirm').onclick = () => {
-            const title = tf.value;
-            const content = ta.value;
-
-            const body = {
-                title: title,
-                content: content,
-                regTime: now()
-            };
-
-            request('/quest/write', {
-                method: 'POST',
-                body: JSON.stringify(body)
-            }).then(res => console.log(res));
-        };
-    </script>
 </th:block>

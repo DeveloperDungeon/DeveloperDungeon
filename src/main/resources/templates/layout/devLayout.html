@@ -5,18 +5,12 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>개발던전</title>
         <link rel="stylesheet" href="/dev-dungeon.css">
-        <script src="/request.js"></script>
-        <script src="/utils.js"></script>
-        <!-- Page specific css -->
-        <th:block layout:fragment="stylesheets"></th:block>
-        <!-- head에 들어갈 js script -->
-        <th:block layout:fragment="headScripts"></th:block>
     </head>
     <body>
         <header th:replace="fragments/devHeader :: devHeader"></header>
-        <th:block layout:fragment="content"></th:block>
+        <th:block layout:fragment="content">Content</th:block>
         <footer th:replace="fragments/devFooter :: devFooter"></footer>
-        <th:block layout:fragment="bodyScripts"></th:block>
     </body>
 </html>
