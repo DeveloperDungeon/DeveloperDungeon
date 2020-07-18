@@ -18,10 +18,5 @@
         <th:block layout:fragment="content"></th:block>
         <footer th:replace="fragments/devFooter :: devFooter"></footer>
         <th:block layout:fragment="bodyScripts"></th:block>
-        <script>
-            // Convert epoch millis to readable format
-            Array.from(document.querySelectorAll('.quest-card-time'))
-                .forEach(span => span.innerText = millisToTimeString(parseInt(span.innerText)));
-        </script>
     </body>
 </html>
