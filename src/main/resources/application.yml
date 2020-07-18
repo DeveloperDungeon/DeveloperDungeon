@@ -23,3 +23,11 @@ spring:
   datasource:
     hikari:
       jdbc-url: jdbc:mysql://192.168.219.157:3306/dblog?serverTimezone=UTC
+
+---
+spring:
+  profiles: deploy
+
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/dblog?serverTimezone=UTC
