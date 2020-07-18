@@ -33,6 +33,7 @@ async function request(url, config) {
     if (config.method == null) throw RequestException.MissingMethodException;
 
     if (config.header == null) config.header = {};
+    if (config.doRedirection == null) config.doRedirection = true;
 
     const method = RequestMethod[config.method];
     if (method == null) throw RequestException.NoSuchMethodException;
@@ -51,5 +52,9 @@ async function request(url, config) {
     }
 
     xhr.send(config.body);
+
+    if (config.doRedirection && xhr.status === 200 && xhr.responseURL)
+        redirect(xhr.responseURL);
+
     return xhr;
 }
