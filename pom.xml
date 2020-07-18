@@ -94,8 +94,13 @@
             <artifactId>spring-boot-devtools</artifactId>
             <version>2.3.1.RELEASE</version>
         </dependency>
-
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>deploy</id>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
