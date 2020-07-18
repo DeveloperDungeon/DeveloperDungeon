@@ -30,8 +30,26 @@ function now() {
     return new Date().getTime();
 }
 
-function redirect(url) {
+function redirect(url, params) {
+    if (params) url = _appendQueryParams(url, params);
     window.location.href = url;
+}
+
+function _appendQueryParams(url, params) {
+    const [baseUrl, rawParams] = url.split('?');
+    if (rawParams) {
+        const originalParams = {};
+        rawParams.split('&').forEach(p => {
+            const [key, value] = p.split('=');
+            originalParams.key = value;
+        });
+        params = {...originalParams, ...params};
+    }
+    const paramKeys = Object.keys(params);
+    if (paramKeys.length === 0) return baseUrl;
+
+    const paramString = '?' + paramKeys.map(key => `${key}=${params[key]}`).join('&');
+    return baseUrl + paramString;
 }
 
 String.prototype.zeroFill = function (len) { return "0".repeat(len - this.length) + this; };

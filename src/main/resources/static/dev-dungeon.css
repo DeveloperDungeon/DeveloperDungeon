@@ -253,3 +253,26 @@ article.article-card {
 .btnNegative:active {
     background-color: #bb4444;
 }
+
+/* Paging */
+.paging {
+    text-align: center;
+    user-select: none;
+}
+
+.paging-button {
+    background: none;
+    border: none;
+    outline: none;
+    margin: 5px;
+    font-size: 15px;
+}
+
+.paging-button:enabled {
+    cursor: pointer;
+}
+
+.paging-button-active {
+    font-weight: bold;
+    font-size: 18px;
+}
