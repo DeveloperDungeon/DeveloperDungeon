@@ -3,7 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/devLayout}">
 <head>
-    <title th:if="${type}=='edit'" th:text="'퀘스트 수정 :: ' + ${quest.title}"></title>
     <title>퀘스트 작성</title>
     <style>
         .content {
@@ -27,6 +26,7 @@
             text-align: right;
         }
     </style>
+    <script src="/quest_write.js"></script>
 </head>
 
 <th:block layout:fragment="content">
@@ -48,44 +48,4 @@
             <button class="btnPositive" th:onclick="onConfirm([[${quest}]])">게시</button>
         </div>
     </div>
-</th:block>
-
-<th:block layout:fragment="bodyScripts">
-    <script>
-        const ta = document.getElementById('ta');
-        const tf = document.getElementById('input');
-
-        function onConfirm(quest) {
-            const title = tf.value;
-            const content = ta.value;
-
-            if (quest == null) requestNewQuest(title, content);
-            else requestEditQuest(quest.id, title, content);
-        }
-
-        function requestNewQuest(title, content) {
-            const body = {
-                title: title,
-                content: content,
-                regTime: now()
-            };
-
-            request('/quest/write', {
-                method: 'POST',
-                body: JSON.stringify(body)
-            }).then(res => console.log(res));
-        }
-
-        function requestEditQuest(id, title, content) {
-            const body = {
-                title: title,
-                content: content
-            };
-
-            request('/quest/edit/' + id, {
-                method: 'PUT',
-                body: JSON.stringify(body)
-            }).then(res => console.log(res));
-        }
-    </script>
 </th:block>

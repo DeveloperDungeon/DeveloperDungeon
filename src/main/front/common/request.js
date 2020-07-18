@@ -1,4 +1,7 @@
-const RequestMethod = {
+import '@babel/polyfill';
+import {redirect} from "./utils";
+
+export const RequestMethod = {
     GET: 'GET',
     POST: 'POST',
     PUT: 'PUT',
@@ -6,12 +9,12 @@ const RequestMethod = {
 };
 Object.freeze(RequestMethod);
 
-const ContentType = {
+export const ContentType = {
     APPLICATION_JSON: 'application/json'
 };
 Object.freeze(ContentType);
 
-const RequestException = {
+export const RequestException = {
     MissingMethodException: "Missing method exception",
     NoSuchMethodException: "No such method exception"
 };
@@ -29,7 +32,7 @@ Object.freeze(RequestException);
  * }
  * @return 요청을 처리하는 Promise
  */
-async function request(url, config) {
+export async function request(url, config) {
     if (config.method == null) throw RequestException.MissingMethodException;
 
     if (config.header == null) config.header = {};

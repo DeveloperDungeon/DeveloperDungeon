@@ -4,6 +4,7 @@
       layout:decorate="~{layout/devLayout}">
 <head>
     <title>개발 던전 로그인</title>
+    <script src="/login.js"></script>
     <style>
         #content {
             padding: 15px 0;
@@ -81,35 +82,5 @@
         <div class="controls">
             <button id="bntLogin">로그인</button>
         </div>
-
     </div>
-</th:block>
-
-<th:block layout:fragment="bodyScripts">
-    <script>
-        const button = document.getElementById('bntLogin');
-        button.onclick = () => {
-            const id = document.getElementById('inputId').value;
-            const pw = document.getElementById('inputPw').value;
-            const body = {
-                id: id,
-                password: pw
-            };
-
-            request('/login', {
-                method: 'POST',
-                body: JSON.stringify(body)
-            }).then(response => {
-                switch (response.status) {
-                    case 200 : /* Redirect */ break;
-                    case 400 :
-                        alert('실패');
-                        break;
-                    default :
-                        alert('실패');
-                        break;
-                }
-            });
-        }
-    </script>
 </th:block>

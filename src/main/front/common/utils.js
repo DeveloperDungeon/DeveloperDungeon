@@ -1,4 +1,4 @@
-function millisToTimeString(millis = now(), format = "yyyy년 MM월 dd일 a/p h시 mm분") {
+export function millisToTimeString(millis = now(), format = "yyyy년 MM월 dd일 a/p h시 mm분") {
     const weekKorName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
     const weekKorShortName = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -26,11 +26,11 @@ function millisToTimeString(millis = now(), format = "yyyy년 MM월 dd일 a/p h�
  * Returns current time millis
  * @returns {number} current time millis
  */
-function now() {
+export function now() {
     return new Date().getTime();
 }
 
-function redirect(url, params) {
+export function redirect(url, params) {
     if (params) url = _appendQueryParams(url, params);
     window.location.href = url;
 }
@@ -41,7 +41,7 @@ function _appendQueryParams(url, params) {
         const originalParams = {};
         rawParams.split('&').forEach(p => {
             const [key, value] = p.split('=');
-            originalParams.key = value;
+            originalParams[key] = value;
         });
         params = {...originalParams, ...params};
     }
