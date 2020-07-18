@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="kr" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout/devLayout">
+      layout:decorate="~{layout/devLayout}">
 <head>
     <title th:if="${type}=='edit'" th:text="'퀘스트 수정 :: ' + ${quest.title}"></title>
     <title>퀘스트 작성</title>
