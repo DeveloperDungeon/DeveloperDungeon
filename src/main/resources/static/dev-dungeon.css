@@ -57,6 +57,7 @@ nav {
 .header-navigator {
     padding: 0;
     display: table-row;
+    z-index: 1;
 }
 
 .header-navigator > li {
@@ -87,7 +88,10 @@ nav {
     top: 45px;
     background: #555555;
     border-radius: 0 0 20px 20px;
-    transition: width 0.3s, left 0.3s;
+}
+
+.header-indicator-smooth {
+    transition: width 0.3s, left 0.3s, top 0.3s;
 }
 
 section.main {
