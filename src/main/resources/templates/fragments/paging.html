@@ -2,26 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="kr">
 <div th:fragment="paging(minPage, maxPage, currentPage, hasPrev, hasNext, baseUrl)" class="paging">
     <div>
-        <button class="paging-button"
-                th:disabled="${!hasPrev}"
-                th:onclick="redirect([[${baseUrl}]], {page: [[${minPage-1}]]})">◀
-        </button>
-        <button class="paging-button"
-                th:each="page : ${#numbers.sequence(minPage, maxPage)}"
-                th:text="${page}"
-                th:classappend="${page == currentPage} ? paging-button-active"
-                th:onclick="redirect([[${baseUrl}]], {page: [[${page}]]})"></button>
-        <button th:disabled="${!hasNext}"
-                class="paging-button"
-                th:onclick="redirect([[${baseUrl}]], {page: [[${maxPage+1}]]})">▶
-        </button>
+        <a class="paging-button"
+           th:attrappend="href=${hasPrev}?@{${baseUrl}(page=${minPage-1})}:'javascript:void(0)'"
+           th:classappend="${!hasPrev} ? 'paging-button-disabled'">◀
+        </a>
+        <a class="paging-button"
+           th:each="page : ${#numbers.sequence(minPage, maxPage)}"
+           th:text="${page}"
+           th:attrappend="href=${page != currentPage}?@{${baseUrl}(page=${page})}:'javascript:void(0)'"
+           th:classappend="${page == currentPage} ? 'paging-button-selected'"></a>
+        <a class="paging-button"
+           th:attrappend="href=${hasNext}?@{${baseUrl}(page=${maxPage+1})}:'javascript:void(0)'"
+           th:classappend="${!hasNext} ? 'paging-button-disabled'">▶
+        </a>
     </div>
-
-    <script>
-        // TODO Use redirect() function from src/main/front/common/utils.js with webpack
-        function redirect(baseUrl, params) {
-            window.location.href = baseUrl + '?page=' + params.page;
-        }
-    </script>
 </div>
 </html>

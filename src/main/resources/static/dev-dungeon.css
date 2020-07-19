@@ -7,6 +7,10 @@ body {
     background-color: #999999;
 }
 
+a {
+    text-decoration: none;
+}
+
 .content-width {
     max-width: 920px;
     margin: 0 auto;
@@ -261,18 +265,21 @@ article.article-card {
 }
 
 .paging-button {
+    color: black;
     background: none;
     border: none;
     outline: none;
     margin: 5px;
     font-size: 15px;
-}
-
-.paging-button:enabled {
     cursor: pointer;
 }
 
-.paging-button-active {
+.paging-button-disabled {
+    cursor: default;
+    color: lightgray;
+}
+
+.paging-button-selected {
     font-weight: bold;
     font-size: 18px;
 }
