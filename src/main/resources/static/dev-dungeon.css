@@ -44,6 +44,7 @@ a {
     line-height: 50px;
     float: left;
     cursor: pointer;
+    color: white;
 }
 
 nav {
@@ -71,6 +72,7 @@ nav {
 
 .header-menu > a {
     cursor: pointer;
+    color: white;
 }
 
 .header-divider {
