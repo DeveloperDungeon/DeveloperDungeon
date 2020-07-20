@@ -40,17 +40,11 @@ public class QuestServiceImpl implements QuestService {
         return questMapper.insertQuest(questVO);
     }
 
-    private QuestVO setAuthorDetails(QuestVO questVO) {
-        UserVO user = userService.getUser(questVO.getAuthor());
-
-        questVO.setAuthorDetails(user);
-
-        return questVO;
-    }
-
     @Override
     public List<QuestVO> getQuestWithPage(int limit, int offset) {
-        return questMapper.selectWithPage(limit, offset);
+        return questMapper.selectWithPage(limit, offset).stream()
+                .map(this::setAuthorDetails)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -61,5 +55,13 @@ public class QuestServiceImpl implements QuestService {
     @Override
     public int getTotalQuestNum() {
         return questMapper.getTotalQuestNum();
+    }
+
+    private QuestVO setAuthorDetails(QuestVO questVO) {
+        UserVO user = userService.getUser(questVO.getAuthor());
+
+        questVO.setAuthorDetails(user);
+
+        return questVO;
     }
 }
