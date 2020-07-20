@@ -57,6 +57,11 @@ public class QuestServiceImpl implements QuestService {
         return questMapper.getTotalQuestNum();
     }
 
+    @Override
+    public int remove(int id) {
+        return questMapper.delete(id);
+    }
+
     private QuestVO setAuthorDetails(QuestVO questVO) {
         UserVO user = userService.getUser(questVO.getAuthor());
 

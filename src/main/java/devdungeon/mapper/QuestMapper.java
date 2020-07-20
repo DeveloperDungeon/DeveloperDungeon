@@ -1,10 +1,7 @@
 package devdungeon.mapper;
 
 import devdungeon.domain.QuestVO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -31,4 +28,7 @@ public interface QuestMapper {
     @Select("SELECT * FROM quest ORDER BY reg_time DESC" +
             " LIMIT #{limit, jdbcType=INTEGER} OFFSET #{offset, jdbcType=INTEGER}")
     List<QuestVO> selectWithPage(int limit, int offset);
+
+    @Delete("DELETE FROM quest WHERE id=#{id}")
+    int delete(int id);
 }

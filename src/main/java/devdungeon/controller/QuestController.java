@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -61,5 +62,14 @@ public class QuestController {
     public String putQuestEdit(@RequestBody QuestVO questVO) {
         questService.editQuest(questVO);
         return "questEdit";
+    }
+
+    @DeleteMapping("/remove/{id}")
+    public String DeleteQuestRemove(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
+        if (questService.remove(id) == 1)
+            redirectAttributes.addFlashAttribute("result", "success");
+        else redirectAttributes.addFlashAttribute("result", "fail");
+
+        return "redirect:/quest";
     }
 }
