@@ -20,13 +20,14 @@ public class QuestController {
     private final HttpSession session;
 
     @GetMapping("/list")
-    public void getQuestList(Model model, @RequestParam(value = "page", required = false,
+    public String getQuestList(Model model, @RequestParam(value = "page", required = false,
             defaultValue = "1") int page) {
 
         PageDTO pageDTO = new PageDTO(page, questService.getTotalQuestNum());
         model.addAttribute("pageInfo",pageDTO);
         model.addAttribute("questList",
                 questService.getQuestWithPage(pageDTO.getLimit(), pageDTO.getOffset()));
+        return "quest/list";
     }
 
     @GetMapping("/{id}")
