@@ -28,8 +28,24 @@ public class ReplyServiceImpl implements ReplyService {
                 .collect(Collectors.toList()), replyMapper.getTotalNum(questId));
     }
 
+    @Override
+    public ReplyVO getReply(int id) {
+        return replyMapper.selectOne(id);
+    }
+
+    @Override
+    public int remove(int id) {
+        return replyMapper.delete(id);
+    }
+
+    @Override
+    public int modify(ReplyVO vo) {
+        return replyMapper.update(vo);
+    }
+
     private ReplyVO setAuthorDetails(ReplyVO replyVO) {
         replyVO.setAuthorDetails(userService.getUser(replyVO.getAuthor()));
         return replyVO;
     }
+
 }

@@ -7,4 +7,10 @@ public interface ReplyService {
     int register(ReplyVO replyVO);
 
     ReplyPageVO getListWithPage(int questId, int limit, int offset);
+
+    ReplyVO getReply(int id);
+
+    int remove(int id);
+
+    int modify(ReplyVO vo);
 }
