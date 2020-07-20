@@ -1,10 +1,7 @@
 package devdungeon.mapper;
 
 import devdungeon.domain.ReplyVO;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -22,4 +19,10 @@ public interface ReplyMapper {
 
     @Delete("DELETE FROM reply WHERE id=#{id}")
     public int delete(int id);
+
+    @Select("SELECT * FROM reply WHERE id=#{id}")
+    public ReplyVO selectOne(int id);
+
+    @Update("UPDATE reply SET content=#{content} WHERE id=#{id}")
+    public int update(ReplyVO vo);
 }
