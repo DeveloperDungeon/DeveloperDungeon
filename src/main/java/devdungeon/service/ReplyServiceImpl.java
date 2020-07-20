@@ -6,6 +6,7 @@ import devdungeon.mapper.ReplyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,11 +22,11 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public ReplyPageVO getListWithPage(int questId, int limit, int offset) {
-        return new ReplyPageVO(replyMapper.selectByQuestWithPaging(questId, limit, offset)
+    public List<ReplyVO> getListWithPage(int questId, int limit, int offset) {
+        return replyMapper.selectByQuestWithPaging(questId, limit, offset)
                 .stream()
                 .map(this::setAuthorDetails)
-                .collect(Collectors.toList()), replyMapper.getTotalNum(questId));
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -35,7 +36,13 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public int remove(int id) {
+
         return replyMapper.delete(id);
+    }
+
+    @Override
+    public int getTotalNum(int questId) {
+        return replyMapper.getTotalNum(questId);
     }
 
     @Override
