@@ -1,0 +1,40 @@
+package devdungeon.controller;
+
+import devdungeon.annotation.CertifyAnnotation;
+import devdungeon.domain.PageVO;
+import devdungeon.domain.ReplyPageVO;
+import devdungeon.domain.ReplyVO;
+import devdungeon.service.ReplyService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/reply")
+public class ReplyController {
+
+    private final ReplyService replyService;
+    private final HttpSession session;
+
+    @PostMapping("/regiser")
+    @CertifyAnnotation
+    public ResponseEntity<String> postReplyRegister(@RequestBody ReplyVO replyVO) {
+        replyVO.setAuthor((String) session.getAttribute("user"));
+        return replyService.register(replyVO) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) :
+                new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @GetMapping
+    public ResponseEntity<ReplyPageVO> getListWithPage(@RequestParam("questId") int questId,
+                                                       @RequestParam(value = "page", required = false, defaultValue = "1")
+                                                               int page) {
+        PageVO pageVO = new PageVO(page);
+
+        return new ResponseEntity<>(replyService.getListWithPage(questId, PageVO.PER_PAGE, pageVO.getOffset()), HttpStatus.OK);
+    }
+
+}
