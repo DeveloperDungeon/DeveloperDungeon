@@ -20,7 +20,7 @@ public class ReplyController {
     private final ReplyService replyService;
     private final HttpSession session;
 
-    @PostMapping("/regiser")
+    @PostMapping("/register")
     @CertifyAnnotation
     public ResponseEntity<String> postReplyRegister(@RequestBody ReplyVO replyVO) {
         replyVO.setAuthor((String) session.getAttribute("user"));
