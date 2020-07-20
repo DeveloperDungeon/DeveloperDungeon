@@ -7,10 +7,10 @@ import java.util.List;
 @Data
 public class ReplyPageVO {
     private List<ReplyVO> list;
-    int replyCnt;
+    private PageVO pageVO;
 
-    public ReplyPageVO(List<ReplyVO> list, int total) {
+    public ReplyPageVO(List<ReplyVO> list, PageVO pageVO ) {
         this.list = list;
-        this.replyCnt = total;
+        this.pageVO =pageVO;
     }
 }
