@@ -32,9 +32,9 @@ public class ReplyController {
     public ResponseEntity<ReplyPageVO> getListWithPage(@RequestParam("questId") int questId,
                                                        @RequestParam(value = "page", required = false, defaultValue = "1")
                                                                int page) {
-        PageVO pageVO = new PageVO(page);
+        PageVO pageVO = new PageVO(page, replyService.getTotalNum(questId));
 
-        return new ResponseEntity<>(replyService.getListWithPage(questId, PageVO.PER_PAGE, pageVO.getOffset()), HttpStatus.OK);
+        return new ResponseEntity<>(new ReplyPageVO(replyService.getListWithPage(questId, PageVO.PER_PAGE, pageVO.getOffset()), pageVO), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -53,7 +53,7 @@ public class ReplyController {
     @CertifyAnnotation
     public ResponseEntity<String> modify(@PathVariable("id") int id, @RequestBody ReplyVO replyVO) {
         replyVO.setId(id);
-        return replyService.modify(replyVO)==1 ? new ResponseEntity<>("success", HttpStatus.OK) :
+        return replyService.modify(replyVO) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) :
                 new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
