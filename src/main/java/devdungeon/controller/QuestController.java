@@ -26,7 +26,7 @@ public class QuestController {
         PageVO pageVO = new PageVO(page, questService.getTotalQuestNum());
         model.addAttribute("pageInfo", pageVO);
         model.addAttribute("questList",
-                questService.getQuestWithPage(PageVO.QUESTS_PER_PAGE, pageVO.getOffset()));
+                questService.getQuestWithPage(PageVO.PER_PAGE, pageVO.getOffset()));
         return "quest/list";
     }
 
