@@ -1,7 +1,7 @@
 package devdungeon.controller;
 
 import devdungeon.annotation.CertifyAnnotation;
-import devdungeon.domain.PageDTO;
+import devdungeon.domain.PageVO;
 import devdungeon.domain.QuestVO;
 import devdungeon.service.QuestService;
 import lombok.RequiredArgsConstructor;
@@ -19,14 +19,14 @@ public class QuestController {
     private final QuestService questService;
     private final HttpSession session;
 
-    @GetMapping("/list")
+    @GetMapping
     public String getQuestList(Model model, @RequestParam(value = "page", required = false,
             defaultValue = "1") int page) {
 
-        PageDTO pageDTO = new PageDTO(page, questService.getTotalQuestNum());
-        model.addAttribute("pageInfo",pageDTO);
+        PageVO pageVO = new PageVO(page, questService.getTotalQuestNum());
+        model.addAttribute("pageInfo", pageVO);
         model.addAttribute("questList",
-                questService.getQuestWithPage(pageDTO.getLimit(), pageDTO.getOffset()));
+                questService.getQuestWithPage(PageVO.QUESTS_PER_PAGE, pageVO.getOffset()));
         return "quest/list";
     }
 
@@ -47,7 +47,7 @@ public class QuestController {
     public String postQuestWrite(@RequestBody QuestVO questVO) {
         questVO.setAuthor((String) session.getAttribute("user"));
         questService.addQuest(questVO);
-        return "redirect:/quest/list";
+        return "redirect:/quest";
     }
 
     @GetMapping("/edit")
