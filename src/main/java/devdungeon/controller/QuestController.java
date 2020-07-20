@@ -30,9 +30,10 @@ public class QuestController {
         return "quest/list";
     }
 
-    @GetMapping("/{id}")
-    public void getQuest(Model model, @PathVariable("id") Integer id) {
+    @GetMapping("/get/{id}")
+    public String getQuest(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("quest", questService.getOne(id));
+        return "quest/get";
     }
 
     @GetMapping("/write")
