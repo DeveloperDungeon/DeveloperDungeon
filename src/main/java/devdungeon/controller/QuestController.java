@@ -65,6 +65,7 @@ public class QuestController {
     }
 
     @DeleteMapping("/remove/{id}")
+    @CertifyAnnotation
     public String DeleteQuestRemove(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
         if (questService.remove(id) == 1)
             redirectAttributes.addFlashAttribute("result", "success");
