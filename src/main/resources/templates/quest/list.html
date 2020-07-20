@@ -17,6 +17,6 @@
         <div th:each="quest : ${questList}">
             <div th:replace="fragments/questCard :: questCard(title=${quest.title}, author=${quest.authorDetails.nickName}, time=${quest.regTime}, content=${quest.content})"></div>
         </div>
-        <div th:replace="fragments/paging :: paging(minPage=1, maxPage=10, currentPage=5, hasPrev=false, hasNext=true, baseUrl='/hyuni')"></div>
+        <div th:replace="fragments/paging :: paging(minPage=${pageInfo.minPage}, maxPage=${pageInfo.maxPage}, currentPage=${pageInfo.currentPage}, hasPrev=${pageInfo.hasPrev}, hasNext=${pageInfo.hasNext}, baseUrl='/quest')"></div>
     </div>
 </th:block>
