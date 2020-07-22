@@ -9,11 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -35,10 +33,10 @@ public class QuestController {
         return "quest/list";
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public String getQuest(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("quest", questService.getOne(id));
-        return "quest/get";
+        return "quest/view";
     }
 
     @GetMapping("/write")
@@ -62,7 +60,8 @@ public class QuestController {
         String questAuthor = questService.getOne(id).getAuthor();
         if (sessUser.equals(questAuthor)) {
             model.addAttribute("quest", questService.getOne(id));
-            return "quest/edit";
+            model.addAttribute("type", "edit");
+            return "quest/write";
         }
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No authentication to edit this quest");
 
@@ -70,12 +69,11 @@ public class QuestController {
 
     @PutMapping("/edit/{id}")
     @CertifyAnnotation
-    public String putQuestEdit(Model model, @PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
+    public String putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
         String sessUser = (String) session.getAttribute("user");
         if (sessUser.equals(questVO.getAuthor())) {
             questService.editQuest(questVO);
-            model.addAttribute("quest", questService.getOne(id));
-            return "quest/edit";
+            return "redirect:/quest/" + id;
         }
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No authentication to edit this quest");
     }
