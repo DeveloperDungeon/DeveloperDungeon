@@ -71,7 +71,9 @@ public class QuestController {
     @CertifyAnnotation
     public String putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
         String sessUser = (String) session.getAttribute("user");
-        if (sessUser.equals(questVO.getAuthor())) {
+        String questAuthor = questService.getOne(id).getAuthor();
+        if (sessUser.equals(questAuthor)) {
+            questVO.setId(id);
             questService.editQuest(questVO);
             return "redirect:/quest/" + id;
         }
