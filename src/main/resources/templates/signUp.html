@@ -15,6 +15,12 @@
             border-radius: 10px;
             border: 1px solid #999999;
         }
+        table.description {
+            margin: 0 auto;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #999999;
+        }
 
         label, input {
             font-size: 18px;
@@ -66,7 +72,7 @@
                 <tr><th>아이디 : 8 ~ 20자</th></tr>
                 <tr><th>비밀번호 : 8 ~ 20 영문, 숫자 각 1자 이상 포함</th></tr>
                 <tr><th>닉네임 : 3 ~ 25자</th></tr>
-                </tbody>>
+                </tbody>
             </table>
         </form>
         <div class="controls">
@@ -76,42 +82,4 @@
     </div>
 </th:block>
 
-<th:block layout:fragment="bodyScripts">
-    <script>
-        const button = document.getElementById('btnSignUp');
-        button.onclick = () => {
-            const id = document.getElementById('inputId').value;
-            const pw = document.getElementById('inputPw').value;
-            const nick = document.getElementById('inputNickname').value;
-            const email = document.getElementById('inputEmail').value;
-
-            const body = {
-                id: id,
-                password: pw,
-                nickName: nick,
-                email: email
-            };
-
-            request(`${ServerUrl}/signup`, {
-                // 디폴트 헤더인 Content-Type: application/json 을 사용하므로 헤더 명시 안해도 됨
-                method: RequestMethod.POST,
-                body: JSON.stringify(body)
-            }).then(xhr => {
-                switch (xhr.status) {
-                    case 200:
-                        redirect(xhr.responseURL);
-                        break;
-                    case 400:
-                        console.log('실패');
-                        alert('실패');
-                        break;
-                    default:
-                        console.log('예상치 못한 에러');
-                        alert('예상치 못한 에러');
-                        break;
-                }
-            });
-        };
-    </script>
-</th:block>
 </html>

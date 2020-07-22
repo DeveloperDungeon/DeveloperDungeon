@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/devLayout">
+<head>
+    <title>개발 던전 회원가입</title>
+</head>
+
+<th:block layout:fragment="stylesheets">
+    <style>
+
+    </style>
+</th:block>
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <h2 class="title">퀘스트</h2>
+        <form>
+            <table class="quest">
+                <tbody>
+                <tr>
+                    <td>제목</td>
+                    <td th:text="*{quest.title}"></td>>
+                </tr>
+                <tr>
+                    <td>작성자</td>
+                    <td th:text="*{quest.author}"></td>
+                    <td>작성일</td>
+                    <td th:text="*{#dates.format(new java.util.Date(quest.regTime), 'yyyy년 MM월 dd일 a H시 mm분')}"></td>
+                </tr>
+                <tr>
+                    <td>내용</td>
+                    <td th:text="*{quest.content}"></td>>
+                </tr>
+                </tbody>
+            </table>
+        </form>>
+
+    </div>
+
+</th:block>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
