@@ -31,4 +31,7 @@ public interface QuestMapper {
 
     @Delete("DELETE FROM quest WHERE id=#{id}")
     int delete(int id);
+
+    @Select("SELECT * FROM quest WHERE author=#{authorId}")
+    List<QuestVO> selectUserQuest(String authorId);
 }

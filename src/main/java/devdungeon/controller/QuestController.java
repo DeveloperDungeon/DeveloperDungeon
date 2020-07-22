@@ -5,9 +5,11 @@ import devdungeon.domain.PageVO;
 import devdungeon.domain.QuestVO;
 import devdungeon.service.QuestService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -31,10 +33,10 @@ public class QuestController {
         return "quest/list";
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public String getQuest(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("quest", questService.getOne(id));
-        return "quest/get";
+        return "quest/view";
     }
 
     @GetMapping("/write")
@@ -51,17 +53,29 @@ public class QuestController {
         return "redirect:/quest";
     }
 
-    @GetMapping("/edit")
+    @GetMapping("/edit/{id}")
     @CertifyAnnotation
-    public String getQuestEdit() {
-        return "questEdit";
+    public String getQuestEdit(Model model, @PathVariable("id") Integer id) {
+        String sessUser = (String) session.getAttribute("user");
+        String questAuthor = questService.getOne(id).getAuthor();
+        if (sessUser.equals(questAuthor)) {
+            model.addAttribute("quest", questService.getOne(id));
+            model.addAttribute("type", "edit");
+            return "quest/write";
+        }
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No authentication to edit this quest");
+
     }
 
-    @PutMapping("/edit")
+    @PutMapping("/edit/{id}")
     @CertifyAnnotation
-    public String putQuestEdit(@RequestBody QuestVO questVO) {
-        questService.editQuest(questVO);
-        return "questEdit";
+    public String putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
+        String sessUser = (String) session.getAttribute("user");
+        if (sessUser.equals(questVO.getAuthor())) {
+            questService.editQuest(questVO);
+            return "redirect:/quest/" + id;
+        }
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No authentication to edit this quest");
     }
 
     @DeleteMapping("/remove/{id}")
