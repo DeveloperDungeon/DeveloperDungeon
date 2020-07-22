@@ -74,6 +74,7 @@ nav {
 .header-menu > a {
     cursor: pointer;
     color: white;
+    font-size : 13px;
 }
 
 .header-divider {

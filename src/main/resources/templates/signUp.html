@@ -15,6 +15,12 @@
             border-radius: 10px;
             border: 1px solid #999999;
         }
+        table.description {
+            margin: 0 auto;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #999999;
+        }
 
         label, input {
             font-size: 18px;
@@ -61,6 +67,13 @@
                 </tr>
                 </tbody>
             </table>
+            <table class="description">
+                <tbody>
+                <tr><th>아이디 : 8 ~ 20자</th></tr>
+                <tr><th>비밀번호 : 8 ~ 20 영문, 숫자 각 1자 이상 포함</th></tr>
+                <tr><th>닉네임 : 3 ~ 25자</th></tr>
+                </tbody>
+            </table>
         </form>
         <div class="controls">
             <button class="btnPositive" id="btnCancel">취소</button>
@@ -68,4 +81,5 @@
         </div>
     </div>
 </th:block>
+
 </html>
