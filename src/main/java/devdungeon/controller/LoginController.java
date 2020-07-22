@@ -32,7 +32,7 @@ public class LoginController {
 
             return "redirect:/";
         }
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong user id or password");
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong user id or password");
 
     }
 }
