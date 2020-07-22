@@ -62,6 +62,11 @@ public class QuestServiceImpl implements QuestService {
         return questMapper.delete(id);
     }
 
+    @Override
+    public List<QuestVO> getUserQuestList(String author){
+        return questMapper.selectUserQuest(author);
+    }
+
     private QuestVO setAuthorDetails(QuestVO questVO) {
         UserVO user = userService.getUser(questVO.getAuthor());
 
@@ -69,4 +74,6 @@ public class QuestServiceImpl implements QuestService {
 
         return questVO;
     }
+
+
 }

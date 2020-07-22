@@ -20,4 +20,6 @@ public interface QuestService {
     List<QuestVO> getQuestWithPage(int limit,int offset);
 
     int remove(int id);
+
+    List<QuestVO> getUserQuestList(String authorId);
 }

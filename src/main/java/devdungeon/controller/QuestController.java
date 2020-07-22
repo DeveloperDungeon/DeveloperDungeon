@@ -5,11 +5,15 @@ import devdungeon.domain.PageVO;
 import devdungeon.domain.QuestVO;
 import devdungeon.service.QuestService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -51,17 +55,29 @@ public class QuestController {
         return "redirect:/quest";
     }
 
-    @GetMapping("/edit")
+    @GetMapping("/edit/{id}")
     @CertifyAnnotation
-    public String getQuestEdit() {
-        return "questEdit";
+    public String getQuestEdit(Model model, @PathVariable("id") Integer id) {
+        String sessUser = (String) session.getAttribute("user");
+        String questAuthor = questService.getOne(id).getAuthor();
+        if (sessUser.equals(questAuthor)) {
+            model.addAttribute("quest", questService.getOne(id));
+            return "quest/edit";
+        }
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No authentication to edit this quest");
+
     }
 
-    @PutMapping("/edit")
+    @PutMapping("/edit/{id}")
     @CertifyAnnotation
-    public String putQuestEdit(@RequestBody QuestVO questVO) {
-        questService.editQuest(questVO);
-        return "questEdit";
+    public String putQuestEdit(Model model, @PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
+        String sessUser = (String) session.getAttribute("user");
+        if (sessUser.equals(questVO.getAuthor())) {
+            questService.editQuest(questVO);
+            model.addAttribute("quest", questService.getOne(id));
+            return "quest/edit";
+        }
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No authentication to edit this quest");
     }
 
     @DeleteMapping("/remove/{id}")
