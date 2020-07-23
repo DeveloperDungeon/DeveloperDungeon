@@ -3,22 +3,23 @@ package devdungeon.interceptor;
 import devdungeon.annotation.AuthAnnotation;
 import devdungeon.service.QuestService;
 import devdungeon.service.ReplyService;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 
-    @Resource
+    @Setter(onMethod_ = @Autowired)
     private QuestService questService;
 
-    @Resource
+    @Setter(onMethod_ = @Autowired)
     private ReplyService replyService;
 
     @Override
