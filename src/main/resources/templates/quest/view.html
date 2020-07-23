@@ -9,29 +9,36 @@
 <th:block layout:fragment="content">
     <div class="content">
         <h2 class="title">퀘스트</h2>
-        <form>
-            <table class="quest">
-                <tbody>
-                <tr>
-                    <td>제목</td>
-                    <td th:text="*{quest.title}"></td>
-                </tr>
-                <tr>
-                    <td>작성자</td>
-                    <td th:text="*{quest.author}"></td>
-                    <td>작성일</td>
-                    <td th:text="*{#dates.format(new java.util.Date(quest.regTime), 'yyyy년 MM월 dd일 a H시 mm분')}"></td>
-                </tr>
-                <tr>
-                    <td>내용</td>
-                    <td th:text="*{quest.content}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </form>
-
+        <table class="quest">
+            <tbody>
+            <tr>
+                <td>제목</td>
+                <td th:text="*{quest.title}"></td>
+            </tr>
+            <tr>
+                <td>작성자</td>
+                <td th:text="*{quest.author}"></td>
+                <td>작성일</td>
+                <td th:text="*{#dates.format(new java.util.Date(quest.regTime), 'yyyy년 MM월 dd일 a H시 mm분')}"></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td th:text="*{quest.content}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <hr>
+        <h2>댓글</h2>
+        <div th:replace="fragments/comment :: comment(author='작성자1', time=1123412341234, content='댓글 내용1')"></div>
+        <div th:replace="fragments/comment :: comment(author='작성자2', time=2123412341234, content='댓글 내용1')"></div>
+        <div th:replace="fragments/comment :: comment(author='작성자3', time=3123412341234, content='댓글 내용1')"></div>
+        <div th:replace="fragments/comment :: comment(author='작성자4', time=4123412341234, content='댓글 내용1')"></div>
+        <div>
+            <label for="input-comment">댓글 작성</label>
+            <input id="input-comment" type="text">
+            <button id="button-comment">작성</button>
+        </div>
     </div>
-
 </th:block>
 
 

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
+<div th:fragment="comment(author, time, content)">
+    <div>
+        <b th:text="${author}"></b>
+        <span th:text="${#dates.format(new java.util.Date(time), 'yyyy년 MM월 dd일 a H시 mm분')}"></span>
+    </div>
+    <div th:text="${content}">
+    </div>
+</div>
+</html>
