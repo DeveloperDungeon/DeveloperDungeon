@@ -1,5 +1,6 @@
 package devdungeon.controller;
 
+import devdungeon.annotation.AuthAnnotation;
 import devdungeon.annotation.CertifyAnnotation;
 import devdungeon.domain.PageVO;
 import devdungeon.domain.QuestVO;
@@ -54,7 +55,7 @@ public class QuestController {
     }
 
     @GetMapping("/edit/{id}")
-    @CertifyAnnotation
+    @AuthAnnotation
     public String getQuestEdit(Model model, @PathVariable("id") Integer id) {
         String sessUser = (String) session.getAttribute("user");
         String questAuthor = questService.getOne(id).getAuthor();
@@ -68,7 +69,7 @@ public class QuestController {
     }
 
     @PutMapping("/edit/{id}")
-    @CertifyAnnotation
+    @AuthAnnotation
     public String putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
         String sessUser = (String) session.getAttribute("user");
         String questAuthor = questService.getOne(id).getAuthor();
@@ -81,7 +82,7 @@ public class QuestController {
     }
 
     @DeleteMapping("/remove/{id}")
-    @CertifyAnnotation
+    @AuthAnnotation
     public String DeleteQuestRemove(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
         if (questService.remove(id) == 1)
             redirectAttributes.addFlashAttribute("result", "success");
