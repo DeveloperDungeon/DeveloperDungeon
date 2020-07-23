@@ -67,7 +67,7 @@ public class QuestController {
     public String putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
         questVO.setId(id);
         questService.editQuest(questVO);
-        return "redirect:/quest/" + id;
+        return "redirect:/quest/"+id;
     }
 
     @DeleteMapping("/remove/{id}")
