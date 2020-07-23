@@ -18,7 +18,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             String user = (String) request.getSession().getAttribute("user");
             if (method.hasMethodAnnotation(CertifyAnnotation.class) && user == null) {
 
-                response.sendRedirect("/login?prevUrl="+request.getServletPath());
+                response.sendRedirect("/login?prevUrl="+request.getServletPath().substring(1));
                 return false;
             }
         }
