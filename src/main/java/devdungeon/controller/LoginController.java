@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpSession;
@@ -26,11 +27,12 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String postLogin(@RequestBody UserVO user, HttpSession session) {
+    public String postLogin(@RequestParam(value = "prevUrl",required = false, defaultValue = "") String prevUrl,
+                            @RequestBody UserVO user, HttpSession session) {
         if (userService.findUser(user.getId(), user.getPassword())) {
             session.setAttribute("user", user.getId());
 
-            return "redirect:/";
+            return "redirect:/"+prevUrl;
         }
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong user id or password");
 
