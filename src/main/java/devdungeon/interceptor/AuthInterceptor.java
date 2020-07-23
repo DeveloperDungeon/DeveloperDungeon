@@ -36,12 +36,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
                 if (str[1].equals("quest")) {
                     if (!user.equals(questService.getOne(Id).getAuthor())) {
-                        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
+                        throw new ResponseStatusException(HttpStatus.FORBIDDEN,
                                 "you do not have auth to access this page");
                     }
                 } else if (str[1].equals("reply")) {
                     if (!user.equals(replyService.getReply(Id).getAuthor())) {
-                        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
+                        throw new ResponseStatusException(HttpStatus.FORBIDDEN,
                                 "you do not have auth to access this page");
                     }
                 }
