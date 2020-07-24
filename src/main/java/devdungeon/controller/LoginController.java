@@ -34,13 +34,12 @@ public class LoginController {
             String prevUrl = request.getHeader("referer");
             String redUrl = "redirect:/";
             int idx = prevUrl.indexOf("=");
-            if(idx != -1){
-                redUrl+=prevUrl.substring(idx+1);
+            if (idx != -1) {
+                redUrl += prevUrl.substring(idx + 1);
             }
             return redUrl;
         }
 
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong user id or password");
-
     }
 }
