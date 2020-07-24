@@ -32,22 +32,11 @@
             </table>
         </form>
         <div class="controls">
-            <button id="bntEdit" th:onclick="goEdit([[${quest.id}]])">수정</button>
-            <button id="bntRemove" th:onclick="goRemove([[${quest.id}]])">삭제</button>
+            <button id="bntEdit" th:onclick="'window.location.href= \'' + @{/quest/edit/{id}(id=${quest.id})} + '\''">수정</button>
+            <button id="bntRemove" th:onclick="'window.location.href= \'' + @{/quest/remove/{id}(id=${quest.id})} + '\''">삭제</button>
         </div>
     </div>
-    <script>
-        const bntEdit = document.getElementById('bntEdit');
-        const bntRemove = document.getElementById('bntRemove');
 
-        function goEdit(questID) {
-            redirect('/quest/edit' + questID);
-        }
-        function goRemove(questID) {
-            redirect('/quest/remove' + questID)
-        }
-
-    </script>
 </th:block>
 
 
