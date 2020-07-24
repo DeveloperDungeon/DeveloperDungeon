@@ -39,7 +39,6 @@ public class ReplyController {
     }
 
     @GetMapping("/{id}")
-    @AuthAnnotation
     public ResponseEntity<ReplyVO> putReplyModify(@PathVariable("id") int id) {
         return new ResponseEntity<>(replyService.getReply(id), HttpStatus.OK);
     }
