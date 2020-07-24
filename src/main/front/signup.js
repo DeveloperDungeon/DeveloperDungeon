@@ -19,7 +19,7 @@ window.addEventListener('load', () => {
         }
 
         function isJobPassword(asValue) {
-            let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,20}$/; //  8 ~ 10자 영문, 숫자 조합
+            let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,20}$/; //  8 ~ 20자 영문, 숫자 조합
             return regExp.test(asValue); // 형식에 맞는 경우 true 리턴
         }
         if (id.length < 8 || id.length > 20) {
@@ -69,7 +69,11 @@ window.addEventListener('load', () => {
 
         else {
             alert(errorMessage);
-            location.reload();
+            isValidPassword = true;
+            isValidID = true;
+            isValidEmail = true;
+            isValidNickname = true;
+            errorMessage = '';
         }
 
 

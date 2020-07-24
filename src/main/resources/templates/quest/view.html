@@ -4,11 +4,13 @@
       layout:decorator="layout/devLayout">
 <head>
     <title th:text="*{quest.title}"></title>
+    <script src="/quest/view.js"></script>
 </head>
 
 <th:block layout:fragment="content">
     <div class="content">
         <h2 class="title">퀘스트</h2>
+        <span id="quest_id" th:value="*{quest.id}"></span>
         <form>
             <table class="quest">
                 <tbody>
@@ -29,9 +31,23 @@
                 </tbody>
             </table>
         </form>
-
+        <div class="controls">
+            <button id="bntEdit" th:onclick="goEdit([[${quest.id}]])">수정</button>
+            <button id="bntRemove" th:onclick="goRemove([[${quest.id}]])">삭제</button>
+        </div>
     </div>
+    <script>
+        const bntEdit = document.getElementById('bntEdit');
+        const bntRemove = document.getElementById('bntRemove');
 
+        function goEdit(questID) {
+            redirect('/quest/edit' + questID);
+        }
+        function goRemove(questID) {
+            redirect('/quest/remove' + questID)
+        }
+
+    </script>
 </th:block>
 
 

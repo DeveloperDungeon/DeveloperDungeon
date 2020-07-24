@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/devLayout">
+<head>
+    <title>유저 정보</title>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <h2 class="title">유저 정보</h2>
+        <form>
+            <table class="user">
+                <tbody>
+                <tr>
+                    <td>아이디</td>
+                    <td th:text="*{userInfo.id}"></td>
+                </tr>
+                <tr>
+                    <td>닉네임</td>
+                    <td th:text="*{userInfo.nickName}"></td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                    <td th:text="*{userInfo.email}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <div>최근 작성한 퀘스트</div>
+                <div th:each="quest:${questList}">
+                    <div th:replace="fragments/questCard :: questCard(title=${quest.title}, author=${userInfo.nickName}, time=${quest.regTime}, content=${quest.content})"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</th:block>
