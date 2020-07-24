@@ -22,6 +22,7 @@ window.addEventListener('load', () => {
             let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,20}$/; //  8 ~ 10자 영문, 숫자 조합
             return regExp.test(asValue); // 형식에 맞는 경우 true 리턴
         }
+
         if (id.length < 8 || id.length > 20) {
             errorMessage += '아이디가 잘못되었습니다\n';
             isValidID = false;
@@ -56,8 +57,8 @@ window.addEventListener('load', () => {
                     case 200: /* Redirected */
                         break;
                     case 400:
-                        console.log('실패');
-                        alert('실패');
+                        console.log(JSON.parse(xhr.responseText).message);
+                        alert(JSON.parse(xhr.responseText).message);
                         break;
                     default:
                         console.log('예상치 못한 에러');
