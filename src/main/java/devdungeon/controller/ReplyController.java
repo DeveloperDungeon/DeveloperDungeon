@@ -1,5 +1,6 @@
 package devdungeon.controller;
 
+import devdungeon.annotation.AuthAnnotation;
 import devdungeon.annotation.CertifyAnnotation;
 import devdungeon.domain.PageVO;
 import devdungeon.domain.ReplyPageVO;
@@ -38,19 +39,20 @@ public class ReplyController {
     }
 
     @GetMapping("/{id}")
+    @AuthAnnotation
     public ResponseEntity<ReplyVO> putReplyModify(@PathVariable("id") int id) {
         return new ResponseEntity<>(replyService.getReply(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    @CertifyAnnotation
+    @AuthAnnotation
     public ResponseEntity<String> remove(@PathVariable("id") int id) {
         return replyService.remove(id) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) :
                 new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PutMapping("/{id}")
-    @CertifyAnnotation
+    @AuthAnnotation
     public ResponseEntity<String> modify(@PathVariable("id") int id, @RequestBody ReplyVO replyVO) {
         replyVO.setId(id);
         return replyService.modify(replyVO) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) :

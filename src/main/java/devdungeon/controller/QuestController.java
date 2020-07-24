@@ -1,5 +1,6 @@
 package devdungeon.controller;
 
+import devdungeon.annotation.AuthAnnotation;
 import devdungeon.annotation.CertifyAnnotation;
 import devdungeon.domain.PageVO;
 import devdungeon.domain.QuestVO;
@@ -54,34 +55,23 @@ public class QuestController {
     }
 
     @GetMapping("/edit/{id}")
-    @CertifyAnnotation
+    @AuthAnnotation
     public String getQuestEdit(Model model, @PathVariable("id") Integer id) {
-        String sessUser = (String) session.getAttribute("user");
-        String questAuthor = questService.getOne(id).getAuthor();
-        if (sessUser.equals(questAuthor)) {
-            model.addAttribute("quest", questService.getOne(id));
-            model.addAttribute("type", "edit");
-            return "quest/write";
-        }
-        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No authentication to edit this quest");
-
+        model.addAttribute("quest", questService.getOne(id));
+        model.addAttribute("type", "edit");
+        return "quest/write";
     }
 
     @PutMapping("/edit/{id}")
-    @CertifyAnnotation
+    @AuthAnnotation
     public String putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
-        String sessUser = (String) session.getAttribute("user");
-        String questAuthor = questService.getOne(id).getAuthor();
-        if (sessUser.equals(questAuthor)) {
-            questVO.setId(id);
-            questService.editQuest(questVO);
-            return "redirect:/quest/" + id;
-        }
-        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No authentication to edit this quest");
+        questVO.setId(id);
+        questService.editQuest(questVO);
+        return "redirect:/quest/" + id;
     }
 
     @DeleteMapping("/remove/{id}")
-    @CertifyAnnotation
+    @AuthAnnotation
     public String DeleteQuestRemove(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
         if (questService.remove(id) == 1)
             redirectAttributes.addFlashAttribute("result", "success");
