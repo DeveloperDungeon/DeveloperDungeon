@@ -29,7 +29,7 @@
             <div>
                 <div>최근 작성한 퀘스트</div>
                 <div th:each="quest:${questList}">
-                    <div th:replace="fragments/questCard :: questCard(title=${quest.title}, author=${userInfo.nickName}, time=${quest.regTime}, content=${quest.content})"></div>
+                    <div th:replace="fragments/questCard :: questCard(id=${quest.id},title=${quest.title}, author=${userInfo.nickName}, time=${quest.regTime}, content=${quest.content})"></div>
                 </div>
             </div>
         </form>
