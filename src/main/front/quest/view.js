@@ -62,9 +62,9 @@ function onCommentButtonClick() {
             loadComments();
             input.value = '';
         } else {
-            // redirect('/login', {
-            //     prevUrl: window.location.pathname.substring(1)
-            // });
+            redirect('/login', {
+                prevUrl: window.location.pathname.substring(1)
+            });
         }
     });
 }
