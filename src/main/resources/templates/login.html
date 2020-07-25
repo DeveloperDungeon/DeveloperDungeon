@@ -60,64 +60,32 @@
             background-color: #555555;
         }
 
-
+        .error-message {
+            color: red;
+        }
     </style>
 </head>
 
 <th:block layout:fragment="content">
     <div id="content" class="content">
         <h1 class="title">로그인</h1>
-        <form>
+        <form method="post">
             <table class="login">
                 <tbody>
                 <tr>
                     <th><label for="inputId">아이디</label></th>
-                    <td><input id="inputId" type="text"></td>
+                    <td><input id="inputId" type="text" name="id"></td>
                 </tr>
                 <tr>
                     <th><label for="inputPw">비밀번호</label></th>
-                    <td><input id="inputPw" type="password"></td>
+                    <td><input id="inputPw" type="password" name="password"></td>
                 </tr>
                 </tbody>
             </table>
+            <span class="error-message" th:if="${errorMessage != null}" th:text="${errorMessage}"></span>
+            <div class="controls">
+                <input id="bntLogin" type="submit" value="로그인">
+            </div>
         </form>
-        <div class="controls">
-            <button id="bntLogin">로그인</button>
-        </div>
-
     </div>
-</th:block>
-
-<th:block layout:fragment="bodyScripts">
-    <script>
-        const button = document.getElementById('bntLogin');
-        button.onclick = () => {
-            const request = new XMLHttpRequest();
-            const id = document.getElementById('inputId').value;
-            const pw = document.getElementById('inputPw').value;
-
-            const body = {
-                id: id,
-                password: pw
-            };
-
-            request.onload = () => {
-                switch (request.status) {
-                    case 200 :
-                        redirect(request.responseURL);
-                        break;
-                    case 400 :
-                        alert('실패');
-                        break;
-                    default :
-                        alert('실패');
-                        break;
-                }
-            };
-
-            request.open('POST', 'http://localhost:8080/login');
-            request.setRequestHeader('Content-Type', 'application/json');
-            request.send(JSON.stringify(body));
-        }
-    </script>
 </th:block>
