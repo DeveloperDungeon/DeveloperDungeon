@@ -32,16 +32,16 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                 String user = (String) request.getSession().getAttribute("user");
                 String[] str = request.getServletPath().split("/");
 
-                int Id = Integer.parseInt(str[str.length - 1]);
+                int id = Integer.parseInt(str[str.length - 1]);
 
                 if (str[1].equals("quest")) {
-                    if (!user.equals(questService.getOne(Id).getAuthor())) {
-                        throw new ResponseStatusException(HttpStatus.FORBIDDEN,
-                                "you do not have auth to access this page");
+                    if (!user.equals(questService.getOne(id).getAuthor())) {
+                        response.sendRedirect("/quest/" + id + "?redirect=unauthorized");
+                        return false;
                     }
                 } else if (str[1].equals("reply")) {
-                    if (!user.equals(replyService.getReply(Id).getAuthor())) {
-                        throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                    if (!user.equals(replyService.getReply(id).getAuthor())) {
+                        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
                                 "you do not have auth to access this page");
                     }
                 }
