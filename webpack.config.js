@@ -29,7 +29,8 @@ function filesToEntry(filePath = clientPath, prefix = '') {
 }
 
 module.exports = (env) => {
-    const outputPath = path.resolve(__dirname, (env === 'production') ? 'src/main/resources/static' : 'out');
+    const outputPath
+        = path.resolve(__dirname, (env === 'production') ? 'src/main/resources/static/scripts' : 'out/scripts');
 
     return {
         mode: !env ? 'development' : env,

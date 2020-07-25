@@ -56,7 +56,9 @@ export async function request(url, config) {
 
     xhr.send(config.body);
 
-    if (config.doRedirection && xhr.status === 200 && xhr.responseURL)
+    console.log(xhr.getAllResponseHeaders());
+
+    if (config.doRedirection && xhr.status === 200 && xhr.responseURL && method === RequestMethod.POST)
         redirect(xhr.responseURL);
 
     return xhr;

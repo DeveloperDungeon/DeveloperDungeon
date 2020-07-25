@@ -1,3 +1,15 @@
+/**
+ * Set style to element
+ * @param element {!HTMLElement}
+ * @param style {!Object}
+ */
+export function setStyle(element, style) {
+    Object.entries(style).forEach(([key, styleValue]) => {
+        const [value, priority = null] = styleValue.split('!');
+        element.style.setProperty(key, value, priority);
+    });
+}
+
 export function millisToTimeString(millis = now(), format = "yyyy년 MM월 dd일 a/p h시 mm분") {
     const weekKorName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
     const weekKorShortName = ["일", "월", "화", "수", "목", "금", "토"];
@@ -12,14 +24,20 @@ export function millisToTimeString(millis = now(), format = "yyyy년 MM월 dd일
             case "KS": return weekKorShortName[date.getDay()]; // 요일 (짧은 한글)
             case "KL": return weekKorName[date.getDay()]; // 요일 (긴 한글)
             case "HH": return date.getHours().zeroFill(2); // 시간 (24시간 기준, 2자리)
-            case "hh": return ((h = date.getHours() % 12) ? h : 12).zeroFill(2); // 시간 (12시간 기준, 2자리)
-            case "h": return ((h = date.getHours() % 12) ? h : 12).toString(); // 시간
+            case "hh": return _getHour(date).zeroFill(2); // 시간 (12시간 기준, 2자리)
+            case "h": return _getHour(date).toString(); // 시간
             case "mm": return date.getMinutes().zeroFill(2); // 분 (2자리)
             case "ss": return date.getSeconds().zeroFill(2); // 초 (2자리)
             case "a/p": return date.getHours() < 12 ? "오전" : "오후"; // 오전/오후 구분
             default: return $1;
         }
     });
+}
+
+function _getHour(date) {
+    const h = date.getHours() % 12;
+    if (h === 0) return 12;
+    return h;
 }
 
 /**
@@ -52,5 +70,5 @@ function _appendQueryParams(url, params) {
     return baseUrl + paramString;
 }
 
-String.prototype.zeroFill = function (len) { return "0".repeat(len - this.length) + this; };
+String.prototype.zeroFill = function (len) { return "0".repeat(len - this.length >= 0? len - this.length : 0) + this; };
 Number.prototype.zeroFill = function (len) { return this.toString().zeroFill(len); };

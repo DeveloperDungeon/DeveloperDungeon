@@ -3,7 +3,7 @@ package devdungeon.domain;
 import lombok.Data;
 
 @Data
-public class ReplyVO {
+public class CommentVO {
     private int id;
     private int questId;
     private String author;

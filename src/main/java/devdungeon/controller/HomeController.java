@@ -15,9 +15,12 @@ public class HomeController {
 
     private final QuestService questService;
 
+    private int counter = 0;
+
     @GetMapping("/test")
     public String test() {
-        return "write";
+        System.out.println("들어왔습니다! " + counter++);
+        return "index";
     }
 
     @GetMapping("/")
