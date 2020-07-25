@@ -57,8 +57,10 @@ window.addEventListener('load', () => {
                     case 200: /* Redirected */
                         break;
                     case 400:
-                        console.log(JSON.parse(xhr.responseText).message);
-                        alert(JSON.parse(xhr.responseText).message);
+                        let ErrMsg = JSON.parse(xhr.responseText).errMsg;
+                        let ErrCode = JSON.parse(xhr.responseText).errCode;
+                        console.log(ErrMsg);
+                        alert(ErrMsg);
                         break;
                     default:
                         console.log('예상치 못한 에러');

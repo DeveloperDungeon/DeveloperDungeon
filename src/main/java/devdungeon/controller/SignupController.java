@@ -24,7 +24,7 @@ public class SignupController {
     }
 
     @PostMapping("/signup")
-    public String postSignup(@RequestBody UserVO user) throws SignUpException{
+    public String postSignup(@RequestBody UserVO user) throws SignUpException {
         //check id
         int idMinLength = 8;
         int idMaxLength = 20;
@@ -59,5 +59,11 @@ public class SignupController {
             return "redirect:/login";
         }
 
+    }
+
+    @ExceptionHandler(SignUpException.class)
+    public ResponseEntity<SignUpException> handleSignUpException(SignUpException suex) {
+        System.out.println(suex.getErrCode());
+        return new ResponseEntity<SignUpException>(suex, HttpStatus.BAD_REQUEST);
     }
 }
