@@ -1,10 +1,10 @@
 package devdungeon.interceptor;
 
 import devdungeon.annotation.AuthAnnotation;
-import devdungeon.service.QuestService;
 import devdungeon.service.CommentService;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+import devdungeon.service.QuestService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,14 +13,11 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+@Configuration
+@RequiredArgsConstructor
 public class AuthInterceptor extends HandlerInterceptorAdapter {
-
-    @Setter(onMethod_ = @Autowired)
-    private QuestService questService;
-
-    @Setter(onMethod_ = @Autowired)
-    private CommentService commentService;
+    private final QuestService questService;
+    private final CommentService commentService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
