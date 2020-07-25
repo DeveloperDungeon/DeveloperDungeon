@@ -23,7 +23,7 @@ window.addEventListener('load', () => {
             return regExp.test(asValue); // 형식에 맞는 경우 true 리턴
         }
 
-        /*if (id.length < 8 || id.length > 20) {
+        if (id.length < 8 || id.length > 20) {
             errorMessage += '아이디가 잘못되었습니다\n';
             isValidID = false;
         }
@@ -38,7 +38,7 @@ window.addEventListener('load', () => {
         if (!isEmail(email)) {
             errorMessage += '이메일이 잘못되었습니다\n';
             isValidEmail = false;
-        }*/
+        }
 
         if (isValidNickname && isValidEmail && isValidID && isValidPassword) {
             const body = {
