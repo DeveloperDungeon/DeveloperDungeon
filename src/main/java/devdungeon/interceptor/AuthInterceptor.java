@@ -2,7 +2,7 @@ package devdungeon.interceptor;
 
 import devdungeon.annotation.AuthAnnotation;
 import devdungeon.service.QuestService;
-import devdungeon.service.ReplyService;
+import devdungeon.service.CommentService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     private QuestService questService;
 
     @Setter(onMethod_ = @Autowired)
-    private ReplyService replyService;
+    private CommentService commentService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -39,8 +39,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                         response.sendRedirect("/quest/" + id + "?redirect=unauthorized");
                         return false;
                     }
-                } else if (str[1].equals("reply")) {
-                    if (!user.equals(replyService.getReply(id).getAuthor())) {
+                } else if (str[1].equals("comment")) {
+                    if (!user.equals(commentService.getReply(id).getAuthor())) {
                         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
                                 "you do not have auth to access this page");
                     }

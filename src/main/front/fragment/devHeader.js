@@ -16,7 +16,6 @@ window.addEventListener('load', () => {
 
     const menuArea = document.getElementById('header-navigator');
     menuArea.addEventListener('mouseleave', () => {
-        console.log('leave');
         const original = menuItems[selectedIndex];
         matchIndicator(indicator, original);
     });
@@ -40,7 +39,6 @@ function matchIndicator(indicator, targetElement) {
         indicator.style.left = `${left}px`;
 
         if (indicator.style.top === TOP_HIDDEN) {
-            console.log(indicator, targetElement);
             // 나올 때
             indicator.classList.remove('header-indicator-smooth');
             indicator.offsetHeight;

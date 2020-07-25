@@ -5,11 +5,11 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ReplyPageVO {
-    private List<ReplyVO> list;
+public class CommentPageVO {
+    private List<CommentVO> list;
     private PageVO pageVO;
 
-    public ReplyPageVO(List<ReplyVO> list, PageVO pageVO) {
+    public CommentPageVO(List<CommentVO> list, PageVO pageVO) {
         this.list = list;
         this.pageVO = pageVO;
     }
