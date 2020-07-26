@@ -70,7 +70,7 @@ public class QuestServiceImpl implements QuestService {
                 .collect(Collectors.toList());
     }
 
-    private QuestVO setAuthorDetails(QuestVO questVO) {
+    public QuestVO setAuthorDetails(QuestVO questVO) {
         UserVO user = userService.getUser(questVO.getAuthor());
 
         questVO.setAuthorDetails(user);
