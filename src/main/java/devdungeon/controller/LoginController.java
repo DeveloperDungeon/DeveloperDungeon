@@ -1,7 +1,9 @@
 package devdungeon.controller;
 
 
+import devdungeon.domain.ResponseVO;
 import devdungeon.service.UserService;
+import devdungeon.templete.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,10 +31,9 @@ public class LoginController {
     }
 
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String postLogin(@RequestParam Map<String, String> paramMap, HttpServletRequest request, Model model) {
+    public Response<ResponseVO> postLogin(@RequestParam Map<String, String> paramMap, HttpServletRequest request) {
         if (paramMap == null || !paramMap.containsKey("id") || !paramMap.containsKey("password")) {
-            model.addAttribute("errorMessage","아이디와 비밀번호를 모.두. 입력해주세요.");
-            return "login";
+            return new Response<>(Response.Code.BAD_REQUEST, new ResponseVO("아이디와 비밀번호를 모.두. 입력해주세요.", "login"));
         }
 
         String id = paramMap.get("id");
@@ -42,14 +43,13 @@ public class LoginController {
         if (userService.findUser(id, password)) {
             request.getSession().setAttribute("user", id);
             String prevUrl = request.getHeader("referer");
-            String redUrl = "redirect:/";
+            String redUrl = "";
             int idx = prevUrl.indexOf("=");
             if (idx != -1) {
                 redUrl += prevUrl.substring(idx + 1);
             }
-            return redUrl;
+            return new Response<>(Response.Code.REDIRECT, new ResponseVO("success", redUrl));
         }
-        model.addAttribute("errorMessage","아이디 혹은 비밀번호가 틀렸습니다.");
-        return "login";
+        return new Response<>(Response.Code.BAD_REQUEST, new ResponseVO("아이디 혹은 비밀번호가 틀렸습니다.", "login"));
     }
 }
