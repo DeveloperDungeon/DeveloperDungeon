@@ -1,5 +1,4 @@
 import {redirect} from './common/utils';
-import {RequestMethod} from "./common/request";
 
 window.addEventListener('load', () => {
     const bntWrite = document.getElementById('btnWrite');
@@ -9,7 +8,7 @@ window.addEventListener('load', () => {
     bntSearch.onclick = () => {
         const methods = document.getElementById('type');
         const methodValue = methods.options[methods.selectedIndex].value;
-        if (methodValue == '') {
+        if (methodValue === '') {
             alert('옵션을 선택해 주세요');
         } else {
             const text = document.getElementById('searchContent').value;
