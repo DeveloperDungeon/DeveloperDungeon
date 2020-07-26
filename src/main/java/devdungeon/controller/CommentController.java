@@ -22,7 +22,6 @@ public class CommentController {
 
     @PostMapping
     @CertifyAnnotation
-    @ResponseBody
     public ResponseTemplate<String> postReplyRegister(@RequestBody CommentVO commentVO) {
         commentVO.setAuthor((String) session.getAttribute("user"));
         return commentService.register(commentVO) == 1 ? new ResponseTemplate<>(ResponseTemplate.Code.OK, "success") :
