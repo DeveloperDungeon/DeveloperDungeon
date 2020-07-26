@@ -67,10 +67,10 @@ public class QuestController {
         questService.editQuest(questVO);
         return "redirect:/quest/" + id;
     }
-
+    
     @DeleteMapping("/remove/{id}")
     @AuthAnnotation
-    public String DeleteQuestRemove(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
+    public String deleteQuestRemove(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
         if (questService.remove(id) == 1)
             redirectAttributes.addFlashAttribute("result", "success");
         else redirectAttributes.addFlashAttribute("result", "fail");
