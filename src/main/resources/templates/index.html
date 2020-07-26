@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/devLayout}">
+<head>
+    <title>개발 던전</title>
+    <script src="/index.js"></script>
+    <style>
+        .title-row {
+            padding: 0 15px;
+        }
+
+        h2 {
+            display: inline-block;
+        }
+
+        button {
+            float: right;
+        }
+    </style>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <div class="title-row">
+            <h2>신규 퀘스트</h2>
+            <button id="btnWrite" class="btnPositive">작성</button>
+        </div>
+        <div th:each="quest : ${questList}">
+            <div th:replace="fragments/questCard :: questCard(id=${quest.id}, title=${quest.title}, author=${quest.authorDetails.nickName}, time=${quest.regTime}, content=${quest.content})"></div>
+        </div>
+    </div>
+</th:block>

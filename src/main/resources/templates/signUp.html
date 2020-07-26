@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/devLayout}">
+<head>
+    <title>개발 던전 회원가입</title>
+    <style>
+        h1.title {
+            padding-left: 15px;
+        }
+
+        table.signup {
+            margin: 0 auto;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #999999;
+        }
+        table.description {
+            margin: 0 auto;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #999999;
+        }
+
+        label, input {
+            font-size: 18px;
+        }
+
+        label {
+            padding: 0 10px;
+        }
+
+        input {
+            width: 350px;
+        }
+
+        div.controls {
+            text-align: right;
+            width: 475px;
+            margin: 10px auto;
+        }
+    </style>
+    <script src="/signup.js"></script>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <h1 class="title">회원가입</h1>
+        <form>
+            <table class="signup">
+                <tbody>
+                <tr>
+                    <th><label for="inputId">아이디</label></th>
+                    <td><input id="inputId" type="text"></td>
+                </tr>
+                <tr>
+                    <th><label for="inputPw">비밀번호</label></th>
+                    <td><input id="inputPw" type="password"></td>
+                </tr>
+                <tr>
+                    <th><label for="inputNickname">닉네임</label></th>
+                    <td><input id="inputNickname" type="text"></td>
+                </tr>
+                <tr>
+                    <th><label for="inputEmail">이메일</label></th>
+                    <td><input id="inputEmail" type="email"></td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="description">
+                <tbody>
+                <tr><th>아이디 : 8 ~ 20자</th></tr>
+                <tr><th>비밀번호 : 8 ~ 20 영문, 숫자 각 1자 이상 포함</th></tr>
+                <tr><th>닉네임 : 3 ~ 25자</th></tr>
+                </tbody>
+            </table>
+        </form>
+        <div class="controls">
+            <button class="btnPositive" id="btnCancel">취소</button>
+            <button class="btnNegative" id="btnSignUp">가입</button>
+        </div>
+    </div>
+</th:block>
+
+</html>
