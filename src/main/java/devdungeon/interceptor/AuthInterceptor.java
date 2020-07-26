@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import devdungeon.annotation.AuthAnnotation;
 import devdungeon.service.CommentService;
 import devdungeon.service.QuestService;
+import devdungeon.template.MessageBody;
 import devdungeon.template.RedirectBody;
 import devdungeon.template.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
@@ -37,16 +38,16 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                 if (str[1].equals("quest")) {
                     if (!user.equals(questService.getOne(id).getAuthor())) {
                         String jsonStr = objectMapper.writeValueAsString(new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT,
-                                new RedirectBody("unAuthorized", "quest/" + id + "?redirect=unauthorized")));
-                        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                                new RedirectBody("unAuthorized", "/quest/" + id + "?redirect=unauthorized")));
+                        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                         response.getWriter().write(jsonStr);
                         return false;
                     }
                 } else if (str[1].equals("comment")) {
                     if (!user.equals(commentService.getReply(id).getAuthor())) {
                         String jsonStr = objectMapper.writeValueAsString(new ResponseTemplate<>(ResponseTemplate.Code.UNAUTHORIZED,
-                                new RedirectBody("unAuthorized", "")));
-                        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                                new MessageBody("unAuthorized")));
+                        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                         response.getWriter().write(jsonStr);
                         return false;
                     }
