@@ -4,12 +4,13 @@ import devdungeon.annotation.AuthAnnotation;
 import devdungeon.annotation.CertifyAnnotation;
 import devdungeon.domain.PageVO;
 import devdungeon.domain.QuestVO;
+import devdungeon.template.RedirectBody;
 import devdungeon.service.QuestService;
+import devdungeon.template.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -46,10 +47,11 @@ public class QuestController {
 
     @PostMapping("/write")
     @CertifyAnnotation
-    public String postQuestWrite(@RequestBody QuestVO questVO) {
+    @ResponseBody
+    public ResponseTemplate<RedirectBody> postQuestWrite(@RequestBody QuestVO questVO) {
         questVO.setAuthor((String) session.getAttribute("user"));
         questService.addQuest(questVO);
-        return "redirect:/quest";
+        return new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT, new RedirectBody("success", "/quest"));
     }
 
     @GetMapping("/edit/{id}")
@@ -60,21 +62,23 @@ public class QuestController {
         return "quest/write";
     }
 
-    @PostMapping("/edit/{id}")
+    @PutMapping("/{id}")
     @AuthAnnotation
-    public String putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
+    @ResponseBody
+    public ResponseTemplate<RedirectBody> putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
         questVO.setId(id);
-        questService.editQuest(questVO);
-        return "redirect:/quest/" + id;
+        if (questService.editQuest(questVO) == 1) {
+            return new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT, new RedirectBody("success", "/quest/" + id));
+        }
+        return new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT, new RedirectBody("fail", "/quest/" + id));
     }
-    
-    @DeleteMapping("/remove/{id}")
-    @AuthAnnotation
-    public String deleteQuestRemove(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
-        if (questService.remove(id) == 1)
-            redirectAttributes.addFlashAttribute("result", "success");
-        else redirectAttributes.addFlashAttribute("result", "fail");
 
-        return "redirect:/quest";
+    @DeleteMapping("/{id}")
+    @AuthAnnotation
+    @ResponseBody
+    public ResponseTemplate<RedirectBody> deleteQuestRemove(@PathVariable("id") int id) {
+        if (questService.remove(id) == 1)
+            return new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT, new RedirectBody("success", "/quest"));
+        else return new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT, new RedirectBody("fail", "/quest"));
     }
 }

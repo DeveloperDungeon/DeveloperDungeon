@@ -1,16 +1,16 @@
 package devdungeon.controller;
 
 import devdungeon.domain.UserVO;
-import devdungeon.httperror.SignUpException;
+import devdungeon.exception.SignUpException;
 import devdungeon.service.UserService;
+import devdungeon.template.Body;
+import devdungeon.template.RedirectBody;
+import devdungeon.template.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,7 +24,8 @@ public class SignupController {
     }
 
     @PostMapping("/signup")
-    public String postSignup(@RequestBody UserVO user) throws SignUpException {
+    @ResponseBody
+    public ResponseTemplate<Body> postSignup(@RequestBody UserVO user) throws SignUpException {
         //check id
         int idMinLength = 8;
         int idMaxLength = 20;
@@ -56,7 +57,8 @@ public class SignupController {
             throw new SignUpException(607, "Same email already exist");
         } else {
             userService.addUser(user);
-            return "redirect:/login";
+            return new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT,
+                    new RedirectBody("success", "/login"));
         }
 
     }
@@ -64,6 +66,6 @@ public class SignupController {
     @ExceptionHandler(SignUpException.class)
     public ResponseEntity<SignUpException> handleSignUpException(SignUpException suex) {
         System.out.println(suex.getErrCode());
-        return new ResponseEntity<SignUpException>(suex, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(suex, HttpStatus.BAD_REQUEST);
     }
 }

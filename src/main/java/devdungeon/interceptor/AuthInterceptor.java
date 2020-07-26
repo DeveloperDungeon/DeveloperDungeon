@@ -1,13 +1,14 @@
 package devdungeon.interceptor;
 
 import devdungeon.annotation.AuthAnnotation;
+import devdungeon.template.RedirectBody;
+import devdungeon.exception.RedirectException;
 import devdungeon.service.CommentService;
 import devdungeon.service.QuestService;
+import devdungeon.template.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,13 +34,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
                 if (str[1].equals("quest")) {
                     if (!user.equals(questService.getOne(id).getAuthor())) {
-                        response.sendRedirect("/quest/" + id + "?redirect=unauthorized");
-                        return false;
+                        throw new RedirectException(new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT,
+                                new RedirectBody("unAuthorized", "quest/" + id + "?redirect=unauthorized")));
                     }
                 } else if (str[1].equals("comment")) {
                     if (!user.equals(commentService.getReply(id).getAuthor())) {
-                        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
-                                "you do not have auth to access this page");
+                        throw new RedirectException(new ResponseTemplate<>(ResponseTemplate.Code.UNAUTHORIZED,
+                                new RedirectBody("unAuthorized", "")));
                     }
                 }
             }
