@@ -1,9 +1,9 @@
-package devdungeon.templete;
+package devdungeon.template;
 
 import lombok.Data;
 
 @Data
-public class Response<T> {
+public class ResponseTemplate<T> {
     public static final class Code {
         public static final int OK = 200;
         public static final int REDIRECT = 300;
@@ -18,7 +18,7 @@ public class Response<T> {
     private int code;
     private T body;
 
-    public Response(int code, T body) {
+    public ResponseTemplate(int code, T body) {
         this.code = code;
         this.body = body;
     }
