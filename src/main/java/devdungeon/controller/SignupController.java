@@ -1,7 +1,7 @@
 package devdungeon.controller;
 
 import devdungeon.domain.UserVO;
-import devdungeon.httperror.SignUpException;
+import devdungeon.exception.SignUpException;
 import devdungeon.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
