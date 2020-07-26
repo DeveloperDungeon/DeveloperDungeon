@@ -47,10 +47,11 @@ public class QuestController {
 
     @PostMapping("/write")
     @CertifyAnnotation
+    @ResponseBody
     public ResponseTemplate<RedirectBody> postQuestWrite(@RequestBody QuestVO questVO) {
         questVO.setAuthor((String) session.getAttribute("user"));
         questService.addQuest(questVO);
-        return new ResponseTemplate<RedirectBody>(ResponseTemplate.Code.REDIRECT, new RedirectBody("success", "quest"));
+        return new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT, new RedirectBody("success", "quest"));
     }
 
     @GetMapping("/edit/{id}")
@@ -63,19 +64,21 @@ public class QuestController {
 
     @PutMapping("/{id}")
     @AuthAnnotation
+    @ResponseBody
     public ResponseTemplate<RedirectBody> putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
         questVO.setId(id);
         if (questService.editQuest(questVO) == 1) {
-            return new ResponseTemplate<RedirectBody>(ResponseTemplate.Code.REDIRECT, new RedirectBody("success", "quest/" + id));
+            return new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT, new RedirectBody("success", "quest/" + id));
         }
-        return new ResponseTemplate<RedirectBody>(ResponseTemplate.Code.REDIRECT, new RedirectBody("fail", "quest/" + id));
+        return new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT, new RedirectBody("fail", "quest/" + id));
     }
 
     @DeleteMapping("/{id}")
     @AuthAnnotation
+    @ResponseBody
     public ResponseTemplate<RedirectBody> deleteQuestRemove(@PathVariable("id") int id) {
         if (questService.remove(id) == 1)
-            return new ResponseTemplate<RedirectBody>(ResponseTemplate.Code.REDIRECT, new RedirectBody("success", "quest"));
-        else return new ResponseTemplate<RedirectBody>(ResponseTemplate.Code.REDIRECT, new RedirectBody("fail", "quest"));
+            return new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT, new RedirectBody("success", "quest"));
+        else return new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT, new RedirectBody("fail", "quest"));
     }
 }
