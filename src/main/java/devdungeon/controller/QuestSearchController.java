@@ -25,7 +25,7 @@ public class QuestSearchController {
             case "content":
                 model.addAttribute("questList", ss.searchByContent(text));
                 break;
-            case ("author"):
+            case "author":
                 model.addAttribute("questList", ss.searchByAuthor(text));
                 break;
             case "title&content":
