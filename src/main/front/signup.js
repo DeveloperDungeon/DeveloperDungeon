@@ -19,7 +19,7 @@ window.addEventListener('load', () => {
         }
 
         function isJobPassword(asValue) {
-            let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,20}$/; //  8 ~ 10자 영문, 숫자 조합
+            let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,20}$/; //  8 ~ 20자 영문, 숫자 조합
             return regExp.test(asValue); // 형식에 맞는 경우 true 리턴
         }
 
@@ -57,8 +57,10 @@ window.addEventListener('load', () => {
                     case 200: /* Redirected */
                         break;
                     case 400:
-                        console.log(JSON.parse(xhr.responseText).message);
-                        alert(JSON.parse(xhr.responseText).message);
+                        let ErrMsg = JSON.parse(xhr.responseText).errMsg;
+                        let ErrCode = JSON.parse(xhr.responseText).errCode;
+                        console.log(ErrMsg);
+                        alert(ErrMsg);
                         break;
                     default:
                         console.log('예상치 못한 에러');
@@ -70,7 +72,11 @@ window.addEventListener('load', () => {
 
         else {
             alert(errorMessage);
-            location.reload();
+            isValidPassword = true;
+            isValidID = true;
+            isValidEmail = true;
+            isValidNickname = true;
+            errorMessage = '';
         }
 
 

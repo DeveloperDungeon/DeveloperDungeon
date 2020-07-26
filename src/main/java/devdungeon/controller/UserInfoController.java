@@ -18,12 +18,13 @@ public class UserInfoController {
 
     private final UserService userService;
     private final QuestService questService;
+
     @GetMapping("/user/{id}")
-    public String getUserInfo(Model model, @PathVariable("id") Integer id){
-        model.addAttribute("userInfo",userService.getUser(Integer.toString(id)));
-        List<QuestVO> UserQuestList = questService.getUserQuestList(Integer.toString(id));
-        model.addAttribute("questNum",UserQuestList.size());
-        model.addAttribute("questList",UserQuestList);
+    public String getUserInfo(Model model, @PathVariable("id") String id) {
+        model.addAttribute("userInfo", userService.getUser(id));
+        List<QuestVO> UserQuestList = questService.getUserQuestList(id);
+        model.addAttribute("questNum", UserQuestList.size());
+        model.addAttribute("questList", UserQuestList);
         return "/user";
     }
 }

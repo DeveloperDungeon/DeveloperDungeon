@@ -9,6 +9,17 @@ window.addEventListener('load', () => {
 
     const button = document.getElementById('button-comment');
     button.onclick = onCommentButtonClick;
+    const bntDelete = document.getElementById('bntRemove');
+    bntDelete.onclick = () => {
+        const url = require('url');
+        const currentURL = url.parse(window.location.href);
+        const path = currentURL.pathname.split('/');
+        const id = path[2];
+        request('/quest/remove/' + id, {
+            method:RequestMethod.DELETE
+        })
+        //    request 결과 받아서 성공, 실패 처리
+    }
 });
 
 function checkRedirectionIssue() {

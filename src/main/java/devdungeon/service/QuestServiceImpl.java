@@ -64,7 +64,10 @@ public class QuestServiceImpl implements QuestService {
 
     @Override
     public List<QuestVO> getUserQuestList(String author){
-        return questMapper.selectUserQuest(author);
+
+        return questMapper.selectUserQuest(author).stream()
+                .map(this::setAuthorDetails)
+                .collect(Collectors.toList());
     }
 
     private QuestVO setAuthorDetails(QuestVO questVO) {

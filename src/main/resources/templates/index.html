@@ -27,7 +27,7 @@
             <button id="btnWrite" class="btnPositive">작성</button>
         </div>
         <div th:each="quest : ${questList}">
-            <div th:replace="fragments/questCard :: questCard(title=${quest.title}, author=${quest.authorDetails.nickName}, time=${quest.regTime}, content=${quest.content})"></div>
+            <div th:replace="fragments/questCard :: questCard(id=${quest.id}, title=${quest.title}, author=${quest.authorDetails.nickName}, time=${quest.regTime}, content=${quest.content})"></div>
         </div>
     </div>
 </th:block>

@@ -15,8 +15,12 @@
     <div class="content">
         <h2>퀘스트 목록</h2>
         <div th:each="quest : ${questList}">
-            <div th:replace="fragments/questCard :: questCard(title=${quest.title}, author=${quest.authorDetails.nickName}, time=${quest.regTime}, content=${quest.content})"></div>
+            <div th:replace="fragments/questCard :: questCard(id=${quest.id}, title=${quest.title}, author=${quest.authorDetails.nickName}, time=${quest.regTime}, content=${quest.content})"></div>
         </div>
         <div th:replace="fragments/paging :: paging(minPage=${pageInfo.minPage}, maxPage=${pageInfo.maxPage}, currentPage=${pageInfo.currentPage}, hasPrev=${pageInfo.hasPrev}, hasNext=${pageInfo.hasNext}, baseUrl='/quest')"></div>
     </div>
+
 </th:block>
+
+
+

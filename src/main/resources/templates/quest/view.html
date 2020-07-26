@@ -28,6 +28,10 @@
             </tr>
             </tbody>
         </table>
+        <div class="controls">
+            <button id="bntEdit" th:onclick="'window.location.href= \'' + @{/quest/edit/{id}(id=${quest.id})} + '\''">수정</button>
+            <button id="bntRemove">삭제</button>
+        </div>
         <hr>
         <h2>댓글</h2>
         <div id="comment-area"></div>
@@ -37,6 +41,7 @@
             <button id="button-comment">작성</button>
         </div>
     </div>
+
 </th:block>
 
 
