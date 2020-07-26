@@ -1,6 +1,5 @@
 package devdungeon.controller;
 
-import devdungeon.domain.SearchVO;
 import devdungeon.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,17 +16,21 @@ public class QuestSearchController {
     private final SearchService ss;
 
     @GetMapping
-    public String getSearchQuest(Model model, @RequestParam("q") String text, @RequestParam("type") String method) throws Exception {
-        SearchVO searchVO = new SearchVO(method, text);
+    public String getSearchQuest(Model model, @RequestParam("q") String text, @RequestParam("type") String method) {
 
-        if (method.equals("title")) {
-            model.addAttribute("questList", ss.searchByTitle(text));
-        } else if (method.equals("content")) {
-            model.addAttribute("questList",ss.searchByContent(text));
-        } else if (method.equals(("author"))) {
-            model.addAttribute("questList",ss.searchByAuthor(text));
-        } else if (method.equals("title&content")) {
-            model.addAttribute("questList", ss.searchByTitleContent(text));
+        switch (method) {
+            case "title":
+                model.addAttribute("questList", ss.searchByTitle(text));
+                break;
+            case "content":
+                model.addAttribute("questList", ss.searchByContent(text));
+                break;
+            case ("author"):
+                model.addAttribute("questList", ss.searchByAuthor(text));
+                break;
+            case "title&content":
+                model.addAttribute("questList", ss.searchByTitleContent(text));
+                break;
         }
         //model.addAttribute("searchInfo", searchVO);
         return "search";
