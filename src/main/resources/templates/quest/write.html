@@ -26,7 +26,9 @@
             text-align: right;
         }
     </style>
-<!--    <script src="/quest_write.js"></script>-->
+    <link href="//cdn.quilljs.com/1.0.0/quill.core.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+    <script src="/quest_write.js"></script>
 </head>
 
 <th:block layout:fragment="content">
@@ -39,69 +41,19 @@
         <label class="w100" for="input">제목</label>
         <input class="w100" id="input" th:value="${quest?.title}?:''">
 
-        <label class="w100" for="ta">퀘스트 내용</label>
+        <label class="w100" for="editor-container">퀘스트 내용</label>
 
-        <textarea class="w100" id="ta" th:inline="text">[[${quest?.content}]]</textarea>
+        <div class="w100" id="editor-container" th:inline="text">[[${quest?.content}]]</div>
 
         <div id="controls">
             <button class="btnNegative" onclick="window.history.back()">취소</button>
-            <button class="btnPositive" th:onclick="onConfirm([[${quest}]])">게시</button>
+            <button id="btnSubmit" class="btnPositive">게시</button>
+        </div>
+
+        <div id="meta" style="display: none">
+            <div id="type" th:text="${type}"></div>
+            <div id="id" th:text="${quest?.id}"></div>
+            <div id="content" th:text="${quest?.content}"></div>
         </div>
     </div>
-    <script>
-        const ta = document.getElementById('ta');
-        const tf = document.getElementById('input');
-
-        function onConfirm(quest) {
-            const title = tf.value;
-            const content = ta.value;
-
-            console.log(content);
-
-            if (quest == null) requestNewQuest(title, content);
-            else requestEditQuest(quest.id, title, content);
-        }
-
-        function requestNewQuest(title, content) {
-            const body = {
-                title: title,
-                content: content,
-                regTime: (new Date()).getTime()
-            };
-
-            request('/quest/write', {
-                method: 'POST',
-                body: JSON.stringify(body)
-            }).then(res => console.log(res));
-        }
-
-        function requestEditQuest(id, title, content) {
-            const body = {
-                title: title,
-                content: content
-            };
-
-            request('/quest/edit/' + id, {
-                method: 'POST',
-                body: JSON.stringify(body)
-            }).then(res => console.log(res));
-        }
-
-        async function request(url, config) {
-            if (config.header == null) config.header = {};
-            if (config.doRedirection == null) config.doRedirection = true;
-
-            const xhr = new XMLHttpRequest();
-            xhr.open(config.method, url, false);
-
-            xhr.setRequestHeader("Content-Type", 'application/json');
-
-            xhr.send(config.body);
-
-            if (config.doRedirection && xhr.status === 200 && xhr.responseURL)
-                window.location.href = (xhr.responseURL);
-
-            return xhr;
-        }
-    </script>
 </th:block>
