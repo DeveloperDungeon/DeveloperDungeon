@@ -41,7 +41,7 @@ public class LoginController {
         if (userService.findUser(id, password)) {
             request.getSession().setAttribute("user", id);
             String prevUrl = request.getHeader("referer");
-            String redUrl = "";
+            String redUrl = "/";
 
             if (prevUrl != null) {
                 int idx = prevUrl.indexOf("=");

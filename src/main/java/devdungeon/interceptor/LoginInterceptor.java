@@ -5,7 +5,9 @@ import devdungeon.template.RedirectBody;
 import devdungeon.exception.RedirectException;
 import devdungeon.template.ResponseTemplate;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;

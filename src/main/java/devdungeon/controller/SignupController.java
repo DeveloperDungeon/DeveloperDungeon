@@ -58,7 +58,7 @@ public class SignupController {
         } else {
             userService.addUser(user);
             return new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT,
-                    new RedirectBody("success", "login"));
+                    new RedirectBody("success", "/login"));
         }
 
     }
