@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
+<div th:fragment="paging(minPage, maxPage, currentPage, hasPrev, hasNext, baseUrl)" class="paging">
+    <div>
+        <a class="paging-button"
+           th:attrappend="href=${hasPrev}?@{${baseUrl}(page=${minPage-1})}:'javascript:void(0)'"
+           th:classappend="${!hasPrev} ? 'paging-button-disabled'">◀
+        </a>
+        <a class="paging-button"
+           th:each="page : ${#numbers.sequence(minPage, maxPage)}"
+           th:text="${page}"
+           th:attrappend="href=${page != currentPage}?@{${baseUrl}(page=${page})}:'javascript:void(0)'"
+           th:classappend="${page == currentPage} ? 'paging-button-selected'"></a>
+        <a class="paging-button"
+           th:attrappend="href=${hasNext}?@{${baseUrl}(page=${maxPage+1})}:'javascript:void(0)'"
+           th:classappend="${!hasNext} ? 'paging-button-disabled'">▶
+        </a>
+    </div>
+</div>
+</html>
