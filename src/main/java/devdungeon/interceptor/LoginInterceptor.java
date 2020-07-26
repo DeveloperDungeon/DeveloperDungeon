@@ -1,6 +1,9 @@
 package devdungeon.interceptor;
 
 import devdungeon.annotation.CertifyAnnotation;
+import devdungeon.domain.ResponseVO;
+import devdungeon.exception.RedirectException;
+import devdungeon.templete.Response;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -16,10 +19,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             HandlerMethod method = (HandlerMethod) handler;
             String user = (String) request.getSession().getAttribute("user");
             if (method.hasMethodAnnotation(CertifyAnnotation.class) && user == null) {
-
-                String redUrl = "/login?prevUrl=";
-                response.sendRedirect(redUrl + request.getServletPath().substring(1));
-                return false;
+                String redUrl = "login?prevUrl=" + request.getServletPath().substring(1);
+                throw new RedirectException(new Response<>(Response.Code.REDIRECT,
+                        new ResponseVO("login please", redUrl)));
             }
         }
         return super.preHandle(request, response, handler);
