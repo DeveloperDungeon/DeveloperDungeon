@@ -1,11 +1,7 @@
-import {redirect} from './common/utils';
-import {RequestMethod} from "./common/request";
+import {redirect} from "./common/utils";
 
 window.addEventListener('load', () => {
-    const bntWrite = document.getElementById('btnWrite');
     const bntSearch = document.getElementById('bntSearch');
-
-    bntWrite.onclick = () => redirect('/quest/write');
     bntSearch.onclick = () => {
         const methods = document.getElementById('type');
         const methodValue = methods.options[methods.selectedIndex].value;
@@ -17,6 +13,4 @@ window.addEventListener('load', () => {
             redirect('/search?q=' + text + '&type=' + methodValue);
         }
     }
-
-
 });
