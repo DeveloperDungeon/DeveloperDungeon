@@ -29,7 +29,7 @@ public class QuestSearchController {
         } else if (method.equals("title&content")) {
             model.addAttribute("questList", ss.searchByTitleContent(text));
         }
-        model.addAttribute("searchInfo", searchVO);
+        //model.addAttribute("searchInfo", searchVO);
         return "search";
     }
 }
