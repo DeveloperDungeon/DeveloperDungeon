@@ -18,23 +18,22 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<QuestVO> searchByAuthor(String text) {
-        return sm.searchByAuthor(text).stream()
-                .map(this::setAuthorDetails).collect(Collectors.toList());
+        return sm.selectByAuthor("%" + text + "%").stream().map(this::setAuthorDetails).collect(Collectors.toList());
     }
 
     @Override
     public List<QuestVO> searchByContent(String text) {
-        return sm.searchByContent(text).stream().map(this::setAuthorDetails).collect(Collectors.toList());
+        return sm.selectByContent("%" + text + "%").stream().map(this::setAuthorDetails).collect(Collectors.toList());
     }
 
     @Override
     public List<QuestVO> searchByTitle(String text) {
-        return sm.searchByTitle(text).stream().map(this::setAuthorDetails).collect(Collectors.toList());
+        return sm.selectByTitle("%" + text + "%").stream().map(this::setAuthorDetails).collect(Collectors.toList());
     }
 
     @Override
     public List<QuestVO> searchByTitleContent(String text) {
-        return sm.searchByTitleContent(text).stream().map(this::setAuthorDetails).collect(Collectors.toList());
+        return sm.selectByTitleContent("%" + text + "%").stream().map(this::setAuthorDetails).collect(Collectors.toList());
     }
 
     public QuestVO setAuthorDetails(QuestVO questVO) {
