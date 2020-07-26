@@ -1,11 +1,11 @@
 package devdungeon.interceptor;
 
 import devdungeon.annotation.AuthAnnotation;
-import devdungeon.domain.ResponseVO;
+import devdungeon.template.RedirectBody;
 import devdungeon.exception.RedirectException;
 import devdungeon.service.CommentService;
 import devdungeon.service.QuestService;
-import devdungeon.templete.Response;
+import devdungeon.template.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.HandlerMethod;
@@ -34,13 +34,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
                 if (str[1].equals("quest")) {
                     if (!user.equals(questService.getOne(id).getAuthor())) {
-                        throw new RedirectException(new Response<>(Response.Code.REDIRECT,
-                                new ResponseVO("unAuthorized", "quest/" + id + "?redirect=unauthorized")));
+                        throw new RedirectException(new ResponseTemplate<>(ResponseTemplate.Code.REDIRECT,
+                                new RedirectBody("unAuthorized", "quest/" + id + "?redirect=unauthorized")));
                     }
                 } else if (str[1].equals("comment")) {
                     if (!user.equals(commentService.getReply(id).getAuthor())) {
-                        throw new RedirectException(new Response<>(Response.Code.UNAUTHORIZED,
-                                new ResponseVO("unAuthorized", "")));
+                        throw new RedirectException(new ResponseTemplate<>(ResponseTemplate.Code.UNAUTHORIZED,
+                                new RedirectBody("unAuthorized", "")));
                     }
                 }
             }

@@ -6,7 +6,7 @@ import devdungeon.domain.CommentPageVO;
 import devdungeon.domain.CommentVO;
 import devdungeon.domain.PageVO;
 import devdungeon.service.CommentService;
-import devdungeon.templete.Response;
+import devdungeon.template.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,39 +22,39 @@ public class CommentController {
 
     @PostMapping
     @CertifyAnnotation
-    public Response<String> postReplyRegister(@RequestBody CommentVO commentVO) {
+    public ResponseTemplate<String> postReplyRegister(@RequestBody CommentVO commentVO) {
         commentVO.setAuthor((String) session.getAttribute("user"));
-        return commentService.register(commentVO) == 1 ? new Response<>(Response.Code.OK, "success") :
-                new Response<>(Response.Code.OK, "fail");
+        return commentService.register(commentVO) == 1 ? new ResponseTemplate<>(ResponseTemplate.Code.OK, "success") :
+                new ResponseTemplate<>(ResponseTemplate.Code.OK, "fail");
     }
 
     @GetMapping
-    public Response<CommentPageVO> getListWithPage(@RequestParam("questId") int questId,
-                                                   @RequestParam(value = "page", required = false, defaultValue = "1")
+    public ResponseTemplate<CommentPageVO> getListWithPage(@RequestParam("questId") int questId,
+                                                           @RequestParam(value = "page", required = false, defaultValue = "1")
                                                            int page) {
         PageVO pageVO = new PageVO(page, commentService.getTotalNum(questId));
 
-        return new Response<>(Response.Code.OK, new CommentPageVO(commentService.getListWithPage(
+        return new ResponseTemplate<>(ResponseTemplate.Code.OK, new CommentPageVO(commentService.getListWithPage(
                 questId, PageVO.PER_PAGE, pageVO.getOffset()), pageVO));
     }
 
     @GetMapping("/{id}")
-    public Response<CommentVO> putReplyModify(@PathVariable("id") int id) {
-        return new Response<>(Response.Code.OK, commentService.getReply(id));
+    public ResponseTemplate<CommentVO> putReplyModify(@PathVariable("id") int id) {
+        return new ResponseTemplate<>(ResponseTemplate.Code.OK, commentService.getReply(id));
     }
 
     @DeleteMapping("/{id}")
     @AuthAnnotation
-    public Response<String> remove(@PathVariable("id") int id) {
-        return commentService.remove(id) == 1 ? new Response<>(Response.Code.OK, "success") :
-                new Response<>(Response.Code.BAD_REQUEST, "success");
+    public ResponseTemplate<String> remove(@PathVariable("id") int id) {
+        return commentService.remove(id) == 1 ? new ResponseTemplate<>(ResponseTemplate.Code.OK, "success") :
+                new ResponseTemplate<>(ResponseTemplate.Code.BAD_REQUEST, "success");
     }
 
     @PutMapping("/{id}")
     @AuthAnnotation
-    public Response<String> modify(@PathVariable("id") int id, @RequestBody CommentVO commentVO) {
+    public ResponseTemplate<String> modify(@PathVariable("id") int id, @RequestBody CommentVO commentVO) {
         commentVO.setId(id);
-        return commentService.modify(commentVO) == 1 ? new Response<>(Response.Code.OK, "success") :
-                new Response<>(Response.Code.BAD_REQUEST, "success");
+        return commentService.modify(commentVO) == 1 ? new ResponseTemplate<>(ResponseTemplate.Code.OK, "success") :
+                new ResponseTemplate<>(ResponseTemplate.Code.BAD_REQUEST, "success");
     }
 }

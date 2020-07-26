@@ -1,12 +1,12 @@
 package devdungeon.exception;
 
-import devdungeon.domain.ResponseVO;
-import devdungeon.templete.Response;
+import devdungeon.template.RedirectBody;
+import devdungeon.template.ResponseTemplate;
 
 public class RedirectException extends Exception {
-    private final Response<ResponseVO> response;
+    private final ResponseTemplate<RedirectBody> responseTemplate;
 
-    public RedirectException(Response<ResponseVO> response) {
-        this.response = response;
+    public RedirectException(ResponseTemplate<RedirectBody> responseTemplate) {
+        this.responseTemplate = responseTemplate;
     }
 }
