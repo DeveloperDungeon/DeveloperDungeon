@@ -25,7 +25,7 @@ public class CommentController {
     public ResponseTemplate<String> postReplyRegister(@RequestBody CommentVO commentVO) {
         commentVO.setAuthor((String) session.getAttribute("user"));
         return commentService.register(commentVO) == 1 ? new ResponseTemplate<>(ResponseTemplate.Code.OK, "success") :
-                new ResponseTemplate<>(ResponseTemplate.Code.OK, "fail");
+                new ResponseTemplate<>(ResponseTemplate.Code.BAD_REQUEST, "fail");
     }
 
     @GetMapping
