@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/comment")
-public class CommentController {
+public class CommentAPI {
 
     private final CommentService commentService;
     private final HttpSession session;
