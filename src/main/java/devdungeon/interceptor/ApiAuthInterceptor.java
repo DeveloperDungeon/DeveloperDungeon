@@ -21,25 +21,25 @@ public class ApiAuthInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HandlerMethod method = (HandlerMethod) handler;
+        if (handler instanceof HandlerMethod) {
+            HandlerMethod method = (HandlerMethod) handler;
 
-        if (method.hasMethodAnnotation(ApiAuthAnnotation.class)) {
-            String user = (String) request.getSession().getAttribute("user");
-            String[] str = request.getServletPath().split("/");
+            if (method.hasMethodAnnotation(ApiAuthAnnotation.class)) {
+                String user = (String) request.getSession().getAttribute("user");
+                String[] str = request.getServletPath().split("/");
 
-            int id = Integer.parseInt(str[str.length - 1]);
+                int id = Integer.parseInt(str[str.length - 1]);
 
-            if (str[1].equals("quest")) {
-                if (!user.equals(questService.getOne(id).getAuthor())) {
-                    throw new ResponseStatusException(HttpStatus.FORBIDDEN,
-                            "you do not have auth to access this page");
-                }
-            }
-
-            else if (str[1].equals("comment")) {
-                if (!user.equals(commentService.getReply(id).getAuthor())) {
-                    throw new ResponseStatusException(HttpStatus.FORBIDDEN,
-                            "you do not have auth to access this page");
+                if (str[1].equals("quest")) {
+                    if (!user.equals(questService.getOne(id).getAuthor())) {
+                        throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                                "you do not have auth to access this page");
+                    }
+                } else if (str[1].equals("comment")) {
+                    if (!user.equals(commentService.getReply(id).getAuthor())) {
+                        throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                                "you do not have auth to access this page");
+                    }
                 }
             }
         }
