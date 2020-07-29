@@ -1,11 +1,14 @@
 package devdungeon.controller;
 
+import devdungeon.annotation.ApiAuthAnnotation;
 import devdungeon.annotation.AuthAnnotation;
 import devdungeon.annotation.CertifyAnnotation;
 import devdungeon.domain.PageVO;
 import devdungeon.domain.QuestVO;
 import devdungeon.service.QuestService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -60,21 +63,21 @@ public class QuestController {
         return "quest/write";
     }
 
-    @PostMapping("/edit/{id}")
-    @AuthAnnotation
-    public String putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
+    @PutMapping("/{id}")
+    @ResponseBody
+    @ApiAuthAnnotation
+    public ResponseEntity<String> putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
         questVO.setId(id);
         questService.editQuest(questVO);
-        return "redirect:/quest/" + id;
+        return new ResponseEntity<>("redirect:/quest/"+id, HttpStatus.OK);
     }
     
-    @DeleteMapping("/remove/{id}")
-    @AuthAnnotation
-    public String deleteQuestRemove(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    @ApiAuthAnnotation
+    public ResponseEntity<String> deleteQuestRemove(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
         if (questService.remove(id) == 1)
-            redirectAttributes.addFlashAttribute("result", "success");
-        else redirectAttributes.addFlashAttribute("result", "fail");
-
-        return "redirect:/quest";
+            return new ResponseEntity<>("redirect:/quest",HttpStatus.OK);
+        else return new ResponseEntity<>("redirect:/quest",HttpStatus.BAD_REQUEST);
     }
 }
