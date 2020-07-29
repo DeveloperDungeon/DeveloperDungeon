@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -69,15 +68,14 @@ public class QuestController {
     public ResponseEntity<String> putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
         questVO.setId(id);
         questService.editQuest(questVO);
-        return new ResponseEntity<>("redirect:/quest/"+id, HttpStatus.OK);
+        return new ResponseEntity<>("/quest/" + id, HttpStatus.FOUND);
     }
-    
+
     @DeleteMapping("/{id}")
     @ResponseBody
     @ApiAuthAnnotation
-    public ResponseEntity<String> deleteQuestRemove(RedirectAttributes redirectAttributes, @PathVariable("id") int id) {
-        if (questService.remove(id) == 1)
-            return new ResponseEntity<>("redirect:/quest",HttpStatus.OK);
-        else return new ResponseEntity<>("redirect:/quest",HttpStatus.BAD_REQUEST);
+    public ResponseEntity<String> deleteQuestRemove(@PathVariable("id") int id) {
+        if (questService.remove(id) == 1) return new ResponseEntity<>("redirect:/quest", HttpStatus.FOUND);
+        else return new ResponseEntity<>("실패", HttpStatus.BAD_REQUEST);
     }
 }

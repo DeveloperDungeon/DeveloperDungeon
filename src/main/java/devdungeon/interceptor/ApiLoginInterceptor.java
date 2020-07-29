@@ -18,8 +18,6 @@ public class ApiLoginInterceptor extends HandlerInterceptorAdapter {
             HandlerMethod method = (HandlerMethod) handler;
             String user = (String) request.getSession().getAttribute("user");
             if (method.hasMethodAnnotation(ApiCertifyAnnotation.class) && user == null) {
-
-                String redUrl = "/login";
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "/login");
             }
         }

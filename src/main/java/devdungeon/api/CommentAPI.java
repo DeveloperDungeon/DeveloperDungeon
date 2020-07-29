@@ -31,7 +31,10 @@ public class CommentAPI {
 
     @GetMapping
     public ResponseEntity<CommentPageVO> getListWithPage(@RequestParam("questId") int questId,
-                                                         @RequestParam(value = "page", required = false, defaultValue = "1")
+                                                         @RequestParam(
+                                                                 value = "page",
+                                                                 required = false,
+                                                                 defaultValue = "1")
                                                                  int page) {
         PageVO pageVO = new PageVO(page, commentService.getTotalNum(questId));
 
