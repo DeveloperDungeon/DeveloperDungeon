@@ -26,7 +26,7 @@ public class CommentAPI {
     public ResponseEntity<String> postReplyRegister(@RequestBody CommentVO commentVO) {
         commentVO.setAuthor((String) session.getAttribute("user"));
         return commentService.register(commentVO) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) :
-                new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+                new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping
@@ -59,6 +59,6 @@ public class CommentAPI {
     public ResponseEntity<String> modify(@PathVariable("id") int id, @RequestBody CommentVO commentVO) {
         commentVO.setId(id);
         return commentService.modify(commentVO) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) :
-                new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+                new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
     }
 }
