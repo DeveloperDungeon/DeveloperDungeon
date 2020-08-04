@@ -1,7 +1,7 @@
 package devdungeon.controller;
 
-import devdungeon.annotation.AuthAnnotation;
-import devdungeon.annotation.CertifyAnnotation;
+import devdungeon.controller.annotation.AuthAnnotation;
+import devdungeon.controller.annotation.CertifyAnnotation;
 import devdungeon.domain.PageVO;
 import devdungeon.service.QuestService;
 import lombok.RequiredArgsConstructor;

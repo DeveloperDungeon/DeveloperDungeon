@@ -1,4 +1,4 @@
-package devdungeon.annotation;
+package devdungeon.api.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

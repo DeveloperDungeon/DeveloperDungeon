@@ -1,6 +1,6 @@
-package devdungeon.interceptor;
+package devdungeon.api.interceptor;
 
-import devdungeon.annotation.ApiCertifyAnnotation;
+import devdungeon.api.annotation.ApiCertifyAnnotation;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;

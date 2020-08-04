@@ -1,9 +1,9 @@
 package devdungeon.config;
 
-import devdungeon.interceptor.ApiAuthInterceptor;
-import devdungeon.interceptor.ApiLoginInterceptor;
-import devdungeon.interceptor.AuthInterceptor;
-import devdungeon.interceptor.LoginInterceptor;
+import devdungeon.api.interceptor.ApiAuthInterceptor;
+import devdungeon.api.interceptor.ApiLoginInterceptor;
+import devdungeon.controller.interceptor.AuthInterceptor;
+import devdungeon.controller.interceptor.LoginInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

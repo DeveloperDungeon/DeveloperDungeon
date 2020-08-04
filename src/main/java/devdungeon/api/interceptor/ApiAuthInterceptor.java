@@ -1,6 +1,6 @@
-package devdungeon.interceptor;
+package devdungeon.api.interceptor;
 
-import devdungeon.annotation.ApiAuthAnnotation;
+import devdungeon.api.annotation.ApiAuthAnnotation;
 import devdungeon.service.CommentService;
 import devdungeon.service.QuestService;
 import lombok.RequiredArgsConstructor;

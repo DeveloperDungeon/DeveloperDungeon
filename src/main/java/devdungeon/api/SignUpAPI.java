@@ -61,6 +61,6 @@ public class SignUpAPI {
     @ExceptionHandler(SignUpException.class)
     public ResponseEntity<SignUpException> handleSignUpException(SignUpException suex) {
         System.out.println(suex.getErrCode());
-        return new ResponseEntity<SignUpException>(suex, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(suex, HttpStatus.BAD_REQUEST);
     }
 }

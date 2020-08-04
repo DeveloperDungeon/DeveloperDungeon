@@ -1,6 +1,6 @@
-package devdungeon.interceptor;
+package devdungeon.controller.interceptor;
 
-import devdungeon.annotation.CertifyAnnotation;
+import devdungeon.controller.annotation.CertifyAnnotation;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

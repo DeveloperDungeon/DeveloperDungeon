@@ -1,6 +1,6 @@
-package devdungeon.interceptor;
+package devdungeon.controller.interceptor;
 
-import devdungeon.annotation.AuthAnnotation;
+import devdungeon.controller.annotation.AuthAnnotation;
 import devdungeon.service.QuestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

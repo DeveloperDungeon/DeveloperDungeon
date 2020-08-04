@@ -1,7 +1,7 @@
 package devdungeon.api;
 
-import devdungeon.annotation.ApiAuthAnnotation;
-import devdungeon.annotation.ApiCertifyAnnotation;
+import devdungeon.api.annotation.ApiAuthAnnotation;
+import devdungeon.api.annotation.ApiCertifyAnnotation;
 import devdungeon.domain.QuestVO;
 import devdungeon.service.QuestService;
 import devdungeon.template.RedirectTemplate;
