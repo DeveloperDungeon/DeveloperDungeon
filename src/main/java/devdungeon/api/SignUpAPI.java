@@ -1,30 +1,27 @@
-package devdungeon.controller;
+package devdungeon.api;
 
 import devdungeon.domain.UserVO;
 import devdungeon.httperror.SignUpException;
 import devdungeon.service.UserService;
+import devdungeon.template.RedirectTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
-public class SignupController {
-
+@RequestMapping("/signup")
+public class SignUpAPI {
     private final UserService userService;
 
-    @GetMapping("/signup")
-    public String getSignup() {
+    @GetMapping
+    public String getSignUp() {
         return "signUp";
     }
 
-    @PostMapping("/signup")
-    public String postSignup(@RequestBody UserVO user) throws SignUpException {
+    @PostMapping
+    public ResponseEntity<RedirectTemplate> postSignUp(@RequestBody UserVO user) throws SignUpException {
         //check id
         int idMinLength = 8;
         int idMaxLength = 20;
@@ -56,7 +53,7 @@ public class SignupController {
             throw new SignUpException(607, "Same email already exist");
         } else {
             userService.addUser(user);
-            return "redirect:/login";
+            return new ResponseEntity<>(new RedirectTemplate("/login"), HttpStatus.MULTIPLE_CHOICES);
         }
 
     }
