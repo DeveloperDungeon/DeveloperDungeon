@@ -17,31 +17,29 @@ public class SignUpAPI {
 
     @PostMapping
     public ResponseEntity<RedirectTemplate> postSignUp(@RequestBody UserVO user) throws SignUpException {
-        //check id
         int idMinLength = 8;
         int idMaxLength = 20;
         int nickNameMinLength = 3;
         int nickNameMaxLength = 25;
         String emailRegExp = "^[a-zA-Z0-9]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]+$";
         String passwordRegExp = "^(?=.*[0-9])(?=.*[a-z]).{8,20}$";
-
-
+        // check id
         if (user.getId().length() < idMinLength || user.getId().length() > idMaxLength) {
             throw new SignUpException(601, "Too long or too short ID");
         } else if (userService.findUser(user.getId())) {
             throw new SignUpException(602, "Same id already exist");
         }
-        //check password
+        // check password
         else if (!user.getPassword().matches(passwordRegExp)) {
             throw new SignUpException(603, "Invalid password");
         }
-        //check nickname
+        // check nickname
         else if (user.getNickName().length() < nickNameMinLength || user.getNickName().length() > nickNameMaxLength) {
             throw new SignUpException(604, "Too long or too short nickname");
         } else if (userService.findUserByNick(user.getNickName())) {
             throw new SignUpException(605, "Same nickname already exist");
         }
-        //check email
+        // check email
         else if (!user.getEmail().matches(emailRegExp)) {
             throw new SignUpException(606, "Invalid email");
         } else if (userService.findUserByEmail(user.getEmail())) {
@@ -50,7 +48,6 @@ public class SignUpAPI {
             userService.addUser(user);
             return new ResponseEntity<>(new RedirectTemplate("/login"), HttpStatus.MULTIPLE_CHOICES);
         }
-
     }
 
     @ExceptionHandler(SignUpException.class)
