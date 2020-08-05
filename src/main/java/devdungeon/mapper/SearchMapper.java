@@ -17,6 +17,6 @@ public interface SearchMapper {
     @Select("SELECT * FROM quest WHERE title LIKE #{text}")
     List<QuestVO> selectByTitle(String text);
 
-    @Select("SELECT * FROM quest WHERE (title LIKE #{text} OR content LIKE {text})")
+    @Select("SELECT * FROM quest WHERE (title LIKE #{text} OR content LIKE #{text})")
     List<QuestVO> selectByTitleContent(String text);
 }
