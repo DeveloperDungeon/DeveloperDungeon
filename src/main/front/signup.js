@@ -52,10 +52,8 @@ window.addEventListener('load', () => {
                 // 디폴트 헤더인 Content-Type: application/json 을 사용하므로 헤더 명시 안해도 됨
                 method: RequestMethod.POST,
                 body: JSON.stringify(body)
-            }).then(([code, body]) => {
-                console.log(body.msg);
-                console.log(body.code);
-                switch (code) {
+            }).then(response => {
+                switch (response.status) {
                     case 300: /* Redirected */
                         break;
                     case 602: {

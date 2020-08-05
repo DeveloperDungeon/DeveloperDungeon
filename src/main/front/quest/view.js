@@ -42,19 +42,21 @@ async function loadComments() {
     const questId = window.location.pathname.split('/')[2];
     request(`/comment?questId=${questId}`, {
         method: RequestMethod.GET
-    }).then(([code, body]) => {
+    }).then(response => {
         const commentArea = document.getElementById('comment-area');
         commentArea.innerHTML = '';
-        body.list.map(e => {
+        response.body.list.map(e => {
             const element = document.createElement('quest-comment');
             element.setAttribute('comment-id', e['id']);
             element.setAttribute('quest-id', e['questId']);
             element.setAttribute('nickname', e['authorDetails'].nickName);
             element.setAttribute('content', e['content']);
             element.setAttribute('reg-time', e['regTime']);
+
             return element;
         }).forEach(e => commentArea.appendChild(e));
     });
+
 }
 
 function onCommentButtonClick() {
@@ -66,8 +68,8 @@ function onCommentButtonClick() {
         method: RequestMethod.POST,
         body: JSON.stringify({content: content, regTime: now(), questId: questId}),
         doRedirection: false
-    }).then(([code, body]) => {
-        if (code === 200) {
+    }).then(response => {
+        if (response.status === 200) {
             loadComments();
 
         } else {
