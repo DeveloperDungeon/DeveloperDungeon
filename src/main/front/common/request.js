@@ -30,7 +30,7 @@ Object.freeze(RequestException);
  *     },
  *     body: string // 요청의 body
  * }
- * @return 요청을 처리하는 Promise
+ * @return {!Promise<!Response>}
  */
 export async function request(url, config) {
     if (config.method == null) throw RequestException.MissingMethodException;
@@ -56,10 +56,20 @@ export async function request(url, config) {
 
     xhr.send(config.body);
 
-    console.log(xhr.getAllResponseHeaders());
+    const body = JSON.parse(xhr.response || '{}');
+    if (config.doRedirection && xhr.status === 300)
+        redirect(body.url);
 
-    if (config.doRedirection && xhr.status === 200 && xhr.responseURL && method === RequestMethod.POST)
-        redirect(xhr.responseURL);
+    return new Response(xhr.status, body);
+}
 
-    return xhr;
+/**
+ * @class Response Response class for the request() method
+ */
+export class Response {
+    constructor(status, body) {
+
+        this.status = status;
+        this.body = body;
+    }
 }
