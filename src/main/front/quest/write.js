@@ -9,6 +9,7 @@ import Header from 'quill/formats/header';
 import Underline from 'quill/formats/underline';
 import CodeBlock from 'quill/formats/code';
 import {request, RequestMethod} from '../common/request';
+import {redirect} from '../common/utils';
 
 Quill.register({
   'modules/toolbar': Toolbar,
@@ -78,7 +79,11 @@ function requestNewQuest(title, content) {
   request('/quest/write', {
     method: RequestMethod.POST,
     body: JSON.stringify(body)
-  }).then(res => console.log(res));
+  }).then(response => {
+    if (response.status === 401) redirect('/login', {
+      'prevUrl': window.location.pathname
+    });
+  });
 }
 
 function requestEditQuest(id, title, content) {
@@ -90,5 +95,9 @@ function requestEditQuest(id, title, content) {
   request('/quest/edit/' + id, {
     method: RequestMethod.POST,
     body: JSON.stringify(body)
-  }).then(res => console.log(res));
+  }).then(response => {
+    if (response.status === 401) redirect('/login', {
+      'prevUrl': window.location.pathname
+    });
+  });
 }
