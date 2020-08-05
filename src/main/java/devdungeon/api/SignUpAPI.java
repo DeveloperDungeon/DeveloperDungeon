@@ -15,11 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class SignUpAPI {
     private final UserService userService;
 
-    @GetMapping
-    public String getSignUp() {
-        return "signUp";
-    }
-
     @PostMapping
     public ResponseEntity<RedirectTemplate> postSignUp(@RequestBody UserVO user) throws SignUpException {
         //check id
