@@ -56,13 +56,20 @@ export async function request(url, config) {
 
     xhr.send(config.body);
 
-    console.log(xhr.getAllResponseHeaders());
+    const body = JSON.parse(xhr.response || '{}');
+    if (config.doRedirection && xhr.status === 300)
+        redirect(body.url);
 
-    const response = xhr.response;
+    return new Response(xhr.status, body);
+}
 
-    const json = JSON.parse(response || '{}');
-    if (config.doRedirection && json.code === 300)
-        redirect(json.url);
+/**
+ * @class Response Response class for the request() method
+ */
+export class Response {
+    constructor(status, body) {
 
-    return [xhr.status, json];
+        this.status = status;
+        this.body = body;
+    }
 }

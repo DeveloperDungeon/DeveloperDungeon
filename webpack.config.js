@@ -39,6 +39,12 @@ module.exports = (env) => {
             path: outputPath,
             filename: '[name].js'
         },
+        resolve: {
+            alias: {
+                'quill$': path.resolve(__dirname, 'node_modules/quill/quill.js')
+            },
+            extensions: ['.js', '.ts', '.svg']
+        },
         devServer: {
             contentBase: outputPath,
             publicPath: '/',
@@ -75,12 +81,11 @@ module.exports = (env) => {
                     }
                 }]
             }, {
-                test: /\.(svg)$/i,
+                test: /\.svg$/,
                 use: [{
-                    loader: 'file-loader',
+                    loader: 'html-loader',
                     options: {
-                        name: '[name].[ext]',
-                        outputPath: 'images/'
+                        minimize: true
                     }
                 }]
             }]

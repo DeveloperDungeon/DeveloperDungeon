@@ -5,6 +5,8 @@
 <head>
     <title th:text="*{quest.title}"></title>
     <script src="/quest_view.js"></script>
+    <link href="//cdn.quilljs.com/1.0.0/quill.core.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
 </head>
 
 <th:block layout:fragment="content">
@@ -24,7 +26,7 @@
             </tr>
             <tr>
                 <td>내용</td>
-                <td th:text="*{quest.content}"></td>
+                <td><div id="editor-container"></div></td>
             </tr>
             </tbody>
         </table>
@@ -41,7 +43,9 @@
             <button id="button-comment">작성</button>
         </div>
     </div>
-
+    <div id="meta" style="display: none">
+        <div id="content" th:text="${quest.content}"></div>
+    </div>
 </th:block>
 
 
