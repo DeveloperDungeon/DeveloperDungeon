@@ -7,11 +7,11 @@ import java.util.List;
 
 @Mapper
 public interface CommentMapper {
-    @Insert("INSERT INTO comment(quest_id,author,content,reg_time) VALUES(#{questId},#{author},#{content},#{regTime})")
+    @Insert("INSERT INTO comment(quest_id, author, content, reg_time) VALUES(#{questId}, #{author}, #{content}, #{regTime})")
     int insert(CommentVO commentVO);
 
     @Select("SELECT * FROM comment WHERE quest_id=#{questId} ORDER BY reg_time DESC" +
-            " LIMIT #{limit,jdbcType=INTEGER} OFFSET #{offset,jdbcType=INTEGER}")
+            " LIMIT #{limit, jdbcType=INTEGER} OFFSET #{offset, jdbcType=INTEGER}")
     List<CommentVO> selectByQuestWithPaging(int questId, int limit, int offset);
 
     @Select("SELECT COUNT(*) FROM comment WHERE quest_id=#{questId}")
