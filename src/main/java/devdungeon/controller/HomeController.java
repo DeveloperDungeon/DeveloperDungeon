@@ -29,5 +29,4 @@ public class HomeController {
         model.addAttribute("questList", questList);
         return "index";
     }
-
 }

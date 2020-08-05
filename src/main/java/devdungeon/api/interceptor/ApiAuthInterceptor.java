@@ -1,6 +1,6 @@
-package devdungeon.interceptor;
+package devdungeon.api.interceptor;
 
-import devdungeon.annotation.AuthAnnotation;
+import devdungeon.api.annotation.ApiAuthAnnotation;
 import devdungeon.service.CommentService;
 import devdungeon.service.QuestService;
 import lombok.RequiredArgsConstructor;
@@ -15,17 +15,16 @@ import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @RequiredArgsConstructor
-public class AuthInterceptor extends HandlerInterceptorAdapter {
+public class ApiAuthInterceptor extends HandlerInterceptorAdapter {
     private final QuestService questService;
     private final CommentService commentService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {
-
             HandlerMethod method = (HandlerMethod) handler;
 
-            if (method.hasMethodAnnotation(AuthAnnotation.class)) {
+            if (method.hasMethodAnnotation(ApiAuthAnnotation.class)) {
                 String user = (String) request.getSession().getAttribute("user");
                 String[] str = request.getServletPath().split("/");
 
@@ -33,17 +32,18 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
                 if (str[1].equals("quest")) {
                     if (!user.equals(questService.getOne(id).getAuthor())) {
-                        response.sendRedirect("/quest/" + id + "?redirect=unauthorized");
-                        return false;
+                        throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                                "you do not have auth to access this page");
                     }
                 } else if (str[1].equals("comment")) {
                     if (!user.equals(commentService.getReply(id).getAuthor())) {
-                        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
+                        throw new ResponseStatusException(HttpStatus.FORBIDDEN,
                                 "you do not have auth to access this page");
                     }
                 }
             }
         }
+
         return super.preHandle(request, response, handler);
     }
 }
