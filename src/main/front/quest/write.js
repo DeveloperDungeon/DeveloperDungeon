@@ -76,7 +76,7 @@ function requestNewQuest(title, content) {
     regTime: (new Date()).getTime()
   };
 
-  request('/quest/write', {
+  request('/quest', {
     method: RequestMethod.POST,
     body: JSON.stringify(body)
   }).then(response => {
@@ -92,8 +92,8 @@ function requestEditQuest(id, title, content) {
     content: content
   };
 
-  request('/quest/edit/' + id, {
-    method: RequestMethod.POST,
+  request('/quest/' + id, {
+    method: RequestMethod.PUT,
     body: JSON.stringify(body)
   }).then(response => {
     if (response.status === 401) redirect('/login', {
