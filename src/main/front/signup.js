@@ -52,16 +52,28 @@ window.addEventListener('load', () => {
                 // 디폴트 헤더인 Content-Type: application/json 을 사용하므로 헤더 명시 안해도 됨
                 method: RequestMethod.POST,
                 body: JSON.stringify(body)
-            }).then(xhr => {
-                switch (xhr.status) {
-                    case 200: /* Redirected */
+            }).then(response => {
+                switch (response.status) {
+                    case 300: /* Redirected */
                         break;
-                    case 400:
-                        let ErrMsg = JSON.parse(xhr.responseText).errMsg;
-                        let ErrCode = JSON.parse(xhr.responseText).errCode;
-                        console.log(ErrMsg);
-                        alert(ErrMsg);
+                    case 602: {
+                        const errMsg = '이미 존재하는 아이디입니다';
+                        console.log(errMsg);
+                        alert(errMsg);
                         break;
+                    }
+                    case 605: {
+                        const errMsg = '이미 존재하는 닉네임입니다';
+                        console.log(errMsg);
+                        alert(errMsg);
+                        break;
+                    }
+                    case 607: {
+                        const errMsg = '이미 존재하는 이메일입니다';
+                        console.log(errMsg);
+                        alert(errMsg);
+                        break;
+                    }
                     default:
                         console.log('예상치 못한 에러');
                         alert('예상치 못한 에러');

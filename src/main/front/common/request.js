@@ -30,7 +30,7 @@ Object.freeze(RequestException);
  *     },
  *     body: string // 요청의 body
  * }
- * @return {!Promise<!Response>}
+ * @return 요청을 처리하는 Promise
  */
 export async function request(url, config) {
     if (config.method == null) throw RequestException.MissingMethodException;

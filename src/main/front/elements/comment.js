@@ -47,6 +47,21 @@ export class Comment extends HTMLElement {
 
         this.contentDiv = document.createElement('div');
         this.appendChild(this.contentDiv);
+
+        this.bntModify = document.createElement('button');
+        this.bntModify.innerHTML = '수정';
+        this.appendChild(this.bntModify);
+        this.bntModify.onclick = function() {
+            //수정
+        }
+
+        this.bntDelete = document.createElement('button');
+        this.bntDelete.innerHTML = '삭제';
+        this.appendChild(this.bntDelete);
+        this.bntDelete.onclick = function() {
+            //삭제
+        }
+
     }
 
     setData_() {
