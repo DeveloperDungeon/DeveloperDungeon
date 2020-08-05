@@ -35,7 +35,7 @@ window.addEventListener('load', () => {
         const path = currentURL.pathname.split('/');
         const id = path[2];
         request('/quest/remove/' + id, {
-            method:RequestMethod.DELETE
+            method: RequestMethod.DELETE
         })
         //    request 결과 받아서 성공, 실패 처리
     };
