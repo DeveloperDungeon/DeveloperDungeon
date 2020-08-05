@@ -58,8 +58,11 @@ export async function request(url, config) {
 
     console.log(xhr.getAllResponseHeaders());
 
-    if (config.doRedirection && xhr.status === 200 && xhr.responseURL && method === RequestMethod.POST)
-        redirect(xhr.responseURL);
+    const response = xhr.response;
 
-    return xhr;
+    const json = JSON.parse(response || '{}');
+    if (config.doRedirection && json.code === 300)
+        redirect(json.url);
+
+    return [xhr.status, json];
 }
