@@ -80,9 +80,7 @@ window.addEventListener('load', () => {
                         break;
                 }
             });
-        }
-
-        else {
+        } else {
             alert(errorMessage);
             isValidPassword = true;
             isValidID = true;

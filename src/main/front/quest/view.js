@@ -70,12 +70,12 @@ async function loadComments() {
         commentArea.innerHTML = '';
         response.body.list.map(e => {
             const element = document.createElement('quest-comment');
+            const commentId = e['id'];
             element.setAttribute('comment-id', e['id']);
             element.setAttribute('quest-id', e['questId']);
             element.setAttribute('nickname', e['authorDetails'].nickName);
             element.setAttribute('content', e['content']);
             element.setAttribute('reg-time', e['regTime']);
-
             return element;
         }).forEach(e => commentArea.appendChild(e));
     });
