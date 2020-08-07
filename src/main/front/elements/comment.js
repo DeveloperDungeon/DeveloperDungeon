@@ -120,7 +120,12 @@ export class Comment extends HTMLElement {
             }
             // 취소 버튼
             this.parentElement.bntCancle.onclick = function () {
-
+                this.parentElement.bntModify.style.display = 'block';
+                this.parentElement.bntDelete.style.display = 'block';
+                this.parentElement.contentDiv.style.display = 'block';
+                this.parentElement.bntConfirm.style.display = 'none';
+                this.parentElement.bntCancle.style.display = 'none';
+                this.parentElement.textBox.style.display = 'none';
             }
         }
         // 삭제 버튼
