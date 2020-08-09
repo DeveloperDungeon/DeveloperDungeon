@@ -3,6 +3,7 @@ package devdungeon.config;
 import devdungeon.api.interceptor.ApiAuthInterceptor;
 import devdungeon.api.interceptor.ApiLoginInterceptor;
 import devdungeon.controller.interceptor.AuthInterceptor;
+import devdungeon.controller.interceptor.ConversionInterceptor;
 import devdungeon.controller.interceptor.LoginInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -14,9 +15,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class InterceptorConfig implements WebMvcConfigurer {
     private final LoginInterceptor loginInterceptor;
     private final AuthInterceptor authInterceptor;
+    private final ConversionInterceptor conversionInterceptor;
 
     private final ApiLoginInterceptor apiLoginInterceptor;
     private final ApiAuthInterceptor apiAuthInterceptor;
+
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -25,5 +28,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
         registry.addInterceptor(apiLoginInterceptor);
         registry.addInterceptor(apiAuthInterceptor);
+
+        registry.addInterceptor(conversionInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/comment/**");
+
     }
 }
