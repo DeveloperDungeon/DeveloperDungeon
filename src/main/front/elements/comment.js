@@ -87,8 +87,7 @@ export class Comment extends HTMLElement {
             this.parentElement.bntConfirm.style.display = 'block';
             this.parentElement.bntCancle.style.display = 'block';
             this.parentElement.textBox.style.display = 'block';
-
-
+            
             // 확인 버튼
             this.parentElement.bntConfirm.onclick = function () {
                 request('/comment/' + this.parentElement.commentId, {
