@@ -30,12 +30,12 @@ public class ApiAuthInterceptor extends HandlerInterceptorAdapter {
 
                 int id = Integer.parseInt(str[str.length - 1]);
 
-                if (str[1].equals("quest")) {
+                if (str[2].equals("quest")) {
                     if (!user.equals(questService.getOne(id).getAuthor())) {
                         throw new ResponseStatusException(HttpStatus.FORBIDDEN,
                                 "you do not have auth to access this page");
                     }
-                } else if (str[1].equals("comment")) {
+                } else if (str[2].equals("comment")) {
                     if (!user.equals(commentService.getReply(id).getAuthor())) {
                         throw new ResponseStatusException(HttpStatus.FORBIDDEN,
                                 "you do not have auth to access this page");
