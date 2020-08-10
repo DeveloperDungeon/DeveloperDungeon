@@ -24,6 +24,7 @@
     "html-loader": "^1.1.0"
   },
   "scripts": {
+    "test": "./node_modules/.bin/jasmine-node spec",
     "prod": "webpack --env=production",
     "dev": "webpack-dev-server --env=development",
     "start": "npm run dev"

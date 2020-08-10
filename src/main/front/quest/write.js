@@ -9,86 +9,100 @@ import Header from 'quill/formats/header';
 import Underline from 'quill/formats/underline';
 import CodeBlock from 'quill/formats/code';
 import {request, RequestMethod} from '../common/request';
+import {redirect} from "../common/utils";
 
 Quill.register({
-  'modules/toolbar': Toolbar,
-  'themes/snow': Snow,
-  'formats/bold': Bold,
-  'formats/italic': Italic,
-  'formats/header': Header,
-  'formats/underline': Underline,
-  'formats/code-block': CodeBlock,
+    'modules/toolbar': Toolbar,
+    'themes/snow': Snow,
+    'formats/bold': Bold,
+    'formats/italic': Italic,
+    'formats/header': Header,
+    'formats/underline': Underline,
+    'formats/code-block': CodeBlock,
 });
 
 window.addEventListener('load', () => {
-  const quill = createQuillEditor();
+    const quill = createQuillEditor();
 
-  const [type, id, content] = getMeta();
+    const [type, id, content] = getMeta();
 
-  if (type === 'edit') {
-    console.log(content);
-    const delta = JSON.parse(content);
-    quill.setContents(delta);
-  }
+    if (type === 'edit') {
+        console.log(content);
+        const delta = JSON.parse(content);
+        quill.setContents(delta);
+    }
 
-  document.getElementById('btnSubmit').onclick = () => {
-    const title = document.getElementById('input').value;
-    const content = JSON.stringify(quill.getContents());
+    document.getElementById('btnSubmit').onclick = () => {
+        const title = document.getElementById('input').value;
+        const content = JSON.stringify(quill.getContents());
 
-    console.log(content);
+        console.log(content);
 
-    if (type === 'edit') requestEditQuest(id, title, content);
-    else requestNewQuest(title, content);
-  };
+        if (type === 'edit') requestEditQuest(id, title, content);
+        else requestNewQuest(title, content);
+    };
 });
 
 function createQuillEditor() {
-  return new Quill('#editor-container', {
-    modules: {
-      toolbar: [
-        [{header: [1, 2, false]}],
-        ['bold', 'italic', 'underline'],
-        ['image', 'code-block']
-      ]
-    },
-    theme: 'snow'
-  });
+    return new Quill('#editor-container', {
+        modules: {
+            toolbar: [
+                [{header: [1, 2, false]}],
+                ['bold', 'italic', 'underline'],
+                ['image', 'code-block']
+            ]
+        },
+        theme: 'snow'
+    });
 }
 
 function getMeta() {
-  const typeDiv = document.getElementById('type');
-  const idDiv = document.getElementById('id');
-  const contentDiv = document.getElementById('content');
+    const typeDiv = document.getElementById('type');
+    const idDiv = document.getElementById('id');
+    const contentDiv = document.getElementById('content');
 
-  return [
-    typeDiv.innerText,
-    idDiv.innerText,
-    contentDiv.innerText
-  ];
+    return [
+        typeDiv.innerText,
+        idDiv.innerText,
+        contentDiv.innerText
+    ];
 }
 
 
 function requestNewQuest(title, content) {
-  const body = {
-    title: title,
-    content: content,
-    regTime: (new Date()).getTime()
-  };
+    const body = {
+        title: title,
+        content: content,
+        regTime: (new Date()).getTime()
+    };
 
-  request('/quest/write', {
-    method: RequestMethod.POST,
-    body: JSON.stringify(body)
-  }).then(res => console.log(res));
+    request('/quest/write', {
+        method: RequestMethod.POST,
+        body: JSON.stringify(body)
+    }).then(response => {
+        switch (response.status) {
+            case 300:
+                console.log('성공');
+                break;
+            case 401:
+                alert('로그인이 필요합니다');
+                redirect('/login')
+                break;
+            default:
+                console.log('예상치 못한 에러');
+                break;
+        }
+    });
 }
 
 function requestEditQuest(id, title, content) {
-  const body = {
-    title: title,
-    content: content
-  };
+    const body = {
+        title: title,
+        content: content
+    };
 
-  request('/quest/edit/' + id, {
-    method: RequestMethod.POST,
-    body: JSON.stringify(body)
-  }).then(res => console.log(res));
+    request('/quest/edit/' + id, {
+        method: RequestMethod.POST,
+        body: JSON.stringify(body)
+    }).then(res => console.log(res));
 }
