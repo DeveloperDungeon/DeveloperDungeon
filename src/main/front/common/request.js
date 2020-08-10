@@ -42,13 +42,16 @@ export async function request(url, config) {
     if (method == null) throw RequestException.NoSuchMethodException;
 
     const xhr = new XMLHttpRequest();
-    xhr.open(method, url, false);
+    xhr.open(method, '/api' + url, false);
 
     switch (method) {
         // Get, Delete 에는 request body 없음
-        case RequestMethod.GET: case RequestMethod.DELETE: break;
+        case RequestMethod.GET:
+        case RequestMethod.DELETE:
+            break;
         // Post, Put 에는 request body 명시
-        case RequestMethod.POST: case RequestMethod.PUT:
+        case RequestMethod.POST:
+        case RequestMethod.PUT:
             const contentType = config.header.contentType || ContentType.APPLICATION_JSON;
             xhr.setRequestHeader("Content-Type", contentType);
             break;

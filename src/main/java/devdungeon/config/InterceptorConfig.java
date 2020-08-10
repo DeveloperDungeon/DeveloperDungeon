@@ -31,7 +31,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
         registry.addInterceptor(conversionInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/comment/**");
+                .excludePathPatterns("/api/**");
 
     }
 }

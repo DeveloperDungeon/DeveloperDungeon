@@ -6,6 +6,8 @@ import devdungeon.domain.CommentPageVO;
 import devdungeon.domain.CommentVO;
 import devdungeon.domain.PageVO;
 import devdungeon.service.CommentService;
+import devdungeon.template.Body;
+import devdungeon.template.MessageBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/comment")
+@RequestMapping("/api/comment")
 public class CommentAPI {
 
     private final CommentService commentService;
@@ -23,10 +25,10 @@ public class CommentAPI {
 
     @PostMapping
     @ApiCertifyAnnotation
-    public ResponseEntity<String> postReplyRegister(@RequestBody CommentVO commentVO) {
+    public ResponseEntity<MessageBody> postReplyRegister(@RequestBody CommentVO commentVO) {
         commentVO.setAuthor((String) session.getAttribute("user"));
-        return commentService.register(commentVO) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) :
-                new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
+        return commentService.register(commentVO) == 1 ? new ResponseEntity<>(new MessageBody("success"), HttpStatus.OK) :
+                new ResponseEntity<>(new MessageBody("fail"), HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping

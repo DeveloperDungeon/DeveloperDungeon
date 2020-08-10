@@ -14,9 +14,13 @@ window.addEventListener('load', () => {
             method: RequestMethod.POST,
             body: JSON.stringify(body)
         }).then(response => {
-          if (response.status === 400) {
-            if (response.body.errorCode === 2) alert('아이디나 비밀번호를 확인해주세요.');
-          }
+            switch (response.status) {
+                case 200 : /* Redirect */
+                    break;
+                case 400 :
+                    alert('실패');
+                    break;
+            }
         });
     };
 });

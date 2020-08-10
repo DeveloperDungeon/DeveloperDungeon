@@ -15,4 +15,5 @@ public class LoginController {
     public String login(@RequestParam(value = "prevUrl", required = false, defaultValue = "") String prevUrl) {
         return "login";
     }
+
 }

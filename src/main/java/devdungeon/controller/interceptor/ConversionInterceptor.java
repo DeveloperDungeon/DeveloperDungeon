@@ -12,12 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 public class ConversionInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        if (handler instanceof HandlerMethod) {
-            HandlerMethod method = (HandlerMethod) handler;
-
+        if (handler instanceof HandlerMethod && modelAndView != null) {
             String user = (String) request.getSession().getAttribute("user");
-            if (user == null) modelAndView.addObject("isLogin", false);
-            else modelAndView.addObject("isLogin", true);
+            modelAndView.addObject("isLogin", user != null);
         }
         super.postHandle(request, response, handler, modelAndView);
     }

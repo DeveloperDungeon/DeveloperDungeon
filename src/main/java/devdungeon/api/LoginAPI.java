@@ -9,17 +9,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/login")
 public class LoginAPI {
 
     private final UserService userService;
 
-    @PostMapping(value = "/login")
+    @PostMapping
     public ResponseEntity<Object> postLogin(@RequestBody UserVO userVO, HttpServletRequest request) {
         if (userVO.getId() == null || userVO.getPassword() == null) {
             return new ResponseEntity<>(new ErrorTemplate(1), HttpStatus.BAD_REQUEST);

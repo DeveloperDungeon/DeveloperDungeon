@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="/dev-dungeon.css">
     </head>
     <body>
-        <header th:replace="fragments/devHeader :: devHeader"></header>
+        <header th:replace="fragments/devHeader :: devHeader(${isLogin})"></header>
         <th:block layout:fragment="content">Content</th:block>
         <footer th:replace="fragments/devFooter :: devFooter"></footer>
     </body>

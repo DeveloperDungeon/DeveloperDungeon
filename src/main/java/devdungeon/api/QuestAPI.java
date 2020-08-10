@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/quest")
+@RequestMapping("/api/quest")
 public class QuestAPI {
 
     private final QuestService questService;
