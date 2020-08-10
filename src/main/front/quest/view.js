@@ -29,6 +29,7 @@ window.addEventListener('load', () => {
     const button = document.getElementById('button-comment');
     button.onclick = onCommentButtonClick;
     const bntDelete = document.getElementById('bntRemove');
+
     bntDelete.onclick = () => {
         const url = require('url');
         const currentURL = url.parse(window.location.href);
@@ -92,11 +93,20 @@ function onCommentButtonClick() {
         body: JSON.stringify({content: content, regTime: now(), questId: questId}),
         doRedirection: false
     }).then(response => {
-        if (response.status === 200) {
-            loadComments();
-
-        } else {
-            console.log('댓글 작성 실패');
+        switch (response.status) {
+            case 200:
+                loadComments();
+                break;
+            case 400:
+                console.log('댓글 등록 실패');
+                break;
+            case 401:
+                alert('로그인이 필요합니다');
+                redirect('/login');
+                break;
+            default:
+                console.log('알 수 없는 에러');
+                break;
         }
     });
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="kr">
-<header th:fragment="devHeader(isLogin)" class="page-header content-width">
+<header th:fragment="devHeader" class="page-header content-width">
     <a id="main" class="header-title" href="/">개발던전</a>
     <nav>
         <ul id="header-navigator" class="header-navigator">
@@ -15,8 +15,7 @@
             <li class="header-divider">|</li>
             <li class="header-menu"><a href="/quest">NPC</a></li>
             <li class="header-divider">|</li>
-            <li th:if="${isLogin} == 'true'" class="header-menu"><a href="/login">로그인</a></li>
-            <li th:unless="${isLogin} == 'true'" class="header-menu"><a href="/login">로그아웃</a></li>
+            <li class="header-menu"><a href="/login">로그인</a></li>
             <li class="header-menu"><a href="/signup">회원가입</a></li>
         </ul>
     </nav>
