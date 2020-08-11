@@ -6,7 +6,6 @@ import devdungeon.domain.CommentPageVO;
 import devdungeon.domain.CommentVO;
 import devdungeon.domain.PageVO;
 import devdungeon.service.CommentService;
-import devdungeon.template.Body;
 import devdungeon.template.MessageBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -51,16 +50,16 @@ public class CommentAPI {
 
     @DeleteMapping("/{id}")
     @ApiAuthAnnotation
-    public ResponseEntity<String> remove(@PathVariable("id") int id) {
-        return commentService.remove(id) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) :
-                new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
+    public ResponseEntity<MessageBody> remove(@PathVariable("id") int id) {
+        return commentService.remove(id) == 1 ? new ResponseEntity<>(new MessageBody("success"), HttpStatus.OK) :
+                new ResponseEntity<>(new MessageBody("fail"), HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/{id}")
     @ApiAuthAnnotation
-    public ResponseEntity<String> modify(@PathVariable("id") int id, @RequestBody CommentVO commentVO) {
+    public ResponseEntity<MessageBody> modify(@PathVariable("id") int id, @RequestBody CommentVO commentVO) {
         commentVO.setId(id);
-        return commentService.modify(commentVO) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) :
-                new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
+        return commentService.modify(commentVO) == 1 ? new ResponseEntity<>(new MessageBody("success"), HttpStatus.OK) :
+                new ResponseEntity<>(new MessageBody("fail"), HttpStatus.BAD_REQUEST);
     }
 }
