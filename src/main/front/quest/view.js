@@ -2,6 +2,7 @@ import {request} from "../common/request";
 import {RequestMethod} from "../common/request";
 import {now, redirect} from "../common/utils";
 import {registerComment} from "../elements/comment";
+import {loadComments} from "../elements/comment";
 
 import Quill from 'quill/core';
 
@@ -24,7 +25,7 @@ Quill.register({
 
 window.addEventListener('load', () => {
     checkRedirectionIssue();
-    loadComments();
+    reloadComments();
 
     const button = document.getElementById('button-comment');
     button.onclick = onCommentButtonClick;
@@ -35,7 +36,7 @@ window.addEventListener('load', () => {
         const currentURL = url.parse(window.location.href);
         const path = currentURL.pathname.split('/');
         const id = path[2];
-        request('/quest/remove/' + id, {
+        request('/quest/' + id, {
             method: RequestMethod.DELETE
         })
         //    request 결과 받아서 성공, 실패 처리
@@ -62,27 +63,6 @@ function checkRedirectionIssue() {
         alert('권한이 없습니다.');
 }
 
-async function loadComments() {
-    const questId = window.location.pathname.split('/')[2];
-    request(`/comment?questId=${questId}`, {
-        method: RequestMethod.GET
-    }).then(response => {
-        const commentArea = document.getElementById('comment-area');
-        commentArea.innerHTML = '';
-        response.body.list.map(e => {
-            const element = document.createElement('quest-comment');
-            const commentId = e['id'];
-            element.setAttribute('comment-id', e['id']);
-            element.setAttribute('quest-id', e['questId']);
-            element.setAttribute('nickname', e['authorDetails'].nickName);
-            element.setAttribute('content', e['content']);
-            element.setAttribute('reg-time', e['regTime']);
-            return element;
-        }).forEach(e => commentArea.appendChild(e));
-    });
-
-}
-
 function onCommentButtonClick() {
     const questId = window.location.pathname.split('/')[2];
     const input = document.getElementById('input-comment');
@@ -95,7 +75,8 @@ function onCommentButtonClick() {
     }).then(response => {
         switch (response.status) {
             case 200:
-                loadComments();
+                reloadComments();
+                input.value = '';
                 break;
             case 400:
                 console.log('댓글 등록 실패');
@@ -115,6 +96,10 @@ function createQuillEditor() {
     return new Quill('#editor-container', {
         readOnly: true
     });
+}
+
+function reloadComments() {
+    loadComments(window.location.pathname.split('/')[2]);
 }
 
 registerComment();

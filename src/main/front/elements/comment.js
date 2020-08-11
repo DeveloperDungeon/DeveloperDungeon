@@ -96,7 +96,7 @@ export class Comment extends HTMLElement {
                 }).then(response => {
                     switch (response.status) {
                         case 200 :
-                            console.log('성공');
+                            reloadComments();
                             break;
                         case 400:
                             console.log('실패');
@@ -131,7 +131,7 @@ export class Comment extends HTMLElement {
             }).then(response => {
                 switch (response.status) {
                     case 200 :
-                        console.log('성공');
+                        reloadComments();
                         break;
                     case 400:
                         console.log('실패');
@@ -163,6 +163,28 @@ export class Comment extends HTMLElement {
     }
 }
 
+function reloadComments() {
+    loadComments(window.location.pathname.split('/')[2]);
+}
+
 export function registerComment() {
     customElements.define('quest-comment', Comment);
+}
+
+export async function loadComments(questId) {
+    const response = await request(`/comment?questId=${questId}`, {
+        method: RequestMethod.GET
+    });
+    const commentArea = document.getElementById('comment-area');
+    commentArea.innerHTML = '';
+    response.body.list.map(e => {
+        const element = document.createElement('quest-comment');
+        element.setAttribute('comment-id', e['id']);
+        element.setAttribute('quest-id', e['questId']);
+        element.setAttribute('nickname', e['authorDetails'].nickName);
+        element.setAttribute('content', e['content']);
+        element.setAttribute('reg-time', e['regTime']);
+        return element;
+    }).forEach(e => commentArea.appendChild(e));
+    ;
 }
