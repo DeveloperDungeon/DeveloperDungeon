@@ -62,6 +62,11 @@ export async function request(url, config) {
     const body = JSON.parse(xhr.response || '{}');
     if (config.doRedirection && xhr.status === 300)
         redirect(body.url);
+    else if (xhr.status === 401) {
+        redirect('/login', {
+            'prevUrl': window.location.pathname.slice(1)
+        });
+    }
 
     return new Response(xhr.status, body);
 }
