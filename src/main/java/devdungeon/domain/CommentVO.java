@@ -10,9 +10,5 @@ public class CommentVO {
     private String content;
     private long regTime;
 
-    CommentVO(String content) {
-        this.content = content;
-    }
-
     private UserVO authorDetails;
 }
