@@ -80,19 +80,19 @@ export class Comment extends HTMLElement {
         this.bntCancle.style.display = 'none';
 
         // 수정 버튼
-        this.bntModify.onclick = function () {
-            this.parentElement.bntModify.style.display = 'none';
-            this.parentElement.bntDelete.style.display = 'none';
-            this.parentElement.contentDiv.style.display = 'none';
-            this.parentElement.bntConfirm.style.display = 'block';
-            this.parentElement.bntCancle.style.display = 'block';
-            this.parentElement.textBox.style.display = 'block';
-            
+        this.bntModify.onclick = () => {
+            this.bntModify.style.display = 'none';
+            this.bntDelete.style.display = 'none';
+            this.contentDiv.style.display = 'none';
+            this.bntConfirm.style.display = 'block';
+            this.bntCancle.style.display = 'block';
+            this.textBox.style.display = 'block';
+
             // 확인 버튼
-            this.parentElement.bntConfirm.onclick = function () {
-                request('/comment/' + this.parentElement.commentId, {
+            this.bntConfirm.onclick = () => {
+                request('/comment/' + this.commentId, {
                     method: RequestMethod.PUT,
-                    body: JSON.stringify(this.parentElement.commentId)
+                    body: JSON.stringify({"content": this.textBox.value})
                 }).then(response => {
                     switch (response.status) {
                         case 200 :
@@ -102,10 +102,7 @@ export class Comment extends HTMLElement {
                             console.log('실패');
                             break;
                         case 401:
-                            console.log('로그인이 필요합니다');
                             alert('로그인이 필요합니다');
-                            // 로그인 페이지로 redirect
-                            redirect('/login');
                             break;
                         case 403:
                             console.log('권한이 없습니다');
@@ -118,20 +115,19 @@ export class Comment extends HTMLElement {
                 });
             }
             // 취소 버튼
-            this.parentElement.bntCancle.onclick = function () {
-                this.parentElement.bntModify.style.display = 'block';
-                this.parentElement.bntDelete.style.display = 'block';
-                this.parentElement.contentDiv.style.display = 'block';
-                this.parentElement.bntConfirm.style.display = 'none';
-                this.parentElement.bntCancle.style.display = 'none';
-                this.parentElement.textBox.style.display = 'none';
+            this.bntCancle.onclick = () => {
+                this.bntModify.style.display = 'block';
+                this.bntDelete.style.display = 'block';
+                this.contentDiv.style.display = 'block';
+                this.bntConfirm.style.display = 'none';
+                this.bntCancle.style.display = 'none';
+                this.textBox.style.display = 'none';
             }
         }
         // 삭제 버튼
-        this.bntDelete.onclick = function () {
+        this.bntDelete.onclick = () => {
             request('/comment/' + this.commentId, {
-                method: RequestMethod.DELETE,
-                body: JSON.stringify(this.commentId)
+                method: RequestMethod.DELETE
             }).then(response => {
                 switch (response.status) {
                     case 200 :
@@ -141,10 +137,7 @@ export class Comment extends HTMLElement {
                         console.log('실패');
                         break;
                     case 401:
-                        console.log('로그인이 필요합니다');
                         alert('로그인이 필요합니다');
-                        // 로그인 페이지로 redirect
-                        redirect('/login');
                         break;
                     case 403:
                         console.log('권한이 없습니다');
@@ -156,7 +149,6 @@ export class Comment extends HTMLElement {
                 }
             });
         }
-
     }
 
     setData_() {
