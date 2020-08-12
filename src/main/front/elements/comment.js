@@ -1,4 +1,4 @@
-import {millisToTimeString, now, redirect, setStyle} from "../common/utils";
+import {millisToTimeString} from "../common/utils";
 import {request, RequestMethod} from "../common/request";
 
 export class Comment extends HTMLElement {
@@ -33,7 +33,6 @@ export class Comment extends HTMLElement {
         this.btnCancle = null;
         /** @type ?HTMLElement */
         this.textBox = null;
-
     }
 
     connectedCallback() {
@@ -186,5 +185,4 @@ export async function loadComments(questId) {
         element.setAttribute('reg-time', e['regTime']);
         return element;
     }).forEach(e => commentArea.appendChild(e));
-    ;
 }
