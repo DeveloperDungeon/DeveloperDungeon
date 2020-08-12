@@ -30,20 +30,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean findUser(String id) {
-        UserVO user = getUser(id);
-        if (user == null) {
-            return false;
-        }
-        return true;
+        return getUser(id) != null;
     }
 
     @Override
     public boolean findUser(String id, String password) {
-        int userNum = getUser(id, password);
-        if (userNum == 0) {
-            return false;
-        }
-        return true;
+        return getUser(id, password) != 0;
     }
 
     @Override
@@ -53,15 +45,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean findUserByEmail(String email) {
-        if (userMapper.selectByEmail(email) == null)
-            return false;
-        return true;
+        return userMapper.selectByEmail(email) != null;
     }
 
     @Override
     public boolean findUserByNick(String nickName) {
-        if (userMapper.selectByNick(nickName) == null)
-            return false;
-        return true;
+        return userMapper.selectByNick(nickName) != null;
     }
 }

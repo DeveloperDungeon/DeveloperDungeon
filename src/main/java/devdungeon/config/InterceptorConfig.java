@@ -20,7 +20,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
     private final ApiLoginInterceptor apiLoginInterceptor;
     private final ApiAuthInterceptor apiAuthInterceptor;
 
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor);
@@ -32,6 +31,5 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(conversionInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/api/**");
-
     }
 }

@@ -15,11 +15,6 @@ public class PageVO {
     private int maxPage;
     private boolean hasPrev, hasNext;
 
-    public PageVO(int currentPage) {
-        this.currentPage = currentPage;
-        this.offset = PER_PAGE * (this.currentPage - 1);
-    }
-
     public PageVO(int currentPage, int total) {
         this.currentPage = currentPage;
         this.offset = PER_PAGE * (this.currentPage - 1);

@@ -32,7 +32,6 @@ public class QuestSearchController {
                 model.addAttribute("questList", ss.searchByTitleContent(text));
                 break;
         }
-        //model.addAttribute("searchInfo", searchVO);
         return "search";
     }
 }

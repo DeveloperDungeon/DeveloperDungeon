@@ -12,15 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/quest")
 public class QuestController {
 
     private final QuestService questService;
-    private final HttpSession session;
 
     @GetMapping
     public String getQuestList(Model model, @RequestParam(value = "page", required = false,
