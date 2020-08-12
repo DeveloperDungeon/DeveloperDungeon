@@ -24,13 +24,13 @@ export class Comment extends HTMLElement {
         /** @type ?HTMLElement */
         this.contentDiv = null;
         /** @type ?HTMLElement */
-        this.bntModify = null;
+        this.btnModify = null;
         /** @type ?HTMLElement */
-        this.bntDelete = null;
+        this.btnDelete = null;
         /** @type ?HTMLElement */
-        this.bntConfirm = null;
+        this.btnConfirm = null;
         /** @type ?HTMLElement */
-        this.bntCancle = null;
+        this.btnCancle = null;
         /** @type ?HTMLElement */
         this.textBox = null;
 
@@ -65,31 +65,31 @@ export class Comment extends HTMLElement {
         this.textBox.style.display = 'none';
         this.appendChild(this.textBox);
 
-        this.bntModify = document.createElement('button');
-        this.appendChild(this.bntModify);
+        this.btnModify = document.createElement('button');
+        this.appendChild(this.btnModify);
 
-        this.bntDelete = document.createElement('button');
-        this.appendChild(this.bntDelete);
+        this.btnDelete = document.createElement('button');
+        this.appendChild(this.btnDelete);
 
-        this.bntConfirm = document.createElement('button');
-        this.appendChild(this.bntConfirm);
-        this.bntConfirm.style.display = 'none';
+        this.btnConfirm = document.createElement('button');
+        this.appendChild(this.btnConfirm);
+        this.btnConfirm.style.display = 'none';
 
-        this.bntCancle = document.createElement('button');
-        this.appendChild(this.bntCancle);
-        this.bntCancle.style.display = 'none';
+        this.btnCancle = document.createElement('button');
+        this.appendChild(this.btnCancle);
+        this.btnCancle.style.display = 'none';
 
         // 수정 버튼
-        this.bntModify.onclick = () => {
-            this.bntModify.style.display = 'none';
-            this.bntDelete.style.display = 'none';
+        this.btnModify.onclick = () => {
+            this.btnModify.style.display = 'none';
+            this.btnDelete.style.display = 'none';
             this.contentDiv.style.display = 'none';
-            this.bntConfirm.style.display = 'block';
-            this.bntCancle.style.display = 'block';
+            this.btnConfirm.style.display = 'block';
+            this.btnCancle.style.display = 'block';
             this.textBox.style.display = 'block';
 
             // 확인 버튼
-            this.bntConfirm.onclick = () => {
+            this.btnConfirm.onclick = () => {
                 request('/comment/' + this.commentId, {
                     method: RequestMethod.PUT,
                     body: JSON.stringify({"content": this.textBox.value})
@@ -115,17 +115,17 @@ export class Comment extends HTMLElement {
                 });
             }
             // 취소 버튼
-            this.bntCancle.onclick = () => {
-                this.bntModify.style.display = 'block';
-                this.bntDelete.style.display = 'block';
+            this.btnCancle.onclick = () => {
+                this.btnModify.style.display = 'block';
+                this.btnDelete.style.display = 'block';
                 this.contentDiv.style.display = 'block';
-                this.bntConfirm.style.display = 'none';
-                this.bntCancle.style.display = 'none';
+                this.btnConfirm.style.display = 'none';
+                this.btnCancle.style.display = 'none';
                 this.textBox.style.display = 'none';
             }
         }
         // 삭제 버튼
-        this.bntDelete.onclick = () => {
+        this.btnDelete.onclick = () => {
             request('/comment/' + this.commentId, {
                 method: RequestMethod.DELETE
             }).then(response => {
@@ -155,10 +155,10 @@ export class Comment extends HTMLElement {
         this.authorDiv.innerText = this.nickname;
         this.timeDiv.innerText = millisToTimeString(this.regTime);
         this.contentDiv.innerText = this.content;
-        this.bntModify.innerText = '수정';
-        this.bntDelete.innerText = '삭제';
-        this.bntConfirm.innerText = '확인';
-        this.bntCancle.innerText = '취소';
+        this.btnModify.innerText = '수정';
+        this.btnDelete.innerText = '삭제';
+        this.btnConfirm.innerText = '확인';
+        this.btnCancle.innerText = '취소';
         this.textBox.setAttribute('value', this.content);
     }
 }
