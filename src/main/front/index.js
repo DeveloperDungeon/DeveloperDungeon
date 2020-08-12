@@ -16,6 +16,6 @@ window.addEventListener('load', () => {
             redirect('/search?q=' + text + '&type=' + methodValue);
         }
     }
-
-
 });
+
+

@@ -5,7 +5,6 @@ import Italic from "quill/formats/italic";
 import Header from "quill/formats/header";
 import Underline from "quill/formats/underline";
 import CodeBlock from "quill/formats/code";
-
 Quill.register({
     'themes/snow': Snow,
     'formats/bold': Bold,
@@ -16,14 +15,17 @@ Quill.register({
 });
 
 window.addEventListener('load', () => {
-    const quill = createQuillEditor();
-    const delta = JSON.parse(document.getElementById('content').innerText);
-    console.log(document.getElementById('content').innerText);
-    quill.setContents(delta);
+    const content = document.getElementsByClassName('quest-card');
+    for (let i = 0; i < content.length; i++) {
+        const editContainer = content[i].getElementsByClassName('edit-container')[0];
+        const delta = JSON.parse(content[i].getElementsByClassName('card-content')[0].innerText);
+        const quill = createQuillEditor(editContainer);
+        quill.setContents(delta);
+    }
 });
 
-function createQuillEditor() {
-    return new Quill('#editor-container', {
+function createQuillEditor(edit) {
+    return new Quill(edit, {
         readOnly: true
     });
 }
