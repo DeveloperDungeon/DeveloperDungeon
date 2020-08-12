@@ -6,7 +6,10 @@
         <span class="quest-card-author" th:text="${author}"></span>
         <span class="quest-card-time" th:text="${#dates.format(new java.util.Date(time), 'yyyy년 MM월 dd일 a H시 mm분')}"></span>
     </div>
-    <p th:text="${content}"></p>
-
+    <p id="editor-container"></p>
+    <div id="meta" style="display: block">
+        <div id="content" th:text="${content}"></div>
+    </div>
+    <script src="/fragment_questCard.js"></script>
 </div>
 </html>
