@@ -76,9 +76,9 @@ export async function request(url, config) {
  */
 export class Response {
     constructor(status, body) {
-        /** @private @const {number} 응답 상태 코드 */
+        /** @public @const {number} 응답 상태 코드 */
         this.status = status;
-        /** @private @const {!Object} 응답 내용 */
+        /** @public @const {!Object} 응답 내용 */
         this.body = body;
     }
 }
