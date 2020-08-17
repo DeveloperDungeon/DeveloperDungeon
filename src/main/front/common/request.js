@@ -62,6 +62,11 @@ export async function request(url, config) {
     const body = JSON.parse(xhr.response || '{}');
     if (config.doRedirection && xhr.status === 300)
         redirect(body.url);
+    else if (xhr.status === 401) {
+        redirect('/login', {
+            'prevUrl': window.location.pathname.slice(1)
+        });
+    }
 
     return new Response(xhr.status, body);
 }
@@ -71,9 +76,9 @@ export async function request(url, config) {
  */
 export class Response {
     constructor(status, body) {
-        /** @private @const {number} 응답 상태 코드 */
+        /** @public @const {number} 응답 상태 코드 */
         this.status = status;
-        /** @private @const {!Object} 응답 내용 */
+        /** @public @const {!Object} 응답 내용 */
         this.body = body;
     }
 }

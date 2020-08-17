@@ -78,32 +78,29 @@ export class Comment extends HTMLElement {
         this.btnCancle.style.display = 'none';
 
         // 수정 버튼
-        this.btnModify.onclick = function () {
-            this.parentElement.btnModify.style.display = 'none';
-            this.parentElement.btnDelete.style.display = 'none';
-            this.parentElement.contentDiv.style.display = 'none';
-            this.parentElement.btnConfirm.style.display = 'block';
-            this.parentElement.btnCancle.style.display = 'block';
-            this.parentElement.textBox.style.display = 'block';
+        this.btnModify.onclick = () => {
+            this.btnModify.style.display = 'none';
+            this.btnDelete.style.display = 'none';
+            this.contentDiv.style.display = 'none';
+            this.btnConfirm.style.display = 'block';
+            this.btnCancle.style.display = 'block';
+            this.textBox.style.display = 'block';
 
             // 확인 버튼
-            this.parentElement.btnConfirm.onclick = function () {
-                request('/comment/' + this.parentElement.commentId, {
+            this.btnConfirm.onclick = () => {
+                request('/comment/' + this.commentId, {
                     method: RequestMethod.PUT,
-                    body: JSON.stringify(this.parentElement.commentId)
+                    body: JSON.stringify({"content": this.textBox.value})
                 }).then(response => {
                     switch (response.status) {
                         case 200 :
-                            console.log('성공');
+                            reloadComments();
                             break;
                         case 400:
                             console.log('실패');
                             break;
                         case 401:
-                            console.log('로그인이 필요합니다');
                             alert('로그인이 필요합니다');
-                            // 로그인 페이지로 redirect
-                            redirect('/login');
                             break;
                         case 403:
                             console.log('권한이 없습니다');
@@ -116,33 +113,29 @@ export class Comment extends HTMLElement {
                 });
             }
             // 취소 버튼
-            this.parentElement.btnCancle.onclick = function () {
-                this.parentElement.btnModify.style.display = 'block';
-                this.parentElement.btnDelete.style.display = 'block';
-                this.parentElement.contentDiv.style.display = 'block';
-                this.parentElement.btnConfirm.style.display = 'none';
-                this.parentElement.btnCancle.style.display = 'none';
-                this.parentElement.textBox.style.display = 'none';
+            this.btnCancle.onclick = () => {
+                this.btnModify.style.display = 'block';
+                this.btnDelete.style.display = 'block';
+                this.contentDiv.style.display = 'block';
+                this.btnConfirm.style.display = 'none';
+                this.btnCancle.style.display = 'none';
+                this.textBox.style.display = 'none';
             }
         }
         // 삭제 버튼
-        this.btnDelete.onclick = function () {
+        this.btnDelete.onclick = () => {
             request('/comment/' + this.commentId, {
-                method: RequestMethod.DELETE,
-                body: JSON.stringify(this.commentId)
+                method: RequestMethod.DELETE
             }).then(response => {
                 switch (response.status) {
                     case 200 :
-                        console.log('성공');
+                        reloadComments();
                         break;
                     case 400:
                         console.log('실패');
                         break;
                     case 401:
-                        console.log('로그인이 필요합니다');
                         alert('로그인이 필요합니다');
-                        // 로그인 페이지로 redirect
-                        redirect('/login');
                         break;
                     case 403:
                         console.log('권한이 없습니다');
@@ -168,6 +161,27 @@ export class Comment extends HTMLElement {
     }
 }
 
+function reloadComments() {
+    loadComments(window.location.pathname.split('/')[2]);
+}
+
 export function registerComment() {
     customElements.define('quest-comment', Comment);
+}
+
+export async function loadComments(questId) {
+    const response = await request(`/comment?questId=${questId}`, {
+        method: RequestMethod.GET
+    });
+    const commentArea = document.getElementById('comment-area');
+    commentArea.innerHTML = '';
+    response.body.list.map(e => {
+        const element = document.createElement('quest-comment');
+        element.setAttribute('comment-id', e['id']);
+        element.setAttribute('quest-id', e['questId']);
+        element.setAttribute('nickname', e['authorDetails'].nickName);
+        element.setAttribute('content', e['content']);
+        element.setAttribute('reg-time', e['regTime']);
+        return element;
+    }).forEach(e => commentArea.appendChild(e));
 }

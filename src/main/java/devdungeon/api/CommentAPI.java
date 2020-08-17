@@ -6,8 +6,7 @@ import devdungeon.domain.CommentPageVO;
 import devdungeon.domain.CommentVO;
 import devdungeon.domain.PageVO;
 import devdungeon.service.CommentService;
-import devdungeon.template.Body;
-import devdungeon.template.MessageBody;
+import devdungeon.template.MessageTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +24,10 @@ public class CommentAPI {
 
     @PostMapping
     @ApiCertifyAnnotation
-    public ResponseEntity<MessageBody> postReplyRegister(@RequestBody CommentVO commentVO) {
+    public ResponseEntity<MessageTemplate> postReplyRegister(@RequestBody CommentVO commentVO) {
         commentVO.setAuthor((String) session.getAttribute("user"));
-        return commentService.register(commentVO) == 1 ? new ResponseEntity<>(new MessageBody("success"), HttpStatus.OK) :
-                new ResponseEntity<>(new MessageBody("fail"), HttpStatus.BAD_REQUEST);
+        return commentService.register(commentVO) == 1 ? new ResponseEntity<>(new MessageTemplate("success"), HttpStatus.OK) :
+                new ResponseEntity<>(new MessageTemplate("fail"), HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping
@@ -51,16 +50,16 @@ public class CommentAPI {
 
     @DeleteMapping("/{id}")
     @ApiAuthAnnotation
-    public ResponseEntity<String> remove(@PathVariable("id") int id) {
-        return commentService.remove(id) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) :
-                new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
+    public ResponseEntity<MessageTemplate> remove(@PathVariable("id") int id) {
+        return commentService.remove(id) == 1 ? new ResponseEntity<>(new MessageTemplate("success"), HttpStatus.OK) :
+                new ResponseEntity<>(new MessageTemplate("fail"), HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/{id}")
     @ApiAuthAnnotation
-    public ResponseEntity<String> modify(@PathVariable("id") int id, @RequestBody CommentVO commentVO) {
+    public ResponseEntity<MessageTemplate> modify(@PathVariable("id") int id, @RequestBody CommentVO commentVO) {
         commentVO.setId(id);
-        return commentService.modify(commentVO) == 1 ? new ResponseEntity<>("success", HttpStatus.OK) :
-                new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
+        return commentService.modify(commentVO) == 1 ? new ResponseEntity<>(new MessageTemplate("success"), HttpStatus.OK) :
+                new ResponseEntity<>(new MessageTemplate("fail"), HttpStatus.BAD_REQUEST);
     }
 }

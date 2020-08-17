@@ -35,7 +35,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int remove(int id) {
-
         return commentMapper.delete(id);
     }
 
@@ -53,5 +52,4 @@ public class CommentServiceImpl implements CommentService {
         commentVO.setAuthorDetails(userService.getUser(commentVO.getAuthor()));
         return commentVO;
     }
-
 }

@@ -79,10 +79,6 @@ function requestNewQuest(title, content) {
   request('/quest', {
     method: RequestMethod.POST,
     body: JSON.stringify(body)
-  }).then(response => {
-    if (response.status === 401) redirect('/login', {
-      'prevUrl': window.location.pathname
-    });
   });
 }
 

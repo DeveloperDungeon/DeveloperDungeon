@@ -38,9 +38,7 @@ public class SearchServiceImpl implements SearchService {
 
     public QuestVO setAuthorDetails(QuestVO questVO) {
         UserVO user = us.getUser(questVO.getAuthor());
-
         questVO.setAuthorDetails(user);
-
         return questVO;
     }
 }

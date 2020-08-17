@@ -12,5 +12,4 @@ public interface SearchService {
     List<QuestVO> searchByTitle(String text);
 
     List<QuestVO> searchByTitleContent(String text);
-
 }

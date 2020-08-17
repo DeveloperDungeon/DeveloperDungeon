@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class MessageBody extends Body {
+public class MessageTemplate extends Body {
 
     @Getter
     private final String message;
