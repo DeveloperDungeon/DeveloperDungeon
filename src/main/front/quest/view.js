@@ -82,7 +82,6 @@ function onCommentButtonClick() {
                 break;
             case 401:
                 alert('로그인이 필요합니다');
-                redirect('/login');
                 break;
             default:
                 console.log('알 수 없는 에러');
