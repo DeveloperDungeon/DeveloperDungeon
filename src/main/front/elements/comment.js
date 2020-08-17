@@ -16,7 +16,6 @@ export class Comment extends HTMLElement {
         /** @type ?number */
         this.regTime = null;
 
-
         /** @type ?HTMLElement */
         this.authorDiv = null;
         /** @type ?HTMLElement */
@@ -33,7 +32,6 @@ export class Comment extends HTMLElement {
         this.btnCancle = null;
         /** @type ?HTMLElement */
         this.textBox = null;
-
     }
 
     connectedCallback() {
@@ -87,7 +85,7 @@ export class Comment extends HTMLElement {
             this.parentElement.btnConfirm.style.display = 'block';
             this.parentElement.btnCancle.style.display = 'block';
             this.parentElement.textBox.style.display = 'block';
-            
+
             // 확인 버튼
             this.parentElement.btnConfirm.onclick = function () {
                 request('/comment/' + this.parentElement.commentId, {
@@ -156,7 +154,6 @@ export class Comment extends HTMLElement {
                 }
             });
         }
-
     }
 
     setData_() {
