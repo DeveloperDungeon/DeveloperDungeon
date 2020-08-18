@@ -12,4 +12,8 @@ public class ChapterVO {
 
     private List<QuestVO> quests;
     private List<String> users;
+
+    public ChapterVO() {
+
+    }
 }
