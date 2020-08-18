@@ -1,0 +1,15 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+
+<!--<mapper namespace="devdungeon.mapper.ChapterMapper">-->
+<!--    <insert id="insertChapter" useGeneratedKeys="true" keyProperty="id" parameterType="devdungeon.domain.ChapterVO">-->
+<!--        INSERT INTO chapter(title, description) VALUES(#{chapterVO.title}, #{chapterVO.description})-->
+<!--    </insert>-->
+
+<!--    <insert id="insertWhitelist">-->
+<!--        INSERT INTO whitelist(chapter_id, user_id) VALUES-->
+<!--        <foreach collection="userIds" item="userId" separator=",">-->
+<!--            (#{chapterId}, #{userId})-->
+<!--        </foreach>-->
+<!--    </insert>-->
+<!--</mapper>-->
