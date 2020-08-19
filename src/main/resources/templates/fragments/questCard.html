@@ -6,7 +6,9 @@
         <span class="quest-card-author" th:text="${author}"></span>
         <span class="quest-card-time" th:text="${#dates.format(new java.util.Date(time), 'yyyy년 MM월 dd일 a H시 mm분')}"></span>
     </div>
-    <p th:text="${content}"></p>
-
+    <p class="edit-container"></p>
+    <div id="meta" style="display: none">
+        <div class="card-content" th:text="${content}"></div>
+    </div>
 </div>
 </html>
