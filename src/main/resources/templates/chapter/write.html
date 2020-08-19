@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/devLayout}">
+<head>
+    <title>챕터 작성</title>
+    <style>
+        .content {
+            padding: 15px;
+        }
+
+        h2 {
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        input {
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        textarea {
+            height: 500px;
+        }
+
+        #controls {
+            text-align: right;
+        }
+
+        .isPrivateContainer {
+            float: right;
+        }
+    </style>
+    <link href="//cdn.quilljs.com/1.0.0/quill.core.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+    <script src="/quest_write.js"></script>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="content">
+        <div>
+            <h2>신규 챕터</h2>
+            <label class="isPrivateContainer">
+                <input id="isPrivate" type="checkbox" name="isPrivate" value="true">
+                허용된 사용자만 작성 가능
+            </label>
+        </div>
+
+        <label class="w100" for="input">제목</label>
+        <input class="w100" id="input">
+
+        <label class="w100" for="editor-container">챕터 소개</label>
+
+        <div class="w100" id="editor-container" th:inline="text"></div>
+
+        <div id="controls">
+            <button class="btnNegative" onclick="window.history.back()">취소</button>
+            <button id="btnSubmit" class="btnPositive">게시</button>
+        </div>
+    </div>
+</th:block>
