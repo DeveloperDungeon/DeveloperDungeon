@@ -41,7 +41,6 @@ window.addEventListener('load', () => {
         })
         //    request 결과 받아서 성공, 실패 처리
     };
-
     const quill = createQuillEditor();
     const delta = JSON.parse(document.getElementById('content').innerText);
     quill.setContents(delta);
@@ -83,7 +82,6 @@ function onCommentButtonClick() {
                 break;
             case 401:
                 alert('로그인이 필요합니다');
-                redirect('/login');
                 break;
             default:
                 console.log('알 수 없는 에러');

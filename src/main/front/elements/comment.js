@@ -16,7 +16,6 @@ export class Comment extends HTMLElement {
         /** @type ?number */
         this.regTime = null;
 
-
         /** @type ?HTMLElement */
         this.authorDiv = null;
         /** @type ?HTMLElement */
