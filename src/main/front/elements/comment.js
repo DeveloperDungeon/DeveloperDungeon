@@ -1,4 +1,4 @@
-import {millisToTimeString, now, redirect, setStyle} from "../common/utils";
+import {millisToTimeString} from "../common/utils";
 import {request, RequestMethod} from "../common/request";
 
 export class Comment extends HTMLElement {
