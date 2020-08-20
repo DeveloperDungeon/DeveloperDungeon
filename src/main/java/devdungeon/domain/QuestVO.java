@@ -9,6 +9,7 @@ public class QuestVO {
     private String content;
     private String author;
     private long regTime;
+    private Integer chapterId;
 
     private UserVO authorDetails;
 }
