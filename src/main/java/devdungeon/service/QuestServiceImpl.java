@@ -37,7 +37,9 @@ public class QuestServiceImpl implements QuestService {
 
     @Override
     public int addQuest(QuestVO questVO) {
-        return questMapper.insertQuest(questVO);
+        return questVO.getChapterId() == null ?
+                questMapper.insertQuest(questVO) :
+                questMapper.insertQuestWithChapter(questVO);
     }
 
     @Override

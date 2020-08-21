@@ -19,6 +19,9 @@ public interface QuestMapper {
     @Insert("INSERT INTO quest(title, content, author, reg_time) VALUES(#{title}, #{content}, #{author}, #{regTime})")
     int insertQuest(QuestVO questVO);
 
+    @Insert("INSERT INTO quest(title, content, author, reg_time, chapter_id) VALUES(#{title}, #{content}, #{author}, #{regTime}, #{chapterId})")
+    int insertQuestWithChapter(QuestVO questVO);
+
     @Update("UPDATE quest SET title=#{title}, content=#{content} WHERE id=#{id}")
     int editQuest(QuestVO questVO);
 
