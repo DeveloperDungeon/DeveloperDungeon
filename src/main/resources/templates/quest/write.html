@@ -38,6 +38,11 @@
             <h2 th:case="*">신규 퀘스트</h2>
         </div>
 
+        <select id="chapter">
+            <option value="None">없음</option>
+            <option th:each="chapter : ${chapterList}" th:value="${chapterList}" th:text="${chapterList}"></option>
+        </select>
+
         <label class="w100" for="input">제목</label>
         <input class="w100" id="input" th:value="${quest?.title}?:''">
 

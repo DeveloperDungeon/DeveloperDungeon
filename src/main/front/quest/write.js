@@ -70,16 +70,18 @@ function getMeta() {
 
 
 function requestNewQuest(title, content) {
+    const chapter = document.getElementById('chapter');
     const body = {
         title: title,
         content: content,
-        regTime: (new Date()).getTime()
+        regTime: (new Date()).getTime(),
+        chapter: chapter
     };
 
-  request('/quest', {
-    method: RequestMethod.POST,
-    body: JSON.stringify(body)
-  });
+    request('/quest', {
+        method: RequestMethod.POST,
+        body: JSON.stringify(body)
+    });
 }
 
 function requestEditQuest(id, title, content) {
@@ -88,12 +90,12 @@ function requestEditQuest(id, title, content) {
         content: content
     };
 
-  request('/quest/' + id, {
-    method: RequestMethod.PUT,
-    body: JSON.stringify(body)
-  }).then(response => {
-    if (response.status === 401) redirect('/login', {
-      'prevUrl': window.location.pathname
+    request('/quest/' + id, {
+        method: RequestMethod.PUT,
+        body: JSON.stringify(body)
+    }).then(response => {
+        if (response.status === 401) redirect('/login', {
+            'prevUrl': window.location.pathname
+        });
     });
-  });
 }
