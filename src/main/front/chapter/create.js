@@ -7,6 +7,11 @@ import {request, RequestMethod} from "../common/request";
  * @param isPublic public인지 아닌지 boolean
  */
 function createChapter(title, description, isPublic) {
+    const body = {
+        title: title,
+        description: description,
+        isPublic: isPublic
+    };
     request('/chapter', {
         method: RequestMethod.POST,
         body: JSON.stringify(body)
