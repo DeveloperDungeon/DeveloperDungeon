@@ -6,7 +6,6 @@ import devdungeon.domain.PageVO;
 import devdungeon.service.ChapterService;
 import devdungeon.service.QuestService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
