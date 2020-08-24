@@ -14,7 +14,7 @@
     </insert>
 
     <select id="selectWritableChapter" resultType="devdungeon.domain.ChapterVO">
-        SELECT * FROM chapter WHERE id=
+        SELECT * FROM chapter WHERE id in
         (SELECT chapter_id FROM whitelist WHERE user_id=#{userID} OR user_id is NULL)
     </select>
 </mapper>
