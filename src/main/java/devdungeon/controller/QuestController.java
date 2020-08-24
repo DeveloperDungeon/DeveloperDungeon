@@ -3,8 +3,10 @@ package devdungeon.controller;
 import devdungeon.controller.annotation.AuthAnnotation;
 import devdungeon.controller.annotation.CertifyAnnotation;
 import devdungeon.domain.PageVO;
+import devdungeon.service.ChapterService;
 import devdungeon.service.QuestService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +14,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/quest")
 public class QuestController {
 
     private final QuestService questService;
+    private final ChapterService chapterService;
+    private final HttpSession session;
 
     @GetMapping
     public String getQuestList(Model model, @RequestParam(value = "page", required = false,
@@ -38,7 +44,9 @@ public class QuestController {
 
     @GetMapping("/write")
     @CertifyAnnotation
-    public String getQuestWrite() {
+    public String getQuestWrite(Model model) {
+        String curAuthor = (String) session.getAttribute("user");
+        model.addAttribute("chapterList",chapterService.findChapters(curAuthor));
         return "quest/write";
     }
 
