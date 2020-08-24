@@ -20,8 +20,10 @@ public class ConversionInterceptor extends HandlerInterceptorAdapter {
 
         if (handler instanceof HandlerMethod && modelAndView != null) {
             String user = (String) request.getSession().getAttribute("user");
-            modelAndView.addObject("isLogin", user != null);
-            modelAndView.addObject("nickname",(userService.getUser(user)).getNickName());
+            boolean isLogin = user!=null;
+            modelAndView.addObject("isLogin", isLogin);
+            if(isLogin)
+                modelAndView.addObject("nickname",(userService.getUser(user)).getNickName());
         }
         super.postHandle(request, response, handler, modelAndView);
     }
