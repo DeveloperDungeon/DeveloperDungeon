@@ -32,12 +32,16 @@ public class ChapterAPI {
         return new ResponseEntity<>(new RedirectTemplate("/chapter"), HttpStatus.MULTIPLE_CHOICES);
     }
 
-    @GetMapping("/writable")
+    @GetMapping
     @ApiCertifyAnnotation
-    public ResponseEntity<List<ChapterVO>> getWritableChapter() {
-        String userId = (String) session.getAttribute("user");
-        List<ChapterVO> writableChapterList = chapterService.findChapters(userId);
-        return new ResponseEntity<>(writableChapterList, HttpStatus.OK);
+    public ResponseEntity<List<ChapterVO>> getWritableChapter(@RequestParam(value = "writeable", required=false, defaultValue = "false")
+                                                                          boolean writeable) {
+        if(writeable) {
+            String userId = (String) session.getAttribute("user");
+            List<ChapterVO> chapterList = chapterService.findChapters(userId);
+            return new ResponseEntity<>(chapterList, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
     @Data
