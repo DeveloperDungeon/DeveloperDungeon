@@ -23,12 +23,8 @@ public class ChapterAPI {
 
     @PostMapping
     @ApiCertifyAnnotation
-    public ResponseEntity<RedirectTemplate> postChapterWrite(@RequestBody ChapterWriteRequestBody requestBody) {
-        ChapterVO newChapter = new ChapterVO();
-        newChapter.setTitle(requestBody.title);
-        newChapter.setDescription(requestBody.description);
-
-        chapterService.addChapter(newChapter, requestBody.isPublic == 1, (String) session.getAttribute("user"));
+    public ResponseEntity<RedirectTemplate> postChapterWrite(@RequestBody ChapterVO chapterVO) {
+        chapterService.addChapter(chapterVO, (String) session.getAttribute("user"));
         return new ResponseEntity<>(new RedirectTemplate("/chapter"), HttpStatus.MULTIPLE_CHOICES);
     }
 
@@ -38,16 +34,9 @@ public class ChapterAPI {
                                                                           boolean writeable) {
         if(writeable) {
             String userId = (String) session.getAttribute("user");
-            List<ChapterVO> chapterList = chapterService.findChapters(userId);
+            List<ChapterVO> chapterList = chapterService.findWritableChapters(userId);
             return new ResponseEntity<>(chapterList, HttpStatus.OK);
         }
         return new ResponseEntity<>(null,HttpStatus.OK);
-    }
-
-    @Data
-    static class ChapterWriteRequestBody {
-        private String title;
-        private String description;
-        private int isPublic;
     }
 }
