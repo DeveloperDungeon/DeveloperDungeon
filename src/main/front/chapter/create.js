@@ -1,6 +1,12 @@
 import {request, RequestMethod} from "../common/request";
 
-function createChapter(title, description, whileList) {
+/**
+ * 챕터 생성 요청을 보냄
+ * @param title 챕터 타이틀
+ * @param description 챕터 설명
+ * @param isPublic public인지 아닌지 boolean
+ */
+function createChapter(title, description, isPublic) {
     request('/chapter', {
         method: RequestMethod.POST,
         body: JSON.stringify(body)
