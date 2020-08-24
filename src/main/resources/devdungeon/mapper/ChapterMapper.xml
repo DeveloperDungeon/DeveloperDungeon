@@ -3,7 +3,7 @@
 
 <mapper namespace="devdungeon.mapper.ChapterMapper">
     <insert id="insertChapter" useGeneratedKeys="true" keyProperty="id" parameterType="devdungeon.domain.ChapterVO">
-        INSERT INTO chapter(title, description) VALUES(#{title}, #{description})
+        INSERT INTO chapter(title, description, is_public) VALUES(#{title}, #{description}, #{isPublic})
     </insert>
 
     <insert id="insertWhitelist">
@@ -13,8 +13,12 @@
         </foreach>
     </insert>
 
-    <select id="selectWritableChapter" resultType="devdungeon.domain.ChapterVO">
-        SELECT * FROM chapter WHERE id=
-        (SELECT chapter_id FROM whitelist WHERE user_id=#{userID} OR user_id is NULL)
+    <select id="selectPrivateWritableChapter" resultType="devdungeon.domain.ChapterVO">
+        SELECT * FROM chapter WHERE id in
+        (SELECT chapter_id FROM whitelist WHERE user_id=#{userID})
+    </select>
+
+    <select id="selectPublicWritableChapter" resultType="devdungeon.domain.ChapterVO">
+        SELECT * FROM chapter WHERE is_public=1
     </select>
 </mapper>
