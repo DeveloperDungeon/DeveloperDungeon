@@ -4,6 +4,7 @@ import devdungeon.api.annotation.ApiCertifyAnnotation;
 import devdungeon.domain.ChapterVO;
 import devdungeon.service.ChapterService;
 import devdungeon.template.RedirectTemplate;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,12 @@ public class ChapterAPI {
 
     @PostMapping
     @ApiCertifyAnnotation
-    public ResponseEntity<RedirectTemplate> postChapterWrite(@RequestBody ChapterVO chapterVO, @RequestBody boolean isPublic) {
-        chapterService.addChapter(chapterVO, isPublic, (String) session.getAttribute("user"));
+    public ResponseEntity<RedirectTemplate> postChapterWrite(@RequestBody ChapterWriteRequestBody requestBody) {
+        ChapterVO newChapter = new ChapterVO();
+        newChapter.setTitle(requestBody.title);
+        newChapter.setDescription(requestBody.description);
+
+        chapterService.addChapter(newChapter, requestBody.isPublic == 1, (String) session.getAttribute("user"));
         return new ResponseEntity<>(new RedirectTemplate("/chapter"), HttpStatus.MULTIPLE_CHOICES);
     }
 
@@ -33,5 +38,12 @@ public class ChapterAPI {
         String userId = (String) session.getAttribute("user");
         List<ChapterVO> writableChapterList = chapterService.findChapters(userId);
         return new ResponseEntity<>(writableChapterList, HttpStatus.OK);
+    }
+
+    @Data
+    static class ChapterWriteRequestBody {
+        private String title;
+        private String description;
+        private int isPublic;
     }
 }

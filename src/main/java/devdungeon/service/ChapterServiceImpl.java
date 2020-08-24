@@ -5,7 +5,7 @@ import devdungeon.mapper.ChapterMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -19,8 +19,7 @@ public class ChapterServiceImpl implements ChapterService {
         int count = chapterMapper.insertChapter(chapterVO);
         int id = chapterVO.getId();
 
-        if (!isPublic) chapterMapper.insertWhitelist(Arrays.asList(userId), id);
-        else chapterMapper.insertAllWhiteList(id);
+        if (!isPublic) chapterMapper.insertWhitelist(Collections.singletonList(userId), id);
         return count;
     }
 

@@ -48,9 +48,9 @@ window.addEventListener('load', () => {
     document.getElementById('btnSubmit').onclick = () => {
         const title = document.getElementById('input').value;
         const content = JSON.stringify(quill.getContents());
-        const isPrivate = document.getElementById('isPrivate').value;
+        const isPublic = document.getElementById('isPrivate').checked ? 0 : 1;
 
-        createChapter(title, content, !isPrivate);
+        createChapter(title, content, isPublic);
     };
 });
 

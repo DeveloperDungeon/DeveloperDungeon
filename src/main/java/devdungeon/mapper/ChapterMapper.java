@@ -15,5 +15,6 @@ public interface ChapterMapper {
     @Insert("INSERT INTO whitelist(chapter_id) VALUES(#{chapterId})")
     int insertAllWhiteList(int chapterId);
 
+    // Implemented in xml [devdungeon/mapper/ChapterMapper.xml]
     List<ChapterVO> selectWritableChapter(String userId);
 }
