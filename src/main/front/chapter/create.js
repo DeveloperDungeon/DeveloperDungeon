@@ -20,13 +20,18 @@ Quill.register({
     'formats/code-block': CodeBlock,
 });
 
+/**
+ * 챕터 생성 요청을 보냄
+ * @param title 챕터 타이틀
+ * @param description 챕터 설명
+ * @param isPublic public인지 아닌지 boolean
+ */
 function createChapter(title, description, isPublic) {
     const body = {
         title: title,
         description: description,
         isPublic: isPublic
     };
-
     request('/chapter', {
         method: RequestMethod.POST,
         body: JSON.stringify(body)

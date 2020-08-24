@@ -1,5 +1,5 @@
 import {redirect} from './common/utils';
-import {richText} from "./quest/richTextQuestCard";
+import {richText} from "./richTextQuestCard";
 
 window.addEventListener('load', () => {
     richText();
