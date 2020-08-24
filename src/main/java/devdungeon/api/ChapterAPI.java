@@ -29,9 +29,13 @@ public class ChapterAPI {
 
     @GetMapping("/writable")
     @ApiCertifyAnnotation
-    public ResponseEntity<List<ChapterVO>> getWritableChapter() {
-        String userId = (String) session.getAttribute("user");
-        List<ChapterVO> writableChapterList = chapterService.findChapters(userId);
-        return new ResponseEntity<>(writableChapterList, HttpStatus.OK);
+    public ResponseEntity<List<ChapterVO>> getWritableChapter(@RequestParam(value = "writeable", required=false, defaultValue = "false")
+                                                                          Boolean writeable) {
+        if(writeable) {
+            String userId = (String) session.getAttribute("user");
+            List<ChapterVO> chapterList = chapterService.findChapters(userId);
+            return new ResponseEntity<>(chapterList, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null,HttpStatus.OK);
     }
 }
