@@ -27,16 +27,9 @@ public class ChapterServiceImpl implements ChapterService {
     @Override
     public List<ChapterVO> findWritableChapters(String userId) {
         List<ChapterVO> writableChapters = new ArrayList<>();
-        chapterMapper.selectPrivateWritableChapter(userId)
-                .stream()
-                .map(writableChapters::add)
-                .close();
 
-        chapterMapper.selectPublicWritableChapter()
-                .stream()
-                .map(writableChapters::add)
-                .close();
-
+        writableChapters.addAll(chapterMapper.selectPrivateWritableChapter(userId));
+        writableChapters.addAll(chapterMapper.selectPublicWritableChapter());
         return writableChapters;
     }
 }
