@@ -40,7 +40,7 @@
 
         <select id="chapter">
             <option value="None">없음</option>
-            <option th:each="chapter : ${chapterList}" th:value="${chapterList}" th:text="${chapterList}"></option>
+            <option th:each="chapter : ${chapterList}" th:value="${chapterList.title}" th:text="${chapterList.title}"></option>
         </select>
 
         <label class="w100" for="input">제목</label>
