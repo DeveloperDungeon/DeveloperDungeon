@@ -1,7 +1,6 @@
 package devdungeon.mapper;
 
 import devdungeon.domain.ChapterVO;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,4 +15,6 @@ public interface ChapterMapper {
     List<ChapterVO> selectPrivateWritableChapter(String userId);
 
     List<ChapterVO> selectPublicWritableChapter();
+
+    ChapterVO selectChapter(int id);
 }
