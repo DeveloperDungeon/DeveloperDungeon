@@ -32,4 +32,9 @@ public class ChapterServiceImpl implements ChapterService {
         writableChapters.addAll(chapterMapper.selectPublicWritableChapter());
         return writableChapters;
     }
+
+    @Override
+    public ChapterVO findChapter(int id) {
+        return chapterMapper.selectChapter(id);
+    }
 }
