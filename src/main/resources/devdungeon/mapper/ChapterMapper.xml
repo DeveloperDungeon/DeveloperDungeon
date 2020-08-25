@@ -21,4 +21,8 @@
     <select id="selectPublicWritableChapter" resultType="devdungeon.domain.ChapterVO">
         SELECT * FROM chapter WHERE is_public=1
     </select>
+
+    <select id="selectChapter" resultType="devdungeon.domain.ChapterVO">
+        SELECT * FROM chapter WHERE  id=#{id}
+    </select>
 </mapper>
