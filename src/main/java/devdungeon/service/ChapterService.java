@@ -8,4 +8,6 @@ public interface ChapterService {
     int addChapter(ChapterVO chapterVO, String userId);
 
     List<ChapterVO> findWritableChapters(String userId);
+
+    ChapterVO findChapter(int id);
 }
