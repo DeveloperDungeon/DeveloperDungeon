@@ -24,7 +24,7 @@ public class ChapterController {
 
     @GetMapping("/{id}")
     public String getChapter(Model model, @PathVariable("id") int id) {
-        model.addAttribute("chapter",chapterService.findChapter(id));
+        model.addAttribute("chapter", chapterService.findChapter(id));
         return "chapter/view";
     }
 
