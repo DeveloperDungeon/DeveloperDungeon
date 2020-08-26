@@ -70,12 +70,12 @@ function getMeta() {
 
 
 function requestNewQuest(title, content) {
-    const chapter = document.getElementById('chapter');
+    const chapterId = document.getElementById('chapterId');
     const body = {
         title: title,
         content: content,
         regTime: (new Date()).getTime(),
-        chapter: chapter
+        chapterId: chapterId
     };
 
     request('/quest', {
