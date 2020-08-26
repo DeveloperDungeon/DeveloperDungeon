@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
+<div th:fragment="chapterCard(id, title, author, time, description)" class="quest-card" th:onclick="'window.location.href= \'' + @{/quest/{id}(id=${id})} + '\''">
+    <h3 th:text="${title}"></h3>
+    <div>
+        <span class="quest-card-author" th:text="${author}"></span>
+        <span class="quest-card-time" th:text="${#dates.format(new java.util.Date(time), 'yyyy년 MM월 dd일 a H시 mm분')}"></span>
+    </div>
+    <p class="edit-container"></p>
+    <div id="meta" style="display: none">
+        <div class="card-content" th:text="${description}"></div>
+    </div>
+</div>
+</html>

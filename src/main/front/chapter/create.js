@@ -29,7 +29,8 @@ function createChapter(title, description, isPublic) {
 }
 
 window.addEventListener('load', () => {
-    const quill = createQuillEditorWrite('edit-container');
+    const editContainer = document.getElementById('editor-container')
+    const quill = createQuillEditorWrite(editContainer);
 
     document.getElementById('btnSubmit').onclick = () => {
         const title = document.getElementById('input').value;

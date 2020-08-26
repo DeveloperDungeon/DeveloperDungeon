@@ -31,6 +31,7 @@ function createQuillEditorRead(edit) {
 }
 
 export function createQuillEditorWrite(container) {
+    console.log('toolbar');
     return new Quill(container, {
         modules: {
             toolbar: [

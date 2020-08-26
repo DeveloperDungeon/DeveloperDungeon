@@ -1,9 +1,11 @@
 import {request, RequestMethod} from '../common/request';
 import {redirect} from '../common/utils';
 import {createQuillEditorWrite} from "../richText";
+import Quill from "quill";
 
 window.addEventListener('load', () => {
-    const quill = createQuillEditorWrite('edit-container');
+    const editContainer = document.getElementById('editor-container')
+    const quill = createQuillEditorWrite(editContainer);
 
     const [type, id, content] = getMeta();
 
