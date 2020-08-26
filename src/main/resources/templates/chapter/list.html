@@ -3,17 +3,17 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/devLayout}">
 <head>
-    <title>챕터 목록</title>
+    <title>퀘스트 목록</title>
     <script src="/chapter_list.js"></script>
 </head>
 
 <th:block layout:fragment="content">
     <div class="content">
-        <h2>챕터 목록</h2>
-        <div th:each="chapter : ${chapterList}">
-            <div th:replace="fragments/chapterCard :: chapterCard(id=${chapter.id}, title=${chapter.title}, author=${chapter.author}, time=${chapter.regTime}, content=${chapter.description})"></div>
+        <h2>퀘스트 목록</h2>
+        <div th:each="quest : ${questList}">
+            <div th:replace="fragments/questCard :: questCard(id=${quest.id}, title=${quest.title}, author=${quest.authorDetails.nickName}, time=${quest.regTime}, content=${quest.content})"></div>
         </div>
-        <div th:replace="fragments/paging :: paging(minPage=${pageInfo.minPage}, maxPage=${pageInfo.maxPage}, currentPage=${pageInfo.currentPage}, hasPrev=${pageInfo.hasPrev}, hasNext=${pageInfo.hasNext}, baseUrl='/chapter')"></div>
+        <div th:replace="fragments/paging :: paging(minPage=${pageInfo.minPage}, maxPage=${pageInfo.maxPage}, currentPage=${pageInfo.currentPage}, hasPrev=${pageInfo.hasPrev}, hasNext=${pageInfo.hasNext}, baseUrl='/quest')"></div>
     </div>
 
 </th:block>
