@@ -1,24 +1,5 @@
-import Quill from 'quill/core';
-
-import Toolbar from 'quill/modules/toolbar';
-import Snow from 'quill/themes/snow';
-
-import Bold from 'quill/formats/bold';
-import Italic from 'quill/formats/italic';
-import Header from 'quill/formats/header';
-import Underline from 'quill/formats/underline';
-import CodeBlock from 'quill/formats/code';
 import {request, RequestMethod} from '../common/request';
-
-Quill.register({
-    'modules/toolbar': Toolbar,
-    'themes/snow': Snow,
-    'formats/bold': Bold,
-    'formats/italic': Italic,
-    'formats/header': Header,
-    'formats/underline': Underline,
-    'formats/code-block': CodeBlock,
-});
+import {createQuillEditorWrite} from "../richText";
 
 /**
  * 챕터 생성 요청을 보냄
@@ -48,7 +29,7 @@ function createChapter(title, description, isPublic) {
 }
 
 window.addEventListener('load', () => {
-    const quill = createQuillEditor();
+    const quill = createQuillEditorWrite('edit-container');
 
     document.getElementById('btnSubmit').onclick = () => {
         const title = document.getElementById('input').value;
@@ -59,15 +40,3 @@ window.addEventListener('load', () => {
     };
 });
 
-function createQuillEditor() {
-    return new Quill('#editor-container', {
-        modules: {
-            toolbar: [
-                [{header: [1, 2, false]}],
-                ['bold', 'italic', 'underline'],
-                ['image', 'code-block']
-            ]
-        },
-        theme: 'snow'
-    });
-}

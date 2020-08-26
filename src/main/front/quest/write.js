@@ -1,28 +1,9 @@
-import Quill from 'quill/core';
-
-import Toolbar from 'quill/modules/toolbar';
-import Snow from 'quill/themes/snow';
-
-import Bold from 'quill/formats/bold';
-import Italic from 'quill/formats/italic';
-import Header from 'quill/formats/header';
-import Underline from 'quill/formats/underline';
-import CodeBlock from 'quill/formats/code';
 import {request, RequestMethod} from '../common/request';
 import {redirect} from '../common/utils';
-
-Quill.register({
-    'modules/toolbar': Toolbar,
-    'themes/snow': Snow,
-    'formats/bold': Bold,
-    'formats/italic': Italic,
-    'formats/header': Header,
-    'formats/underline': Underline,
-    'formats/code-block': CodeBlock,
-});
+import {createQuillEditorWrite} from "../richText";
 
 window.addEventListener('load', () => {
-    const quill = createQuillEditor();
+    const quill = createQuillEditorWrite('edit-container');
 
     const [type, id, content] = getMeta();
 
@@ -43,19 +24,6 @@ window.addEventListener('load', () => {
     };
 });
 
-function createQuillEditor() {
-    return new Quill('#editor-container', {
-        modules: {
-            toolbar: [
-                [{header: [1, 2, false]}],
-                ['bold', 'italic', 'underline'],
-                ['image', 'code-block']
-            ]
-        },
-        theme: 'snow'
-    });
-}
-
 function getMeta() {
     const typeDiv = document.getElementById('type');
     const idDiv = document.getElementById('id');
@@ -67,7 +35,6 @@ function getMeta() {
         contentDiv.innerText
     ];
 }
-
 
 function requestNewQuest(title, content) {
     const chapterId = document.getElementById('chapterId');
