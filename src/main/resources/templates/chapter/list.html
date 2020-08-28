@@ -8,6 +8,8 @@
 </head>
 
 <th:block layout:fragment="content">
+    <button id="delete-button" onclick="clickDelete(chapter.id)">삭제</button>
+
     <div class="content">
         <h2>퀘스트 목록</h2>
         <div th:each="quest : ${questList}">
