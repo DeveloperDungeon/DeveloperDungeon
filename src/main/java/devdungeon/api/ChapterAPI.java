@@ -38,4 +38,26 @@ public class ChapterAPI {
         }
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    @ApiCertifyAnnotation
+    public ResponseEntity<Object> deleteChapter(@PathVariable("id") Integer id) {
+        if (chapterService.findChapter(id) == null) {
+            return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+        }
+        String userId = (String) session.getAttribute("user");
+        List<ChapterVO> chapterList = chapterService.findWritableChapters(userId);
+        boolean removable = false;
+        for (ChapterVO c : chapterList) {
+            if (c.getId() == id) {
+                removable = true;
+                break;
+            }
+        }
+        if (removable) {
+            chapterService.removeChapter(id);
+            return new ResponseEntity<>(new RedirectTemplate("/"), HttpStatus.MULTIPLE_CHOICES);
+        }
+        return new ResponseEntity<>("", HttpStatus.FORBIDDEN);
+    }
 }

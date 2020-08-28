@@ -9,5 +9,7 @@ public interface ChapterService {
 
     List<ChapterVO> findWritableChapters(String userId);
 
-    ChapterVO findChapter(int id);
+    ChapterVO findChapter(Integer id);
+
+    int removeChapter(Integer id);
 }

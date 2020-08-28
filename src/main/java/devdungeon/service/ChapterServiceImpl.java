@@ -34,7 +34,12 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
-    public ChapterVO findChapter(int id) {
+    public ChapterVO findChapter(Integer id) {
         return chapterMapper.selectChapter(id);
+    }
+
+    @Override
+    public int removeChapter(Integer id) {
+        return chapterMapper.removeChapter(id);
     }
 }

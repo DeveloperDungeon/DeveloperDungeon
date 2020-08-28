@@ -1,6 +1,7 @@
 package devdungeon.mapper;
 
 import devdungeon.domain.ChapterVO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,5 +17,8 @@ public interface ChapterMapper {
 
     List<ChapterVO> selectPublicWritableChapter();
 
-    ChapterVO selectChapter(int id);
+    ChapterVO selectChapter(Integer id);
+
+    @Delete("DELETE FROM chapter WHERE id=#{id}")
+    int removeChapter(Integer id);
 }
