@@ -69,6 +69,13 @@ public class QuestServiceImpl implements QuestService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<QuestVO> getChapterQuestList(Integer chapterId) {
+        return questMapper.selectChapterQuest(chapterId).stream()
+                .map(this::setAuthorDetails)
+                .collect(Collectors.toList());
+    }
+
     public QuestVO setAuthorDetails(QuestVO questVO) {
         UserVO user = userService.getUser(questVO.getAuthor());
         questVO.setAuthorDetails(user);
