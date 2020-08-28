@@ -1,9 +1,12 @@
 import {request, RequestMethod} from "../common/request";
 
+window.addEventListener('load', () => {
+    console.log('test');
+
+});
 function clickDelete(id) {
     request('api/chapter/' + id, {
-        method: RequestMethod.DELETE,
-        body: JSON.stringify(id)
+        method: RequestMethod.DELETE
     }).then(response => {
         switch (response.status) {
             case 400:
