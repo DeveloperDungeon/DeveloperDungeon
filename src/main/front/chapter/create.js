@@ -1,6 +1,5 @@
 import {request, RequestMethod} from '../common/request';
 import {createQuillEditorWrite} from "../richText";
-import Quill from "quill";
 
 /**
  * 챕터 생성 요청을 보냄
