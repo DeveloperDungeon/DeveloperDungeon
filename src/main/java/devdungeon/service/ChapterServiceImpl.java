@@ -21,7 +21,7 @@ public class ChapterServiceImpl implements ChapterService {
         int id = chapterVO.getId();
 
         if (chapterVO.getIsPublic() == 0) chapterMapper.insertWhitelist(Collections.singletonList(userId), id);
-        return count;
+        return id;
     }
 
     @Override
