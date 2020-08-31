@@ -11,8 +11,11 @@
     <label>챕터 제목</label>
     <div th:inline="text">[[*{chapter.title}]]</div>
     <label>챕터 설명</label>
-    <div th:inline="text">[[*{chapter?.description}]]</div>
-    <button id="delete-button" th:onclick="clickDelete([[${chapter.id}]]);">삭제</button>
+    <div id="chapter-description"></div>
+    <div id="meta" style="display: none">
+        <div id="content" th:text="${chapter.description}"></div>
+    </div>
+    <button id="button-delete">삭제</button>
 
     <div class="content">
         <h2>퀘스트 목록</h2>
