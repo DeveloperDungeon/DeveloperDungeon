@@ -70,7 +70,7 @@ export async function request(url, config) {
             redirect('/login', {
                 'prevUrl': window.location.pathname.slice(1)
             });
-            break;
+            break; 
         case 403:
             alert('권한이 없습니다');
             break;

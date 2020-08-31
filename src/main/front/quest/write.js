@@ -10,7 +10,6 @@ window.addEventListener('load', () => {
     const [type, id, content] = getMeta();
 
     if (type === 'edit') {
-        console.log(content);
         const delta = JSON.parse(content);
         quill.setContents(delta);
     }
@@ -18,9 +17,6 @@ window.addEventListener('load', () => {
     document.getElementById('btnSubmit').onclick = () => {
         const title = document.getElementById('input').value;
         const content = JSON.stringify(quill.getContents());
-
-        console.log(content);
-
         if (type === 'edit') requestEditQuest(id, title, content);
         else requestNewQuest(title, content);
     };
@@ -39,7 +35,9 @@ function getMeta() {
 }
 
 function requestNewQuest(title, content) {
-    const chapterId = document.getElementById('chapterId');
+    const chapter = document.getElementById('chapterId');
+    const chapterId = chapter.value;
+
     const body = {
         title: title,
         content: content,
