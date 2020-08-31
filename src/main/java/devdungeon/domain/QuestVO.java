@@ -12,4 +12,5 @@ public class QuestVO {
     private Integer chapterId;
 
     private UserVO authorDetails;
+    private ChapterVO chapterDetails;
 }
