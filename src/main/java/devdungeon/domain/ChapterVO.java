@@ -7,4 +7,5 @@ public class ChapterVO {
     private int id;
     private String title;
     private String description;
+    private int isPublic;
 }

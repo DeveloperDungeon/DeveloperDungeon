@@ -26,6 +26,7 @@ public class CommentAPI {
     @ApiCertifyAnnotation
     public ResponseEntity<MessageTemplate> postReplyRegister(@RequestBody CommentVO commentVO) {
         commentVO.setAuthor((String) session.getAttribute("user"));
+
         return commentService.register(commentVO) == 1 ? new ResponseEntity<>(new MessageTemplate("success"), HttpStatus.OK) :
                 new ResponseEntity<>(new MessageTemplate("fail"), HttpStatus.BAD_REQUEST);
     }

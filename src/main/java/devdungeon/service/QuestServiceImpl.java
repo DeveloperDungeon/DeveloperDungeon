@@ -37,9 +37,7 @@ public class QuestServiceImpl implements QuestService {
 
     @Override
     public int addQuest(QuestVO questVO) {
-        return questVO.getChapterId() == null ?
-                questMapper.insertQuest(questVO) :
-                questMapper.insertQuestWithChapter(questVO);
+        return questMapper.insertQuestWithChapter(questVO);
     }
 
     @Override
@@ -67,6 +65,13 @@ public class QuestServiceImpl implements QuestService {
     @Override
     public List<QuestVO> getUserQuestList(String author) {
         return questMapper.selectUserQuest(author).stream()
+                .map(this::setAuthorDetails)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<QuestVO> getChapterQuestList(Integer chapterId) {
+        return questMapper.selectChapterQuest(chapterId).stream()
                 .map(this::setAuthorDetails)
                 .collect(Collectors.toList());
     }

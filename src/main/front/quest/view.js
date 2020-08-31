@@ -78,10 +78,7 @@ function onCommentButtonClick() {
                 input.value = '';
                 break;
             case 400:
-                console.log('댓글 등록 실패');
-                break;
-            case 401:
-                alert('로그인이 필요합니다');
+                alert('댓글 등록 실패');
                 break;
             default:
                 console.log('알 수 없는 에러');

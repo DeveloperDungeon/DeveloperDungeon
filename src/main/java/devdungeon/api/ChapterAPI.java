@@ -4,7 +4,6 @@ import devdungeon.api.annotation.ApiCertifyAnnotation;
 import devdungeon.domain.ChapterVO;
 import devdungeon.service.ChapterService;
 import devdungeon.template.RedirectTemplate;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,31 +22,42 @@ public class ChapterAPI {
 
     @PostMapping
     @ApiCertifyAnnotation
-    public ResponseEntity<RedirectTemplate> postChapterWrite(@RequestBody ChapterWriteRequestBody requestBody) {
-        ChapterVO newChapter = new ChapterVO();
-        newChapter.setTitle(requestBody.title);
-        newChapter.setDescription(requestBody.description);
-
-        chapterService.addChapter(newChapter, requestBody.isPublic == 1, (String) session.getAttribute("user"));
+    public ResponseEntity<RedirectTemplate> postChapterWrite(@RequestBody ChapterVO chapterVO) {
+        chapterService.addChapter(chapterVO, (String) session.getAttribute("user"));
         return new ResponseEntity<>(new RedirectTemplate("/chapter"), HttpStatus.MULTIPLE_CHOICES);
     }
 
     @GetMapping
     @ApiCertifyAnnotation
-    public ResponseEntity<List<ChapterVO>> getWritableChapter(@RequestParam(value = "writeable", required=false, defaultValue = "false")
-                                                                          boolean writeable) {
-        if(writeable) {
+    public ResponseEntity<List<ChapterVO>> getWritableChapter(@RequestParam(value = "writeable", required = false, defaultValue = "false")
+                                                                      boolean writable) {
+        if (writable) {
             String userId = (String) session.getAttribute("user");
-            List<ChapterVO> chapterList = chapterService.findChapters(userId);
+            List<ChapterVO> chapterList = chapterService.findWritableChapters(userId);
             return new ResponseEntity<>(chapterList, HttpStatus.OK);
         }
-        return new ResponseEntity<>(null,HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-    @Data
-    static class ChapterWriteRequestBody {
-        private String title;
-        private String description;
-        private int isPublic;
+    @DeleteMapping("/{id}")
+    @ApiCertifyAnnotation
+    public ResponseEntity<Object> deleteChapter(@PathVariable("id") Integer id) {
+        if (chapterService.findChapter(id) == null) {
+            return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+        }
+        String userId = (String) session.getAttribute("user");
+        List<ChapterVO> chapterList = chapterService.findWritableChapters(userId);
+        boolean removable = false;
+        for (ChapterVO c : chapterList) {
+            if (c.getId() == id) {
+                removable = true;
+                break;
+            }
+        }
+        if (removable) {
+            chapterService.removeChapter(id);
+            return new ResponseEntity<>(new RedirectTemplate("/"), HttpStatus.MULTIPLE_CHOICES);
+        }
+        return new ResponseEntity<>("", HttpStatus.FORBIDDEN);
     }
 }
