@@ -12,12 +12,12 @@ a {
 }
 
 .content-width {
-    max-width: 920px;
+    max-width: 1130px;
     margin: 0 auto;
 }
 
 .content {
-    max-width: 920px;
+    max-width: 1130px;
     margin: 0 auto;
     padding: 15px 0;
     background-color: white;
@@ -48,10 +48,9 @@ a {
 }
 
 nav {
-    margin-left: 150px;
-    margin-right: 30px;
+    padding: 0 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .header-navigator {
@@ -64,21 +63,25 @@ nav {
     display: table-cell;
     height: 50px;
     vertical-align: middle;
-    cursor: default;
 }
 
 .header-menu {
+    cursor: pointer;
     padding: 0 5px;
 }
 
 .header-menu > a {
-    cursor: pointer;
     color: white;
-    font-size : 13px;
+    font-size: 13px;
 }
 
 .header-divider {
+    cursor: default;
     padding: 0 5px;
+}
+
+.header-space {
+    flex: 1;
 }
 
 #header-indicator {
@@ -94,6 +97,18 @@ nav {
 
 .header-indicator-smooth {
     transition: width 0.3s, left 0.3s, top 0.3s;
+}
+
+.header-login {
+    visibility: hidden;
+    padding: 5px 10px;
+    position: absolute;
+    right: 10px;
+    background-color: white;
+    color: #333;
+    list-style-type: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(60, 64, 67, 0.15), 0 1px 3px rgba(60, 64, 67, 0.3), 0 6px 11px rgba(128, 134, 139, 0.06), 0 -3px 11px rgba(128, 134, 139, 0.09);
 }
 
 section.main {
