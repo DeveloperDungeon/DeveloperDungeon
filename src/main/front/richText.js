@@ -1,12 +1,18 @@
 import Quill from "quill";
 
-export function richText() {
+export function richTextQuestCard() {
     Array.from(document.getElementsByClassName('quest-card')).forEach(c => {
         const editContainer = c.getElementsByClassName('edit-container')[0];
         const delta = JSON.parse(c.getElementsByClassName('card-content')[0].innerText);
         const quill = createQuillEditorRead(editContainer);
         quill.setContents(delta);
     });
+}
+
+export function richText(edit, content) {
+    const quill = createQuillEditorRead(edit);
+    const delta = JSON.parse(content);
+    quill.setContents(delta);
 }
 
 function createQuillEditorRead(edit) {
