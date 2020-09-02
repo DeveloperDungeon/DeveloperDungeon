@@ -23,8 +23,9 @@ public class ChapterAPI {
     @PostMapping
     @ApiCertifyAnnotation
     public ResponseEntity<RedirectTemplate> postChapterWrite(@RequestBody ChapterVO chapterVO) {
-        int id = chapterService.addChapter(chapterVO, (String) session.getAttribute("user"));
-        return new ResponseEntity<>(new RedirectTemplate("/chapter/" + id), HttpStatus.MULTIPLE_CHOICES);
+        //ret는 저장 성공여부..
+        int ret = chapterService.addChapter(chapterVO, (String) session.getAttribute("user"));
+        return new ResponseEntity<>(new RedirectTemplate("/chapter/" + chapterVO.getId()), HttpStatus.MULTIPLE_CHOICES);
     }
 
     @GetMapping

@@ -18,10 +18,9 @@ public class ChapterServiceImpl implements ChapterService {
     @Override
     public int addChapter(ChapterVO chapterVO, String userId) {
         int count = chapterMapper.insertChapter(chapterVO);
-        int id = chapterVO.getId();
-
-        if (chapterVO.getIsPublic() == 0) chapterMapper.insertWhitelist(Collections.singletonList(userId), id);
-        return id;
+        if (chapterVO.getIsPublic() == 0) chapterMapper.insertWhitelist(Collections.singletonList(userId)
+                ,chapterVO.getId());
+        return count;
     }
 
     @Override
