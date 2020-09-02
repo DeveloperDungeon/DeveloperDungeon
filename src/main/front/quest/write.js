@@ -1,33 +1,15 @@
-import Quill from 'quill/core';
-
-import Toolbar from 'quill/modules/toolbar';
-import Snow from 'quill/themes/snow';
-
-import Bold from 'quill/formats/bold';
-import Italic from 'quill/formats/italic';
-import Header from 'quill/formats/header';
-import Underline from 'quill/formats/underline';
-import CodeBlock from 'quill/formats/code';
 import {request, RequestMethod} from '../common/request';
 import {redirect} from '../common/utils';
-
-Quill.register({
-    'modules/toolbar': Toolbar,
-    'themes/snow': Snow,
-    'formats/bold': Bold,
-    'formats/italic': Italic,
-    'formats/header': Header,
-    'formats/underline': Underline,
-    'formats/code-block': CodeBlock,
-});
+import {createQuillEditorWrite} from "../richText";
+import Quill from "quill";
 
 window.addEventListener('load', () => {
-    const quill = createQuillEditor();
+    const editContainer = document.getElementById('editor-container')
+    const quill = createQuillEditorWrite(editContainer);
 
     const [type, id, content] = getMeta();
 
     if (type === 'edit') {
-        console.log(content);
         const delta = JSON.parse(content);
         quill.setContents(delta);
     }
@@ -35,26 +17,10 @@ window.addEventListener('load', () => {
     document.getElementById('btnSubmit').onclick = () => {
         const title = document.getElementById('input').value;
         const content = JSON.stringify(quill.getContents());
-
-        console.log(content);
-
         if (type === 'edit') requestEditQuest(id, title, content);
         else requestNewQuest(title, content);
     };
 });
-
-function createQuillEditor() {
-    return new Quill('#editor-container', {
-        modules: {
-            toolbar: [
-                [{header: [1, 2, false]}],
-                ['bold', 'italic', 'underline'],
-                ['image', 'code-block']
-            ]
-        },
-        theme: 'snow'
-    });
-}
 
 function getMeta() {
     const typeDiv = document.getElementById('type');
@@ -68,18 +34,21 @@ function getMeta() {
     ];
 }
 
-
 function requestNewQuest(title, content) {
+    const chapter = document.getElementById('chapterId');
+    const chapterId = chapter.value;
+
     const body = {
         title: title,
         content: content,
-        regTime: (new Date()).getTime()
+        regTime: (new Date()).getTime(),
+        chapterId: chapterId
     };
 
-  request('/quest', {
-    method: RequestMethod.POST,
-    body: JSON.stringify(body)
-  });
+    request('/quest', {
+        method: RequestMethod.POST,
+        body: JSON.stringify(body)
+    });
 }
 
 function requestEditQuest(id, title, content) {
@@ -88,12 +57,12 @@ function requestEditQuest(id, title, content) {
         content: content
     };
 
-  request('/quest/' + id, {
-    method: RequestMethod.PUT,
-    body: JSON.stringify(body)
-  }).then(response => {
-    if (response.status === 401) redirect('/login', {
-      'prevUrl': window.location.pathname
+    request('/quest/' + id, {
+        method: RequestMethod.PUT,
+        body: JSON.stringify(body)
+    }).then(response => {
+        if (response.status === 401) redirect('/login', {
+            'prevUrl': window.location.pathname
+        });
     });
-  });
 }

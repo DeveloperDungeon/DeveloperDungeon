@@ -1,6 +1,5 @@
-import {richText} from "./richTextQuestCard";
+import {richText} from "../richText";
 
 window.addEventListener('load', () => {
-    console.log('엥');
     richText();
 });

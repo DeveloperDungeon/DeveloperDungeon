@@ -16,8 +16,8 @@ public interface QuestMapper {
     @Select("SELECT * FROM quest ORDER BY reg_time DESC LIMIT #{amount}")
     List<QuestVO> selectRecent(int amount);
 
-    @Insert("INSERT INTO quest(title, content, author, reg_time) VALUES(#{title}, #{content}, #{author}, #{regTime})")
-    int insertQuest(QuestVO questVO);
+    @Insert("INSERT INTO quest(title, content, author, reg_time, chapter_id) VALUES(#{title}, #{content}, #{author}, #{regTime}, #{chapterId})")
+    int insertQuestWithChapter(QuestVO questVO);
 
     @Update("UPDATE quest SET title=#{title}, content=#{content} WHERE id=#{id}")
     int editQuest(QuestVO questVO);
@@ -34,4 +34,7 @@ public interface QuestMapper {
 
     @Select("SELECT * FROM quest WHERE author=#{authorId}")
     List<QuestVO> selectUserQuest(String authorId);
+
+    @Select("SELECT * FROM quest WHERE chapter_id=#{chapterId}")
+    List<QuestVO> selectChapterQuest(int chapterId);
 }

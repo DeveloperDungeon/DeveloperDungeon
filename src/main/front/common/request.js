@@ -60,14 +60,21 @@ export async function request(url, config) {
     xhr.send(config.body);
 
     const body = JSON.parse(xhr.response || '{}');
-    if (config.doRedirection && xhr.status === 300)
-        redirect(body.url);
-    else if (xhr.status === 401) {
-        redirect('/login', {
-            'prevUrl': window.location.pathname.slice(1)
-        });
+    switch(xhr.status) {
+        case 300:
+            if (config.doRedirection)
+                redirect(body.url);
+            break;
+        case 401:
+            alert('로그인이 필요합니다');
+            redirect('/login', {
+                'prevUrl': window.location.pathname.slice(1)
+            });
+            break; 
+        case 403:
+            alert('권한이 없습니다');
+            break;
     }
-
     return new Response(xhr.status, body);
 }
 

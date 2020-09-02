@@ -1,9 +1,30 @@
 window.addEventListener('load', () => {
+    setIndicator();
+    setDropdown();
+});
+
+function setDropdown() {
+    const nicknameButton = document.getElementById('user-button');
+    // 로그인 안되어있음
+    if (nicknameButton == null) return;
+
+    const dropdownMenu = document.getElementsByClassName('header-login')[0];
+    nicknameButton.onclick = () => {
+        dropdownMenu.style.visibility = 'visible';
+    };
+
+    document.addEventListener('click', (e) => {
+        const clickOutside = !(e.path.includes(dropdownMenu) || e.path.includes(nicknameButton));
+        if (clickOutside) dropdownMenu.style.visibility = 'hidden';
+    });
+}
+
+function setIndicator() {
     // TODO parse url and assign selected menu index
     const selectedIndex = -1;
 
     const menuItems
-        = /** @type Array<HTMLElement> */ Array.from(document.getElementsByClassName('header-menu'));
+        = /** @type Array<HTMLElement> */ Array.from(document.getElementsByClassName('header-target'));
     const indicator = document.getElementById('header-indicator');
     indicator.style.visibility = 'visible';
 
@@ -19,7 +40,7 @@ window.addEventListener('load', () => {
         const original = menuItems[selectedIndex];
         matchIndicator(indicator, original);
     });
-});
+}
 
 /**
  * Matches indicator position and size to the target element

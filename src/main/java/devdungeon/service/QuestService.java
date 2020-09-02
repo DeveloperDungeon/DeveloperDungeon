@@ -17,9 +17,11 @@ public interface QuestService {
 
     int getTotalQuestNum();
 
-    List<QuestVO> getQuestWithPage(int limit,int offset);
+    List<QuestVO> getQuestWithPage(int limit, int offset);
 
     int remove(int id);
 
     List<QuestVO> getUserQuestList(String authorId);
+
+    List<QuestVO> getChapterQuestList(int chapterId);
 }

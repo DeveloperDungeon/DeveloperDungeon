@@ -3,13 +3,14 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/devLayout}">
 <head>
-    <title>퀘스트 작성</title>
+    <title>챕터 작성</title>
     <style>
         .content {
             padding: 15px;
         }
 
         h2 {
+            display: inline-block;
             margin-bottom: 15px;
         }
 
@@ -25,40 +26,36 @@
         #controls {
             text-align: right;
         }
+
+        .isPrivateContainer {
+            float: right;
+        }
     </style>
     <link href="//cdn.quilljs.com/1.0.0/quill.core.css" rel="stylesheet">
     <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
-    <script src="/quest_write.js"></script>
+    <script src="/chapter_create.js"></script>
 </head>
 
 <th:block layout:fragment="content">
     <div class="content">
-        <div th:switch="${type}">
-            <h2 th:case="'edit'">퀘스트 수정 :: [[${quest.title}]]</h2>
-            <h2 th:case="*">신규 퀘스트</h2>
+        <div>
+            <h2>신규 챕터</h2>
+            <label class="isPrivateContainer">
+                <input id="isPrivate" type="checkbox" name="isPrivate" value="true">
+                허용된 사용자만 작성 가능
+            </label>
         </div>
 
-        <select id="chapterId">
-            <option value="None">없음</option>
-            <option th:each="chapter : ${chapterList}" th:value="${chapter.id}" th:text="${chapter.title}"></option>
-        </select>
-
         <label class="w100" for="input">제목</label>
-        <input class="w100" id="input" th:value="${quest?.title}?:''">
+        <input class="w100" id="input">
 
-        <label class="w100" for="editor-container">퀘스트 내용</label>
+        <label class="w100" for="editor-container">챕터 소개</label>
 
-        <div class="w100" id="editor-container" th:inline="text">[[${quest?.content}]]</div>
+        <div class="w100" id="editor-container" th:inline="text"></div>
 
         <div id="controls">
             <button class="btnNegative" onclick="window.history.back()">취소</button>
             <button id="btnSubmit" class="btnPositive">게시</button>
-        </div>
-
-        <div id="meta" style="display: none">
-            <div id="type" th:text="${type}"></div>
-            <div id="id" th:text="${quest?.id}"></div>
-            <div id="content" th:text="${quest?.content}"></div>
         </div>
     </div>
 </th:block>

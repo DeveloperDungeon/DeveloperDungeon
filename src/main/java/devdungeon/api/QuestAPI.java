@@ -3,6 +3,7 @@ package devdungeon.api;
 import devdungeon.api.annotation.ApiAuthAnnotation;
 import devdungeon.api.annotation.ApiCertifyAnnotation;
 import devdungeon.domain.QuestVO;
+import devdungeon.service.ChapterService;
 import devdungeon.service.QuestService;
 import devdungeon.template.RedirectTemplate;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +20,13 @@ public class QuestAPI {
 
     private final QuestService questService;
     private final HttpSession session;
+    private final ChapterService chapterService;
 
     @PostMapping
     @ApiCertifyAnnotation
     public ResponseEntity<RedirectTemplate> postQuestWrite(@RequestBody QuestVO questVO) {
-        questVO.setAuthor((String) session.getAttribute("user"));
+        String curAuthor = (String) session.getAttribute("user");
+        questVO.setAuthor(curAuthor);
         questService.addQuest(questVO);
         return new ResponseEntity<>(new RedirectTemplate("/quest"), HttpStatus.MULTIPLE_CHOICES);
     }

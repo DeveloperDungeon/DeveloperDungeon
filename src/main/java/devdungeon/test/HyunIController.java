@@ -15,20 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/hyuni")
 public class HyunIController {
-    private final QuestService questService;
 
-    @GetMapping("/list")
-    public String getList(Model model) {
-        List<QuestVO> quests = questService.getAll();
-        model.addAttribute("questList", quests);
-        return "quest/list";
-    }
-
-    @GetMapping("/{id}")
-    public String getList(Model model, @PathVariable int id) {
-        QuestVO quest = questService.getOne(id);
-        model.addAttribute("type", "edit");
-        model.addAttribute("quest", quest);
-        return "quest/write";
+    @GetMapping()
+    public String hyuni() {
+        return "chapter/write";
     }
 }
