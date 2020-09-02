@@ -21,6 +21,7 @@
         <div id="content" th:text="${chapter.description}"></div>
     </div>
     <button id="button-delete">삭제</button>
+    <button th:onclick="'window.location.href=\'' + @{/quest/write?c={id}(id=${chapter.id})} + '\''">퀘스트 생성</button>
 
     <div class="content">
         <h2>퀘스트 목록</h2>
