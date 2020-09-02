@@ -36,8 +36,9 @@ public class QuestController {
     }
 
     @GetMapping("/{id}")
-    public String getQuest(Model model, @PathVariable("id") Integer id) {
+    public String getQuest(Model model, @PathVariable("id") Integer id, @RequestParam(value="c",required = false) int chapterId) {
         model.addAttribute("quest", questService.getOne(id));
+        model.addAttribute("chapterId",chapterService.findChapter(chapterId).getId());
         return "quest/view";
     }
 
