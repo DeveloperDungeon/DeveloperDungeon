@@ -36,7 +36,7 @@ public class QuestController {
     }
 
     @GetMapping("/{id}")
-    public String getQuest(Model model, @PathVariable("id") Integer id) {
+    public String getQuest(Model model, @PathVariable("id") int id) {
         model.addAttribute("quest", questService.getOne(id));
         return "quest/view";
     }
@@ -52,7 +52,7 @@ public class QuestController {
 
     @GetMapping("/edit/{id}")
     @AuthAnnotation
-    public String getQuestEdit(Model model, @PathVariable("id") Integer id) {
+    public String getQuestEdit(Model model, @PathVariable("id") int id) {
         model.addAttribute("quest", questService.getOne(id));
         model.addAttribute("type", "edit");
         return "quest/write";

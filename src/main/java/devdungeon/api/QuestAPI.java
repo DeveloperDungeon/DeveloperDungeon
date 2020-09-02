@@ -33,7 +33,7 @@ public class QuestAPI {
 
     @PutMapping("/{id}")
     @ApiAuthAnnotation
-    public ResponseEntity<RedirectTemplate> putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
+    public ResponseEntity<RedirectTemplate> putQuestEdit(@PathVariable("id") int id, @RequestBody QuestVO questVO) {
         questVO.setId(id);
         questService.editQuest(questVO);
         return new ResponseEntity<>(new RedirectTemplate("/quest/" + id), HttpStatus.MULTIPLE_CHOICES);
