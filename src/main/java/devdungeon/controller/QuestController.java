@@ -45,8 +45,8 @@ public class QuestController {
     @CertifyAnnotation
     public String getQuestWrite(Model model, @RequestParam(value = "c", required = false) Integer chapterId) {
         String curAuthor = (String) session.getAttribute("user");
-        model.addAttribute("chapterList", chapterService.findWritableChapters(curAuthor));
-        model.addAttribute("chapterId", chapterService.findChapter(chapterId).getId());
+        model.addAttribute("chapterList", chapterService.getWritableChapters(curAuthor));
+        if (chapterId != null) model.addAttribute("chapterId", chapterService.getChapter(chapterId).getId());
         return "quest/write";
     }
 
