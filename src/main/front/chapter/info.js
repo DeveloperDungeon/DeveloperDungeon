@@ -29,11 +29,6 @@ window.addEventListener('load', () => {
     }
 });
 
-function clickDelete(id) {
-    console.log(id);
-
-}
-
 function createQuillEditor(edit) {
     return new Quill(edit, {
         readOnly: true
