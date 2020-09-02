@@ -70,7 +70,7 @@ public class QuestServiceImpl implements QuestService {
     }
 
     @Override
-    public List<QuestVO> getChapterQuestList(Integer chapterId) {
+    public List<QuestVO> getChapterQuestList(int chapterId) {
         return questMapper.selectChapterQuest(chapterId).stream()
                 .map(this::setAuthorDetails)
                 .collect(Collectors.toList());

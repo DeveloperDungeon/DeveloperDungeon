@@ -41,7 +41,7 @@ public class ChapterAPI {
 
     @DeleteMapping("/{id}")
     @ApiCertifyAnnotation
-    public ResponseEntity<Object> deleteChapter(@PathVariable("id") Integer id) {
+    public ResponseEntity<Object> deleteChapter(@PathVariable("id") int id) {
         if (chapterService.findChapter(id) == null) {
             return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
         }

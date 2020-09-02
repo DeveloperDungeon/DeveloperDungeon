@@ -6,6 +6,10 @@
     <title th:text="*{chapter.title}"></title>
     <script src="/chapter_info.js"></script>
     <style>
+        .ql-clipboard {
+            display: none;
+        }
+
         .content {
             padding: 15px;
         }
@@ -34,6 +38,7 @@
             <div id="content"th:text="${chapter.description}"></div>
         </div>
         <button id="button-delete">삭제</button>
+        <button th:onclick="'window.location.href=\'' + @{/quest/write?c={id}(id=${chapter.id})} + '\''">퀘스트 생성</button>
 
         <h2>퀘스트 목록</h2>
         <div th:if="${questList.size()} == 0" class="no-quests">

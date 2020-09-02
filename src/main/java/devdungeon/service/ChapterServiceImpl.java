@@ -34,12 +34,12 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
-    public ChapterVO findChapter(Integer id) {
+    public ChapterVO findChapter(int id) {
         return chapterMapper.selectChapter(id);
     }
 
     @Override
-    public int removeChapter(Integer id) {
+    public int removeChapter(int id) {
         return chapterMapper.removeChapter(id);
     }
 }

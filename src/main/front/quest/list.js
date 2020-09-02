@@ -1,5 +1,5 @@
-import {richText} from "../richText";
+import {richTextQuestCard} from "../richText";
 
 window.addEventListener('load', () => {
-    richText();
+    richTextQuestCard();
 });

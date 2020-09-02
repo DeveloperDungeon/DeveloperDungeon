@@ -1,8 +1,8 @@
 import {redirect} from './common/utils';
-import {richText} from "./richText";
+import {richTextQuestCard} from "./richText";
 
 window.addEventListener('load', () => {
-    richText();
+    richTextQuestCard();
     const bntWrite = document.getElementById('btnWrite');
     const bntSearch = document.getElementById('bntSearch');
 

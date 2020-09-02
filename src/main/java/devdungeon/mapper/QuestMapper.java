@@ -36,5 +36,5 @@ public interface QuestMapper {
     List<QuestVO> selectUserQuest(String authorId);
 
     @Select("SELECT * FROM quest WHERE chapter_id=#{chapterId}")
-    List<QuestVO> selectChapterQuest(Integer chapterId);
+    List<QuestVO> selectChapterQuest(int chapterId);
 }
