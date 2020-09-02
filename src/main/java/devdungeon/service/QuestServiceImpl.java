@@ -28,7 +28,7 @@ public class QuestServiceImpl implements QuestService {
 
     @Override
     public QuestVO getOne(int id) {
-        return setAuthorDetails(questMapper.selectOne(id));
+        return setChapterDetails(setAuthorDetails(questMapper.selectOne(id)));
     }
 
     @Override
