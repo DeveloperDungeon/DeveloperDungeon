@@ -28,7 +28,7 @@ public class QuestAPI {
         String curAuthor = (String) session.getAttribute("user");
         questVO.setAuthor(curAuthor);
         questService.addQuest(questVO);
-        return new ResponseEntity<>(new RedirectTemplate("/quest"), HttpStatus.MULTIPLE_CHOICES);
+        return new ResponseEntity<>(new RedirectTemplate("/quest/"+questVO.getId()), HttpStatus.MULTIPLE_CHOICES);
     }
 
     @PutMapping("/{id}")
