@@ -23,5 +23,5 @@ public interface QuestService {
 
     List<QuestVO> getUserQuestList(String authorId);
 
-    List<QuestVO> getChapterQuestList(Integer chapterId);
+    List<QuestVO> getChapterQuestList(int chapterId);
 }
