@@ -21,7 +21,7 @@ window.addEventListener('load', () => {
         })
     };
     const edit = document.getElementById('editor-container');
-    const content = document.getElementById('content').innerText
+    const content = JSON.parse(document.getElementById('content').innerText);
     applyRichText(edit, content);
 });
 

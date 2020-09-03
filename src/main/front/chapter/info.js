@@ -1,12 +1,11 @@
 import {request, RequestMethod} from "../common/request";
-import Quill from "quill/core";
+import {applyRichText, applyRichTextToAll, questCardRichText} from "../richText";
 
 window.addEventListener('load', () => {
     const descriptionArea = document.getElementById('chapter-description');
-
-    const quill = createQuillEditor(descriptionArea);
     const delta = JSON.parse(document.getElementById('content').innerText);
-    quill.setContents(delta);
+    applyRichText(descriptionArea, delta);
+    applyRichTextToAll(questCardRichText)
 
     const btnDelete = document.getElementById('button-delete')
     btnDelete.onclick = () => {
@@ -28,9 +27,3 @@ window.addEventListener('load', () => {
         })
     }
 });
-
-function createQuillEditor(edit) {
-    return new Quill(edit, {
-        readOnly: true
-    });
-}
