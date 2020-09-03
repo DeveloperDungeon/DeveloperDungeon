@@ -43,9 +43,10 @@ public class QuestController {
 
     @GetMapping("/write")
     @CertifyAnnotation
-    public String getQuestWrite(Model model) {
+    public String getQuestWrite(Model model, @RequestParam(value = "c", required = false) Integer chapterId) {
         String curAuthor = (String) session.getAttribute("user");
         model.addAttribute("chapterList", chapterService.findWritableChapters(curAuthor));
+        model.addAttribute("chapterId", chapterService.findChapter(chapterId).getId());
         return "quest/write";
     }
 
