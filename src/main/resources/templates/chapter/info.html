@@ -5,20 +5,45 @@
 <head>
     <title th:text="*{chapter.title}"></title>
     <script src="/chapter_info.js"></script>
+    <style>
+        .ql-clipboard {
+            display: none;
+        }
+
+        .content {
+            padding: 15px;
+        }
+
+        .description {
+            margin: 10px;
+            padding: 10px;
+            background-color: #cccccc;
+            border-radius: 3px;
+        }
+
+        .no-quests {
+            text-align: center;
+            font-weight: bold;
+            color: #333333;
+            padding: 15px;
+        }
+    </style>
 </head>
 
 <th:block layout:fragment="content">
-    <label>챕터 제목</label>
-    <div th:inline="text">[[*{chapter.title}]]</div>
-    <label>챕터 설명</label>
-    <div id="chapter-description"></div>
-    <div id="meta" style="display: none">
-        <div id="content" th:text="${chapter.description}"></div>
-    </div>
-    <button id="button-delete">삭제</button>
-
     <div class="content">
+        <h1 th:text="${chapter.title}"></h1>
+        <div id="chapter-description" class="description"></div>
+        <div id="meta" style="display: none">
+            <div id="content"th:text="${chapter.description}"></div>
+        </div>
+        <button id="button-delete">삭제</button>
+        <button th:onclick="'window.location.href=\'' + @{/quest/write?c={id}(id=${chapter.id})} + '\''">퀘스트 생성</button>
+
         <h2>퀘스트 목록</h2>
+        <div th:if="${questList.size()} == 0" class="no-quests">
+            아직 퀘스트가 작성되지 않았습니다.<br>첫 퀘스트를 작성해보세요!
+        </div>
         <div th:each="quest : ${questList}">
             <div th:replace="fragments/questCard :: questCard(id=${quest.id}, title=${quest.title}, author=${quest.authorDetails.nickName}, time=${quest.regTime}, content=${quest.content})"></div>
         </div>
