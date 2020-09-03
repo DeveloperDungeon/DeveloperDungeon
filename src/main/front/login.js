@@ -21,6 +21,7 @@ window.addEventListener('load', () => {
                         break;
                     case 2 :
                         alert('아이디 또는 비밀번호가 틀렸습니다');
+                        break;
                 }
         });
     }
