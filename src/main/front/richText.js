@@ -3,6 +3,7 @@ import Quill from "quill";
 export function applyRichText(edit, delta) {
     const quill = createQuillEditorRead(edit);
     quill.setContents(delta);
+    deleteTempContent();
 }
 
 export function applyRichTextToAll(selectorFunction) {
@@ -19,7 +20,9 @@ export function questCardRichText() {
     const elemArray = [];
     Array.from(document.getElementsByClassName('quest-card')).forEach(c => {
         const editContainer = c.getElementsByClassName('edit-container')[0];
-        const delta = JSON.parse(c.getElementsByClassName('card-content')[0].innerText);
+        const content = c.getElementsByClassName('card-content')[0];
+        deleteTempContent();
+        const delta = JSON.parse(content.innerText);
         elemArray.push([editContainer, delta]);
     });
     return elemArray;
@@ -29,6 +32,12 @@ function createQuillEditorRead(edit) {
     return new Quill(edit, {
         readOnly: true
     });
+}
+
+function deleteTempContent() {
+    const content = document.getElementById('meta');
+    const parent = content.parentNode;
+    parent.removeChild(content);
 }
 
 export function createQuillEditorWrite(container) {
