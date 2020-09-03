@@ -27,9 +27,3 @@ window.addEventListener('load', () => {
         })
     }
 });
-
-function createQuillEditor(edit) {
-    return new Quill(edit, {
-        readOnly: true,
-    });
-}
