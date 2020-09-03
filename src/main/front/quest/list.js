@@ -1,5 +1,5 @@
-import {richText} from "../richText";
+import {applyRichTextToAll, questCardRichText} from "../richText";
 
 window.addEventListener('load', () => {
-    richText();
+    applyRichTextToAll(questCardRichText);
 });
