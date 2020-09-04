@@ -16,7 +16,7 @@ public interface QuestMapper {
     @Select("SELECT * FROM quest ORDER BY reg_time DESC LIMIT #{amount}")
     List<QuestVO> selectRecent(int amount);
 
-    @Insert("INSERT INTO quest(title, content, author, reg_time, chapter_id) VALUES(#{title}, #{content}, #{author}, #{regTime}, #{chapterId})")
+    // Implemented in xml [devdungeon/mapper/QuestMapper.xml]
     int insertQuestWithChapter(QuestVO questVO);
 
     @Update("UPDATE quest SET title=#{title}, content=#{content} WHERE id=#{id}")

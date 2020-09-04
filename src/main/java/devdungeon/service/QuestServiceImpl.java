@@ -21,21 +21,19 @@ public class QuestServiceImpl implements QuestService {
     @Override
     public List<QuestVO> getAll() {
         return questMapper.selectAll().stream()
-                .map(this::setAuthorDetails)
-                .map(this::setChapterDetails)
+                .map(this::setDetails)
                 .collect(Collectors.toList());
     }
 
     @Override
     public QuestVO getOne(int id) {
-        return setChapterDetails(setAuthorDetails(questMapper.selectOne(id)));
+        return setDetails(questMapper.selectOne(id));
     }
 
     @Override
     public List<QuestVO> getRecent(int amount) {
         return questMapper.selectRecent(amount).stream()
-                .map(this::setAuthorDetails)
-                .map(this::setChapterDetails)
+                .map(this::setDetails)
                 .collect(Collectors.toList());
     }
 
@@ -47,8 +45,7 @@ public class QuestServiceImpl implements QuestService {
     @Override
     public List<QuestVO> getQuestWithPage(int limit, int offset) {
         return questMapper.selectWithPage(limit, offset).stream()
-                .map(this::setAuthorDetails)
-                .map(this::setChapterDetails)
+                .map(this::setDetails)
                 .collect(Collectors.toList());
     }
 
@@ -70,28 +67,32 @@ public class QuestServiceImpl implements QuestService {
     @Override
     public List<QuestVO> getUserQuestList(String author) {
         return questMapper.selectUserQuest(author).stream()
-                .map(this::setAuthorDetails)
-                .map(this::setChapterDetails)
+                .map(this::setDetails)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<QuestVO> getChapterQuestList(int chapterId) {
         return questMapper.selectChapterQuest(chapterId).stream()
-                .map(this::setAuthorDetails)
-                .map(this::setChapterDetails)
+                .map(this::setDetails)
                 .collect(Collectors.toList());
     }
 
-    public QuestVO setAuthorDetails(QuestVO questVO) {
-        UserVO user = userService.getUser(questVO.getAuthor());
-        questVO.setAuthorDetails(user);
-        return questVO;
+    private UserVO getAuthorDetails(QuestVO questVO) {
+        return userService.getUser(questVO.getAuthor());
     }
 
-    public QuestVO setChapterDetails(QuestVO questVO) {
-        ChapterVO chapter = chapterService.findChapter(questVO.getChapterId());
-        questVO.setChapterDetails(chapter);
+    private ChapterVO getChapterDetails(QuestVO questVO) {
+        ChapterVO chapter = null;
+        if (questVO.getChapterId() != null) {
+            chapter = chapterService.getChapter(questVO.getChapterId());
+        }
+        return chapter;
+    }
+
+    private QuestVO setDetails(QuestVO questVO) {
+        questVO.setChapterDetails(getChapterDetails(questVO));
+        questVO.setAuthorDetails(getAuthorDetails(questVO));
         return questVO;
     }
 }

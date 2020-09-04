@@ -23,8 +23,9 @@ public class ChapterAPI {
     @PostMapping
     @ApiCertifyAnnotation
     public ResponseEntity<RedirectTemplate> postChapterWrite(@RequestBody ChapterVO chapterVO) {
-        int id = chapterService.addChapter(chapterVO, (String) session.getAttribute("user"));
-        return new ResponseEntity<>(new RedirectTemplate("/chapter/" + id), HttpStatus.MULTIPLE_CHOICES);
+        //ret는 저장 성공여부..
+        int ret = chapterService.addChapter(chapterVO, (String) session.getAttribute("user"));
+        return new ResponseEntity<>(new RedirectTemplate("/chapter/" + chapterVO.getId()), HttpStatus.MULTIPLE_CHOICES);
     }
 
     @GetMapping
@@ -33,7 +34,7 @@ public class ChapterAPI {
                                                                       boolean writable) {
         if (writable) {
             String userId = (String) session.getAttribute("user");
-            List<ChapterVO> chapterList = chapterService.findWritableChapters(userId);
+            List<ChapterVO> chapterList = chapterService.getWritableChapters(userId);
             return new ResponseEntity<>(chapterList, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.OK);
@@ -42,11 +43,11 @@ public class ChapterAPI {
     @DeleteMapping("/{id}")
     @ApiCertifyAnnotation
     public ResponseEntity<Object> deleteChapter(@PathVariable("id") int id) {
-        if (chapterService.findChapter(id) == null) {
+        if (chapterService.getChapter(id) == null) {
             return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
         }
         String userId = (String) session.getAttribute("user");
-        List<ChapterVO> chapterList = chapterService.findWritableChapters(userId);
+        List<ChapterVO> chapterList = chapterService.getWritableChapters(userId);
         boolean removable = false;
         for (ChapterVO c : chapterList) {
             if (c.getId() == id) {
