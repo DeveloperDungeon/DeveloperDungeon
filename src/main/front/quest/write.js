@@ -3,8 +3,8 @@ import {redirect} from '../common/utils';
 import {createQuillEditorWrite} from "../richText";
 
 window.addEventListener('load', () => {
-    const editContainer = document.getElementById('editor-container')
-    const quill = createQuillEditorWrite(editContainer);
+    const editorContainer = document.getElementById('editor-container');
+    const quill = createQuillEditorWrite(editorContainer);
 
     const [type, id, content] = getMeta();
 

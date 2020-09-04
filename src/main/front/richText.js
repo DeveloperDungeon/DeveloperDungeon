@@ -4,6 +4,7 @@ export function applyRichText(edit, delta) {
     const quill = createQuillEditorRead(edit);
     quill.setContents(delta);
     deleteTempContent();
+    edit.style.border = 'none';
 }
 
 export function applyRichTextToAll(selectorFunction) {
@@ -24,13 +25,18 @@ export function questCardRichText() {
         deleteTempContent();
         const delta = JSON.parse(content.innerText);
         elemArray.push([editContainer, delta]);
+        editContainer.style.border = 'none';
     });
     return elemArray;
 }
 
 function createQuillEditorRead(edit) {
     return new Quill(edit, {
-        readOnly: true
+        readOnly: true,
+        theme: 'snow',
+        modules: {
+            toolbar: false
+        }
     });
 }
 
