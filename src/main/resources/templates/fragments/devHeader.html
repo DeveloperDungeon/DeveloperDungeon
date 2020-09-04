@@ -18,7 +18,7 @@
         <ul id="user-button" class="header-navigator" th:if="${nickname}">
             <li class="header-menu"><span th:text="${nickname}"></span> ▼
                 <ul class="header-login">
-                    <li><a href=@{/user/{id}(id=${user.id})}>내 정보</a></li>
+                    <li><a href=@{/user/{id}(id=${id})}>내 정보</a></li>
                     <li><a href="/logout">로그아웃</a></li>
                 </ul>
             </li>
