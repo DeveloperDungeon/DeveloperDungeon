@@ -19,14 +19,11 @@ public class ConversionInterceptor extends HandlerInterceptorAdapter {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
         if (handler instanceof HandlerMethod && modelAndView != null) {
-            String user = (String) request.getSession().getAttribute("user");
-            boolean isLogin = user != null;
+            String id = (String) request.getSession().getAttribute("user");
             String nickname = null;
-            String id = null;
-            if (isLogin) {
-                nickname = userService.getUser(user).getNickName();
-                id = userService.getUser(user).getId();
-            }
+
+            if (id != null) nickname = userService.getUser(id).getNickName();
+
             modelAndView.addObject("nickname", nickname);
             modelAndView.addObject("id", id);
         }
