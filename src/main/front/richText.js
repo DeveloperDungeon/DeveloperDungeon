@@ -6,6 +6,7 @@ export function richTextQuestCard() {
         const delta = JSON.parse(c.getElementsByClassName('card-content')[0].innerText);
         const quill = createQuillEditorRead(editContainer);
         quill.setContents(delta);
+        editContainer.style.border = 'none';
     });
 }
 
@@ -13,11 +14,16 @@ export function richText(edit, content) {
     const quill = createQuillEditorRead(edit);
     const delta = JSON.parse(content);
     quill.setContents(delta);
+    edit.style.border = 'none';
 }
 
-function createQuillEditorRead(edit) {
-    return new Quill(edit, {
-        readOnly: true
+function createQuillEditorRead(container) {
+    return new Quill(container, {
+        readOnly: true,
+        theme: 'snow',
+        modules: {
+            toolbar: false
+        }
     });
 }
 
