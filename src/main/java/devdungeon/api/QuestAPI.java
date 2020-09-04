@@ -28,12 +28,12 @@ public class QuestAPI {
         String curAuthor = (String) session.getAttribute("user");
         questVO.setAuthor(curAuthor);
         questService.addQuest(questVO);
-        return new ResponseEntity<>(new RedirectTemplate("/quest"), HttpStatus.MULTIPLE_CHOICES);
+        return new ResponseEntity<>(new RedirectTemplate("/quest/"+questVO.getId()), HttpStatus.MULTIPLE_CHOICES);
     }
 
     @PutMapping("/{id}")
     @ApiAuthAnnotation
-    public ResponseEntity<RedirectTemplate> putQuestEdit(@PathVariable("id") Integer id, @RequestBody QuestVO questVO) {
+    public ResponseEntity<RedirectTemplate> putQuestEdit(@PathVariable("id") int id, @RequestBody QuestVO questVO) {
         questVO.setId(id);
         questService.editQuest(questVO);
         return new ResponseEntity<>(new RedirectTemplate("/quest/" + id), HttpStatus.MULTIPLE_CHOICES);

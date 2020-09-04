@@ -25,8 +25,8 @@ public class ChapterController {
     }
 
     @GetMapping("/{id}")
-    public String getChapter(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("chapter", chapterService.findChapter(id));
+    public String getChapter(Model model, @PathVariable("id") int id) {
+        model.addAttribute("chapter", chapterService.getChapter(id));
         model.addAttribute("questList", questService.getChapterQuestList(id));
         return "chapter/info";
     }

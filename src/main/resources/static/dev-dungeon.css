@@ -99,8 +99,13 @@ nav {
     transition: width 0.3s, left 0.3s, top 0.3s;
 }
 
+#user-button {
+    position: relative;
+}
+
 .header-login {
     visibility: hidden;
+    width: 100px;
     padding: 5px 10px;
     position: absolute;
     right: 10px;

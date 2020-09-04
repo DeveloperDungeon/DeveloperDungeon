@@ -19,6 +19,8 @@
                 <td th:text="*{quest.title}"></td>
             </tr>
             <tr>
+                <td>챕터</td>
+                <a th:text="*{quest.chapterDetails.title}" th:href="@{/chapter/{id}(id=${quest.chapterDetails.id})}"></a>
                 <td>작성자</td>
                 <td th:text="*{quest.author}"></td>
                 <td>작성일</td>

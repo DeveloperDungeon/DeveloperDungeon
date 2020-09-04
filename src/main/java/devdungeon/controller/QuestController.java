@@ -36,22 +36,23 @@ public class QuestController {
     }
 
     @GetMapping("/{id}")
-    public String getQuest(Model model, @PathVariable("id") Integer id) {
+    public String getQuest(Model model, @PathVariable("id") int id) {
         model.addAttribute("quest", questService.getOne(id));
         return "quest/view";
     }
 
     @GetMapping("/write")
     @CertifyAnnotation
-    public String getQuestWrite(Model model) {
+    public String getQuestWrite(Model model, @RequestParam(value = "c", required = false) Integer chapterId) {
         String curAuthor = (String) session.getAttribute("user");
-        model.addAttribute("chapterList", chapterService.findWritableChapters(curAuthor));
+        model.addAttribute("chapterList", chapterService.getWritableChapters(curAuthor));
+        if (chapterId != null) model.addAttribute("chapterId", chapterService.getChapter(chapterId).getId());
         return "quest/write";
     }
 
     @GetMapping("/edit/{id}")
     @AuthAnnotation
-    public String getQuestEdit(Model model, @PathVariable("id") Integer id) {
+    public String getQuestEdit(Model model, @PathVariable("id") int id) {
         model.addAttribute("quest", questService.getOne(id));
         model.addAttribute("type", "edit");
         return "quest/write";
