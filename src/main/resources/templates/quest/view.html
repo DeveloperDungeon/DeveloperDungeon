@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>챕터</td>
-                <td th:text="*{quest.chapterDetails.title}" th:onclick="'window.location.href=\'' + @{/chapter/{id}(id=${quest.chapterDetails.id})} + '\''"></td>
+                <a th:text="*{quest.chapterDetails.title}" th:href="@{/chapter/{id}(id=${quest.chapterDetails.id})}"></a>
                 <td>작성자</td>
                 <td th:text="*{quest.author}"></td>
                 <td>작성일</td>
