@@ -23,7 +23,8 @@ public class LoginAPI {
 
     @PostMapping
     public ResponseEntity<Object> postLogin(@RequestBody UserVO userVO, HttpServletRequest request) {
-        if (userVO.getId() == null || userVO.getPassword() == null) {
+        if (userVO.getId() == null || userVO.getPassword() == null ||
+                userVO.getId().equals("") || userVO.getPassword().equals("")) {
             return new ResponseEntity<>(new ErrorTemplate(1), HttpStatus.BAD_REQUEST);
         }
 
