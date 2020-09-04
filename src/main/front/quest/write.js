@@ -1,7 +1,6 @@
 import {request, RequestMethod} from '../common/request';
 import {redirect} from '../common/utils';
 import {createQuillEditorWrite} from "../richText";
-import Quill from "quill";
 
 window.addEventListener('load', () => {
     const editContainer = document.getElementById('editor-container')
