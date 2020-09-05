@@ -66,7 +66,6 @@ export async function request(url, config) {
                 redirect(body.url);
             break;
         case 401:
-            alert('로그인이 필요합니다');
             redirect('/login', {
                 'prevUrl': window.location.pathname.slice(1)
             });
