@@ -35,7 +35,8 @@ function getMeta() {
 
 function requestNewQuest(title, content) {
     const chapter = document.getElementById('chapterId');
-    const chapterId = chapter.value;
+    let chapterId = chapter.value;
+    if (!chapterId) chapterId = null;
 
     const body = {
         title: title,
