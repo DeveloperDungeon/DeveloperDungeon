@@ -1,5 +1,5 @@
 import {request, RequestMethod} from '../common/request';
-import {createQuillEditorWrite} from "../richText";
+import {applyRichText} from "../richText/richText";
 
 /**
  * 챕터 생성 요청을 보냄
@@ -30,7 +30,7 @@ function createChapter(title, description, isPublic) {
 
 window.addEventListener('load', () => {
     const editContainer = document.getElementById('editor-container')
-    const quill = createQuillEditorWrite(editContainer);
+    const quill = applyRichText(editContainer, null, false);
 
     document.getElementById('btnSubmit').onclick = () => {
         const title = document.getElementById('input').value;

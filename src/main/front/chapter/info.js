@@ -1,5 +1,6 @@
 import {request, RequestMethod} from "../common/request";
-import {applyRichText, applyRichTextToAll, questCardRichText} from "../richText";
+import {applyRichText, applyRichTextToAll} from "../richText/richText";
+import {questCardRichText} from "../richText/richTextSelectorFunction";
 
 window.addEventListener('load', () => {
     const descriptionArea = document.getElementById('chapter-description');
