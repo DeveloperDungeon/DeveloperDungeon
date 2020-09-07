@@ -69,6 +69,7 @@
 <th:block layout:fragment="content">
     <div id="content" class="content">
         <h1 class="title">로그인</h1>
+        <a th:if="${loginRequired}==true" >로그인이 필요한 서비스 입니다.</a>
         <table class="login">
             <tbody>
             <tr>
