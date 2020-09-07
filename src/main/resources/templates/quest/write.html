@@ -39,7 +39,7 @@
         <div th:text="${chapterId}"></div>
 
         <select id="chapterId">
-            <option value="None">없음</option>
+            <option value="">없음</option>
             <option th:each="chapter : ${chapterList}" th:value="${chapter.id}" th:text="${chapter.title}" th:selected="${chapter.id}==${chapterId}"></option>
         </select>
 
