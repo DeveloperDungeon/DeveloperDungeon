@@ -23,14 +23,13 @@ public class LoginAPI {
 
     @PostMapping
     public ResponseEntity<Object> postLogin(@RequestBody UserVO userVO, HttpServletRequest request) {
-        if (userVO.getId() == null || userVO.getPassword() == null) {
-            return new ResponseEntity<>(new ErrorTemplate(1), HttpStatus.BAD_REQUEST);
-        }
-
         String id = userVO.getId();
         String password = userVO.getPassword();
 
-        System.out.println("Login request!");
+        if (id == null || password == null || id.isEmpty() || password.isEmpty()) {
+            return new ResponseEntity<>(new ErrorTemplate(1), HttpStatus.BAD_REQUEST);
+        }
+
         if (userService.findUser(id, password)) {
             request.getSession().setAttribute("user", id);
             String prevUrl = request.getHeader("referer");

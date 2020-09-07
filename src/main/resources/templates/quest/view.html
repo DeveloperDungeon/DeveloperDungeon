@@ -5,8 +5,6 @@
 <head>
     <title th:text="*{quest.title}"></title>
     <script src="/quest_view.js"></script>
-    <link href="//cdn.quilljs.com/1.0.0/quill.core.css" rel="stylesheet">
-    <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
 </head>
 
 <th:block layout:fragment="content">
@@ -20,9 +18,14 @@
             </tr>
             <tr>
                 <td>챕터</td>
-                <a th:text="*{quest.chapterDetails.title}" th:href="@{/chapter/{id}(id=${quest.chapterDetails.id})}"></a>
+                <td>
+                    <a th:if="${quest.chapterDetails} == null" th:text="없음"></a>
+                    <a th:if="${quest.chapterDetails} != null"
+                       th:text="*{quest.chapterDetails.title}"
+                       th:href="@{/chapter/{id}(id=${quest.chapterDetails.id})}"></a>
+                </td>
                 <td>작성자</td>
-                <td th:text="*{quest.author}"></td>
+                <td><a th:text="*{quest.author}" th:href="@{/user/{id}(id=${quest.authorDetails.id})}"></a></td>
                 <td>작성일</td>
                 <td th:text="*{#dates.format(new java.util.Date(quest.regTime), 'yyyy년 MM월 dd일 a H시 mm분')}"></td>
             </tr>

@@ -1,11 +1,12 @@
 import {request, RequestMethod} from "../common/request";
-import Quill from "quill/core";
-import {richText} from "../richText";
+import {applyRichText, applyRichTextToAll} from "../richText/richText";
+import {questCardRichText} from "../richText/richTextSelectorFunction";
 
 window.addEventListener('load', () => {
-    const edit = document.getElementById('chapter-description');
-    const content = document.getElementById('content').innerText;
-    richText(edit, content);
+    const descriptionArea = document.getElementById('chapter-description');
+    const delta = JSON.parse(document.getElementById('content').innerText);
+    applyRichText(descriptionArea, delta);
+    applyRichTextToAll(questCardRichText);
 
     const btnDelete = document.getElementById('button-delete')
     btnDelete.onclick = () => {

@@ -1,7 +1,7 @@
 import {request, RequestMethod} from "../common/request";
 import {now, redirect} from "../common/utils";
 import {loadComments, registerComment} from "../elements/comment";
-import {richText} from "../richText";
+import {applyRichText} from "../richText/richText";
 
 window.addEventListener('load', () => {
     checkRedirectionIssue();
@@ -21,8 +21,8 @@ window.addEventListener('load', () => {
         })
     };
     const edit = document.getElementById('editor-container');
-    const content = document.getElementById('content').innerText
-    richText(edit, content);
+    const content = JSON.parse(document.getElementById('content').innerText);
+    applyRichText(edit, content, true);
 });
 
 function checkRedirectionIssue() {

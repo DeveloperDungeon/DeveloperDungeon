@@ -1,8 +1,9 @@
 import {redirect} from './common/utils';
-import {richTextQuestCard} from "./richText";
+import {applyRichTextToAll} from "./richText/richText";
+import {questCardRichText} from "./richText/richTextSelectorFunction";
 
 window.addEventListener('load', () => {
-    richTextQuestCard();
+    applyRichTextToAll(questCardRichText);
     const bntWrite = document.getElementById('btnWrite');
     const bntSearch = document.getElementById('bntSearch');
 
@@ -14,7 +15,6 @@ window.addEventListener('load', () => {
             alert('옵션을 선택해 주세요');
         } else {
             const text = document.getElementById('searchContent').value;
-            const url = '/search?q=' + text + '&type=' + methodValue;
             redirect('/search?q=' + text + '&type=' + methodValue);
         }
     }
